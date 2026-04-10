@@ -1,0 +1,189 @@
+
+<div class="edu-msg-viewport" id="edu-msg-wrapper">
+    
+    <div class="edu-msg-card">
+        <button type="button" class="edu-msg-close" onclick="closeEduMessage()">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="edu-msg-blob"></div>
+        
+        <div class="edu-msg-inner">
+            {% if status == "success" %}
+                <div class="edu-msg-icon-box edu-success">
+                    <div class="edu-msg-ring"></div>
+                    <i class="fas fa-check"></i>
+                </div>
+                <h2 class="edu-msg-title">Action Successful</h2>
+            {% else %}
+                <div class="edu-msg-icon-box edu-error">
+                    <div class="edu-msg-ring"></div>
+                    <i class="fas fa-exclamation"></i>
+                </div>
+                <h2 class="edu-msg-title">Execution Halted</h2>
+            {% endif %}
+
+            <div class="edu-msg-separator"></div>
+
+            <p class="edu-msg-text">
+                {{ msg }}
+            </p>
+
+            <a href="{{ url }}" class="edu-msg-btn {% if status == 'success' %}edu-btn-dark{% else %}edu-btn-light{% endif %}">
+                <span>Continue</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeEduMessage() {
+        const msgWrapper = document.getElementById('edu-msg-wrapper');
+        // Add a fade-out effect before removing
+        msgWrapper.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        msgWrapper.style.opacity = '0';
+        msgWrapper.style.transform = 'scale(0.95)';
+        
+        setTimeout(() => {
+            msgWrapper.remove();
+        }, 400);
+    }
+</script>
+
+<style>
+    .edu-msg-viewport {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 70vh;
+        padding: 20px;
+    }
+
+    .edu-msg-card {
+        position: relative;
+        background: #ffffff;
+        width: 100%;
+        max-width: 450px;
+        border-radius: 32px;
+        padding: 60px 40px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f0f0f0;
+        overflow: hidden;
+        animation: eduFadeUp 0.6s ease-out;
+    }
+
+    /* Close Button Styling */
+    .edu-msg-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #f8f9fa;
+        border: none;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        color: #adb5bd;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        transition: all 0.2s;
+    }
+
+    .edu-msg-close:hover {
+        background: #e9ecef;
+        color: #495057;
+        transform: rotate(90deg);
+    }
+
+    .edu-msg-blob {
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #3498db15, #2ecc7115);
+        border-radius: 50%;
+    }
+
+    .edu-msg-inner {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .edu-msg-icon-box {
+        position: relative;
+        width: 85px;
+        height: 85px;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        border-radius: 22px;
+        transform: rotate(-8deg);
+    }
+
+    .edu-success { background: #00b894; color: white; }
+    .edu-error { background: #ff7675; color: white; }
+
+    .edu-msg-ring {
+        position: absolute;
+        width: 115%;
+        height: 115%;
+        border: 1px dashed #ddd;
+        border-radius: 26px;
+        animation: eduRotate 12s linear infinite;
+    }
+
+    .edu-msg-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #2d3436;
+        margin-bottom: 10px;
+    }
+
+    .edu-msg-separator {
+        width: 40px;
+        height: 4px;
+        background: #f1f2f6;
+        margin: 0 auto 20px;
+        border-radius: 10px;
+    }
+
+    .edu-msg-text {
+        font-size: 1.05rem;
+        color: #636e72;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    .edu-msg-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 30px;
+        border-radius: 16px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .edu-btn-dark { background: #2d3436; color: white; }
+    .edu-btn-light { background: #f1f2f6; color: #2d3436; }
+
+    @keyframes eduFadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes eduRotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+</style>

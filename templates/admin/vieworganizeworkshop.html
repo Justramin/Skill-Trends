@@ -1,0 +1,466 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>Workshop Nmae</th>#}
+{#        <th>details</th>#}
+{#        <th>date</th>#}
+{#        <th>time</th>#}
+{##}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.workshop_name}}</td>#}
+{#        <td>{{ i.details}}</td>#}
+{#        <td>{{ i.date}}</td>#}
+{#        <td>{{ i.time}}</td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{##}
+{##}
+{#<a href="/myapp/organize_workshop/">workshop</a>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Upcoming Workshops</title>#}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);#}
+{#            min-height: 100vh;#}
+{#            padding: 40px 20px;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1200px;#}
+{#            margin: 0 auto;#}
+{#        }#}
+{##}
+{#        .header {#}
+{#            text-align: center;#}
+{#            margin-bottom: 50px;#}
+{#        }#}
+{##}
+{#        .header h1 {#}
+{#            font-size: 42px;#}
+{#            color: #1e3a8a;#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{##}
+{#        .header p {#}
+{#            font-size: 18px;#}
+{#            color: #64748b;#}
+{#        }#}
+{##}
+{#        .add-btn {#}
+{#            display: inline-block;#}
+{#            background: linear-gradient(135deg, #667eea, #764ba2);#}
+{#            color: white;#}
+{#            padding: 14px 32px;#}
+{#            border-radius: 50px;#}
+{#            text-decoration: none;#}
+{#            font-weight: 600;#}
+{#            font-size: 18px;#}
+{#            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);#}
+{#            transition: all 0.3s ease;#}
+{#            margin-bottom: 40px;#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            transform: translateY(-5px);#}
+{#            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);#}
+{#        }#}
+{##}
+{#        .workshops-grid {#}
+{#            display: grid;#}
+{#            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));#}
+{#            gap: 25px;#}
+{#        }#}
+{##}
+{#        .workshop-card {#}
+{#            background: white;#}
+{#            border-radius: 16px;#}
+{#            overflow: hidden;#}
+{#            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);#}
+{#            transition: all 0.4s ease;#}
+{#        }#}
+{##}
+{#        .workshop-card:hover {#}
+{#            transform: translateY(-12px);#}
+{#            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);#}
+{#        }#}
+{##}
+{#        .card-header {#}
+{#            background: linear-gradient(135deg, #4c51bf, #667eea);#}
+{#            color: white;#}
+{#            padding: 20px;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .card-header h2 {#}
+{#            font-size: 24px;#}
+{#            margin: 0;#}
+{#        }#}
+{##}
+{#        .card-body {#}
+{#            padding: 25px;#}
+{#        }#}
+{##}
+{#        .info-row {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            margin-bottom: 18px;#}
+{#            padding-bottom: 12px;#}
+{#            border-bottom: 1px solid #f1f5f9;#}
+{#        }#}
+{##}
+{#        .info-label {#}
+{#            font-weight: 600;#}
+{#            color: #64748b;#}
+{#            font-size: 15px;#}
+{#        }#}
+{##}
+{#        .info-value {#}
+{#            font-weight: 500;#}
+{#            color: #1e2937;#}
+{#            text-align: right;#}
+{#        }#}
+{##}
+{#        .details {#}
+{#            margin-top: 15px;#}
+{#            line-height: 1.7;#}
+{#            color: #334155;#}
+{#            font-size: 15.5px;#}
+{#        }#}
+{##}
+{#        .no-data {#}
+{#            text-align: center;#}
+{#            padding: 60px;#}
+{#            color: #64748b;#}
+{#            font-size: 18px;#}
+{#        }#}
+{##}
+{#        @media (max-width: 768px) {#}
+{#            .workshops-grid {#}
+{#                grid-template-columns: 1fr;#}
+{#            }#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{##}
+{#    <div class="container">#}
+{#        <!-- Header -->#}
+{#        <div class="header">#}
+{#            <h1>Upcoming Workshops</h1>#}
+{#            <p>Discover and join exciting learning sessions</p>#}
+{#        </div>#}
+{##}
+{#        <!-- Add Workshop Button -->#}
+{#        <a href="/myapp/organize_workshop/" class="add-btn">+ Organize New Workshop</a>#}
+{##}
+{#        <!-- Workshops Grid -->#}
+{#        {% if data %}#}
+{#        <div class="workshops-grid">#}
+{#            {% for i in data %}#}
+{#            <div class="workshop-card">#}
+{#                <div class="card-header">#}
+{#                    <h2>{{ i.workshop_name }}</h2>#}
+{#                </div>#}
+{#                <div class="card-body">#}
+{#                    <div class="info-row">#}
+{#                        <span class="info-label">Date</span>#}
+{#                        <span class="info-value">{{ i.date }}</span>#}
+{#                    </div>#}
+{#                    <div class="info-row">#}
+{#                        <span class="info-label">Time</span>#}
+{#                        <span class="info-value">{{ i.time }}</span>#}
+{#                    </div>#}
+{##}
+{#                    <div class="details">#}
+{#                        <strong>Details:</strong><br>#}
+{#                        {{ i.details }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        {% else %}#}
+{#        <div class="no-data">#}
+{#            <h2>No workshops available yet</h2>#}
+{#            <p>Be the first to organize one!</p>#}
+{#        </div>#}
+{#        {% endif %}#}
+{##}
+{#    </div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Workshops</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1e2937;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 20px;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .add-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.35);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 50px;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(99, 102, 241, 0.45);
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        }
+
+        .workshops-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .workshop-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 1px solid #f1f5f9;
+        }
+
+        .workshop-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+            border-color: #e0e7ff;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 28px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .card-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+
+        /* Decorative element */
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.8), rgba(255,255,255,0.3));
+        }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: #1e2937;
+            font-size: 16px;
+        }
+
+        .details {
+            margin-top: 22px;
+            color: #475569;
+            font-size: 15.5px;
+            line-height: 1.75;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 100px 20px;
+            color: #64748b;
+        }
+
+        .no-data h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #334155;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workshops-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 40px;
+            }
+            .workshop-card {
+                margin: 0 auto;
+                max-width: 420px;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% extends "home.html" %}
+    {% block body %}
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Upcoming Workshops</h1>
+            <p>Discover and join exciting learning sessions from experts and peers</p>
+        </div>
+
+        <!-- Add Workshop Button -->
+        <div style="text-align: center;">
+            <a href="/myapp/organize_workshop/" class="add-btn">
+                <span>+</span> Organize New Workshop
+            </a>
+        </div>
+
+        <!-- Workshops Grid -->
+        {% if data %}
+        <div class="workshops-grid">
+            {% for i in data %}
+            <div class="workshop-card">
+                <div class="card-header">
+                    <h2>{{ i.workshop_name }}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="info-row">
+                        <span class="info-label">📅 Date</span>
+                        <span class="info-value">{{ i.date }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">⏰ Time</span>
+                        <span class="info-value">{{ i.time }}</span>
+                    </div>
+
+                    <div class="details">
+                        <strong style="color: #334155;">Details:</strong><br><br>
+                        {{ i.details }}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-data">
+            <h2>No workshops available yet</h2>
+            <p>Be the first to organize one and share your knowledge!</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,95 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'placementcell/home.html' %}#}
+{#{% block body %}#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>Workshop Nmae</th>#}
+{#        <th>details</th>#}
+{#        <th>date</th>#}
+{#        <th>time</th>#}
+{#    </tr>#}
+{#     </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.workshop_name}}</td>#}
+{#        <td>{{ i.details}}</td>#}
+{#        <td>{{ i.date}}</td>#}
+{#        <td>{{ i.time}}</td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{#{% endblock %}#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+{% extends 'placementcell/home.html' %}
+
+{% block body %}
+<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+
+    <div style="width: 100%; max-width: 950px; margin-bottom: 25px;">
+        <h2 style="color: white; margin: 0; font-size: 1.8rem; text-align: left;">
+            <i class="fas fa-chalkboard-teacher"></i> Upcoming Sessions & Workshops
+        </h2>
+        <p style="color: rgba(255,255,255,0.8); margin-top: 5px;">View and track scheduled training sessions</p>
+    </div>
+
+    <div style="background: white; width: 100%; max-width: 950px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Workshop Name</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Details</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Schedule</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr style="border-bottom: 1px solid #eee; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#f4f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+
+                    <td style="padding: 18px 15px;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="background: #e1f5fe; color: #03a9f4; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <strong style="color: #2c3e50; font-size: 1rem;">{{ i.workshop_name }}</strong>
+                        </div>
+                    </td>
+
+                    <td style="padding: 18px 15px; color: #555; line-height: 1.5; max-width: 300px;">
+                        {{ i.details }}
+                    </td>
+
+                    <td style="padding: 18px 15px;">
+                        <div style="color: #2c3e50; font-weight: 500;">
+                            <i class="far fa-calendar-alt" style="color: #3498db; margin-right: 8px;"></i>{{ i.date }}
+                        </div>
+                        <div style="color: #7f8c8d; font-size: 0.85rem; margin-top: 4px;">
+                            <i class="far fa-clock" style="color: #e67e22; margin-right: 8px;"></i>{{ i.time }}
+                        </div>
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="padding: 50px; text-align: center; color: #95a5a6;">
+                        <i class="fas fa-calendar-times" style="font-size: 2.5rem; display: block; margin-bottom: 15px; opacity: 0.4;"></i>
+                        No workshops or sessions are currently scheduled.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

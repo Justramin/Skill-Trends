@@ -1,0 +1,96 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<form action="/myapp/organiz_workshop_post/" method="post">{% csrf_token %}#}
+{#Workshop Name:<input type="text" name="workshop_name"><br>#}
+{#details:<input type="text" name="details">#}
+{##}
+{#<input type="submit" value="add">#}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organize Workshop - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <div class="min-h-screen flex items-center justify-center p-6">
+        <div class="max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden">
+
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-8 text-center">
+                <i class="fas fa-chalkboard-teacher text-5xl mb-4"></i>
+                <h1 class="text-4xl font-bold">Organize Workshop</h1>
+                <p class="mt-2 text-indigo-100">Create and manage your workshops easily</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="p-10">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center gap-3">
+                    <i class="fas fa-plus-circle text-indigo-600"></i>
+                    Add New Workshop
+                </h2>
+
+                <form action="/myapp/organiz_workshop_post/" method="post" class="space-y-6">
+                    {% csrf_token %}
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Workshop Name <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text"
+                               name="workshop_name"
+                               required
+                               class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+                               placeholder="e.g. Python for Beginners">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Details / Description
+                        </label>
+                        <textarea name="details"
+                                  rows="5"
+                                  class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-y"
+                                  placeholder="Write workshop details, topics, duration, target audience..."></textarea>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit"
+                                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 rounded-2xl text-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-plus"></i>
+                            Add Workshop
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Footer / Extra Info -->
+            <div class="border-t border-gray-100 bg-gray-50 px-10 py-6 text-center text-sm text-gray-500">
+                <p>Manage all your workshops from one place</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

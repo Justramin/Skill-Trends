@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/myapp/registerpost/" method="post">{% csrf_token %}
+   name: <input type="text"  name="name"><br><br>
+   place: <input type="text" name="place"><br><br>
+   phone: <input type="text" name="phone"><br><br>
+   email: <input type="text" name="email"><br><br>
+   username: <input type="text" name="username"><br><br>
+   password: <input type="text" name="password"><br><br>
+
+    <input type="submit" value="add">
+
+</form>
+
+
+</body>
+</html>

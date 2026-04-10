@@ -1,0 +1,205 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>department</th>#}
+{#        <th>hod details</th>#}
+{#        <th>photo</th>#}
+{##}
+{#        <th>date</th>#}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.Department.department }},{{i.Department.details  }}</td>#}
+{#        <td>{{ i.hid.name }},{{ i.hid.place }},{{ i.hid.post }},{{ i.hid.pin }},{{ i.hid.phone }},{{ i.hid.email }}</td>#}
+{#        <td><img src="/media/{{ i.hid.photo}}" width="100px" height="100px"></td>#}
+{#        <td>{{ i.date }}</td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{#</body>#}
+{#</html>#}
+
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Home - Department & HOD Details</title>#}
+{#    <script src="https://cdn.tailwindcss.com"></script>#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: system-ui, -apple-system, sans-serif;#}
+{#        }#}
+{#        .photo {#}
+{#            transition: transform 0.3s ease;#}
+{#        }#}
+{#        .photo:hover {#}
+{#            transform: scale(1.08);#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body class="bg-gray-50 min-h-screen py-10">#}
+{##}
+{#    <div class="max-w-6xl mx-auto px-6">#}
+{##}
+{#        <!-- Header -->#}
+{#        <div class="text-center mb-10">#}
+{#            <h1 class="text-4xl font-bold text-gray-800">Department & HOD Information</h1>#}
+{#            <p class="text-gray-600 mt-2">List of Departments and Their Heads of Department</p>#}
+{#        </div>#}
+{##}
+{#        <div class="bg-white rounded-3xl shadow-lg overflow-hidden">#}
+{#            <table class="w-full">#}
+{#                <thead>#}
+{#                    <tr class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">#}
+{#                        <th class="py-6 px-8 text-left font-medium">Department </th>#}
+{#                        <th class="py-6 px-8 text-left font-medium">HOD Details</th>#}
+{#                        <th class="py-6 px-8 text-center font-medium">Photo</th>#}
+{#                        <th class="py-6 px-8 text-left font-medium">Date</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for i in data %}#}
+{#                    <tr class="border-b hover:bg-gray-50 transition-colors">#}
+{#                        <!-- Department -->#}
+{#                        <td class="py-7 px-8">#}
+{#                            <div class="font-semibold text-lg text-gray-800">#}
+{#                                {{ i.Department.department }}#}
+{#                            </div>#}
+{#                            <div class="text-sm text-gray-600 mt-1">#}
+{#                                {{ i.Department.details }}#}
+{#                            </div>#}
+{#                        </td>#}
+{##}
+{#                        <!-- HOD Details -->#}
+{#                        <td class="py-7 px-8">#}
+{#                            <div class="space-y-2 text-gray-700">#}
+{#                                <div><strong>Name:</strong> {{ i.hid.name }}</div>#}
+{#                                <div><strong>Place:</strong> {{ i.hid.place }}</div>#}
+{#                                <div><strong>Post:</strong> {{ i.hid.post }}</div>#}
+{#                                <div><strong>Pin:</strong> {{ i.hid.pin }}</div>#}
+{#                                <div><strong>Phone:</strong> {{ i.hid.phone }}</div>#}
+{#                                <div><strong>Email:</strong>#}
+{#                                    <a href="mailto:{{ i.hid.email }}" class="text-blue-600 hover:underline">#}
+{#                                        {{ i.hid.email }}#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </td>#}
+{##}
+{#                        <!-- Photo -->#}
+{#                        <td class="py-7 px-8 text-center">#}
+{#                            <img src="/media/{{ i.hid.photo }}"#}
+{#                                 alt="{{ i.hid.name }}"#}
+{#                                 class="photo w-28 h-28 object-cover rounded-2xl shadow-md mx-auto border-2 border-gray-100">#}
+{#                        </td>#}
+{##}
+{#                        <!-- Date -->#}
+{#                        <td class="py-7 px-8 text-gray-600 font-medium">#}
+{#                            {{ i.date }}#}
+{#                        </td>#}
+{#                    </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{#        </div>#}
+{##}
+{#        <!-- Footer -->#}
+{#        <div class="text-center mt-10 text-gray-500 text-sm">#}
+{#            © 2026 Department Portal | All Rights Reserved#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department & HOD Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .photo { transition: transform 0.3s; }
+        .photo:hover { transform: scale(1.08); }
+    </style>
+</head>
+<body class="bg-gray-50 py-12">
+
+    <div class="max-w-6xl mx-auto px-6">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-2">Departments & HOD Information</h1>
+        <p class="text-center text-gray-600 mb-10">Current Heads of Departments</p>
+
+        {% if data and data.exists %}
+            <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-blue-700 text-white">
+                            <th class="py-6 px-8 text-left">Department</th>
+                            <th class="py-6 px-8 text-left">HOD Details</th>
+                            <th class="py-6 px-8 text-center">Photo</th>
+                            <th class="py-6 px-8 text-left">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y">
+                        {% for i in data %}
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-8 px-8">
+                                <div class="font-semibold text-xl">{{ i.Department.department|default:"-" }}</div>
+                                <div class="text-gray-600 mt-1">{{ i.Department.details|default:"No details available" }}</div>
+                            </td>
+
+                            <td class="py-8 px-8">
+                                <div class="space-y-1 text-gray-700">
+                                    <div><strong>Name:</strong> {{ i.hid.name|default:"-" }}</div>
+                                    <div><strong>Place:</strong> {{ i.hid.place|default:"-" }}</div>
+                                    <div><strong>Post:</strong> {{ i.hid.post|default:"-" }}</div>
+                                    <div><strong>Pin:</strong> {{ i.hid.pin|default:"-" }}</div>
+                                    <div><strong>Phone:</strong> {{ i.hid.phone|default:"-" }}</div>
+                                    <div><strong>Email:</strong>
+                                        {% if i.hid.email %}<a href="mailto:{{ i.hid.email }}" class="text-blue-600">{{ i.hid.email }}</a>{% else %}-{% endif %}
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="py-8 px-8 text-center">
+                                {% if i.hid.photo %}
+                                    <img src="{{ i.hid.photo.url }}"
+                                         alt="{{ i.hid.name }}"
+                                         class="photo w-32 h-32 object-cover rounded-2xl shadow mx-auto border-2 border-white">
+                                {% else %}
+                                    <div class="w-32 h-32 mx-auto bg-gray-200 rounded-2xl flex items-center justify-center text-gray-400">
+                                        No Photo
+                                    </div>
+                                {% endif %}
+                            </td>
+
+                            <td class="py-8 px-8 text-gray-600">{{ i.date|default:"-" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="bg-white rounded-3xl shadow p-16 text-center">
+                <p class="text-2xl text-gray-500">No department records found.</p>
+                <p class="text-gray-400 mt-4">Add some data from the Admin panel.</p>
+            </div>
+        {% endif %}
+
+        <div class="text-center mt-12 text-gray-500 text-sm">
+            Department Portal
+        </div>
+    </div>
+
+</body>
+</html>

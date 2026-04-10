@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Allocate HOD</title>
+</head>
+<body>
+
+<h2>Allocate HOD to Department</h2>
+
+<form action="/myapp/allocate_post/" method="post">
+{% csrf_token %}
+
+Department:<br>
+
+<select name="Department">
+{% for i in data %}
+<option value="{{ i.id }}">{{ i.department }}</option>
+{% endfor %}
+</select>
+
+<br><br>
+Hod:<br>
+
+<select name="Hod">
+{% for i in data %}
+<option value="{{ i.hid }}">{{ i.HOD }}</option>
+{% endfor %}
+</select>
+  <br><br>
+{#<a href="/myapp/view_hod/">allocate</a>#}
+
+<input type="submit" value="Allocate">
+
+</form>
+
+</body>
+</html>
+

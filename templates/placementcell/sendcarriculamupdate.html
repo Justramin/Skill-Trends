@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+    <style>
+    form {
+        width: 300px;
+    }
+    input {
+        margin-bottom: 10px;
+        padding: 5px;
+        width: 100%;
+    }
+</style>
+</head>
+<body>
+<form action="/myapp/sendcarriculam_update_post/" method="post">{% csrf_token %}
+    <div>
+    subject: <input type="text" name="subject">
+    </div>
+    <div>
+    date: <input type="text" name="date">
+        </div>
+
+    <div>
+         need:<input type="text" name="need">
+    </div>
+    <div>
+        <input type="submit" value="add">
+    </div>
+
+
+</form>
+</body>
+</html>

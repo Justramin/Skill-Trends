@@ -1,0 +1,741 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#<meta charset="UTF-8">#}
+{#<meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#<title>feedback page</title>#}
+{##}
+{#<style>#}
+{##}
+{#:root{#}
+{#--bg:#ffffff;#}
+{#--text:#0f172a;#}
+{#--accent:#6366f1;#}
+{#--gray:#64748b;#}
+{#--light:#f1f5f9;#}
+{#}#}
+{##}
+{#body{#}
+{#font-family:system-ui;#}
+{#margin:0;#}
+{#background:var(--bg);#}
+{#color:var(--text);#}
+{#}#}
+{##}
+{#/* Navbar */#}
+{##}
+{#header{#}
+{#background:var(--bg);#}
+{#border-bottom:1px solid #e2e8f0;#}
+{#}#}
+{##}
+{#.container{#}
+{#max-width:1200px;#}
+{#margin:auto;#}
+{#padding:0 20px;#}
+{#}#}
+{##}
+{#nav{#}
+{#display:flex;#}
+{#justify-content:space-between;#}
+{#align-items:center;#}
+{#height:70px;#}
+{#}#}
+{##}
+{#.logo{#}
+{#font-size:22px;#}
+{#font-weight:bold;#}
+{#color:var(--accent);#}
+{#text-decoration:none;#}
+{#}#}
+{##}
+{#.nav-links{#}
+{#display:flex;#}
+{#gap:30px;#}
+{#}#}
+{##}
+{#.nav-links a{#}
+{#text-decoration:none;#}
+{#color:var(--text);#}
+{#font-weight:500;#}
+{#}#}
+{##}
+{#.nav-links a:hover{#}
+{#color:var(--accent);#}
+{#}#}
+{##}
+{#/* Page Content */#}
+{##}
+{#.page{#}
+{#padding:60px 0;#}
+{#}#}
+{##}
+{#.page h1{#}
+{#text-align:center;#}
+{#margin-bottom:40px;#}
+{#font-size:40px;#}
+{#}#}
+{##}
+{#/* Table */#}
+{##}
+{#table{#}
+{#width:100%;#}
+{#border-collapse:collapse;#}
+{#background:var(--light);#}
+{#border-radius:10px;#}
+{#overflow:hidden;#}
+{#box-shadow:0 10px 20px rgba(0,0,0,0.1);#}
+{#}#}
+{##}
+{##}
+{#th,td{#}
+{#padding:15px;#}
+{#text-align:left;#}
+{#}#}
+{##}
+{#th{#}
+{#background:var(--accent);#}
+{#color:white;#}
+{#}#}
+{##}
+{#tr:nth-child(even){#}
+{#background:#e2e8f0;#}
+{#}#}
+{##}
+{#.btn{#}
+{#background:var(--accent);#}
+{#color:#f2f4f7;#}
+{#padding:8px 16px;#}
+{#border-radius:20px;#}
+{#text-decoration:none;#}
+{#font-size:14px;#}
+{#}#}
+{##}
+{#</style>#}
+{#</head>#}
+{##}
+{#<body>#}
+{##}
+{#<header>#}
+{#<div class="container">#}
+{#<nav>#}
+{##}
+{#<a href="#" class="logo">carriculam</a>#}
+{##}
+{#<div class="nav-links">#}
+{#<a href="/myapp/view_department/">Department</a>#}
+{#<a href="/myapp/view_student/">Student</a>#}
+{#<a href="/myapp/view_hod/">HOD</a>#}
+{#<a href="/myapp/view_feedback/">feedback</a>#}
+{#</div>#}
+{##}
+{#</nav>#}
+{#</div>#}
+{#</header>#}
+{##}
+{#<div class="container page">#}
+{##}
+{#<h1>view feedback</h1>#}
+{##}
+{#<table>#}
+{##}
+{#<tr>#}
+{#<th>student</th>#}
+{#<th>feedback</th>#}
+{#<th>rating</th>#}
+{#<th>date</th>#}
+{#<th>Action</th>#}
+{#</tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.student}}</td>#}
+{#        <td>{{ i.feedback}}</td>#}
+{#        <td>{{ i.rating}}</td>#}
+{#         <td>{{ i.date}}</td>#}
+{##}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{#<tr>#}
+{#<td>1</td>#}
+{#<td>Computer Science</td>#}
+{#<td>Software Development</td>#}
+{#<td><a href="#" class="btn">Edit</a></td>#}
+{#</tr>#}
+{##}
+{#<tr>#}
+{#<td>2</td>#}
+{#<td>Electronics</td>#}
+{#<td>Hardware & Embedded</td>#}
+{#<td><a href="#" class="btn">Edit</a></td>#}
+{#</tr>#}
+{##}
+{#</table>#}
+{##}
+{#</div>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
+
+{#####################################################}
+
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>View Feedback - Carriculam AI</title>#}
+{##}
+{#    <style>#}
+{#        :root {#}
+{#            --primary: #6366f1;#}
+{#            --secondary: #4f46e5;#}
+{#            --dark: #0f172a;#}
+{#            --gray: #64748b;#}
+{#            --light: #f1f5f9;#}
+{#            --bg: #f8fafc;#}
+{#        }#}
+{##}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: system-ui, -apple-system, sans-serif;#}
+{#            background: var(--bg);#}
+{#            color: var(--dark);#}
+{#            line-height: 1.6;#}
+{#        }#}
+{##}
+{#        /* Navbar */#}
+{#        header {#}
+{#            background: white;#}
+{#            border-bottom: 1px solid #e2e8f0;#}
+{#            position: sticky;#}
+{#            top: 0;#}
+{#            z-index: 100;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1280px;#}
+{#            margin: 0 auto;#}
+{#            padding: 0 24px;#}
+{#        }#}
+{##}
+{#        nav {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#            height: 80px;#}
+{#        }#}
+{##}
+{#        .logo {#}
+{#            font-size: 28px;#}
+{#            font-weight: 700;#}
+{#            color: var(--primary);#}
+{#            text-decoration: none;#}
+{#        }#}
+{##}
+{#        .nav-links {#}
+{#            display: flex;#}
+{#            gap: 35px;#}
+{#        }#}
+{##}
+{#        .nav-links a {#}
+{#            text-decoration: none;#}
+{#            color: var(--dark);#}
+{#            font-weight: 500;#}
+{#            transition: color 0.3s;#}
+{#        }#}
+{##}
+{#        .nav-links a:hover {#}
+{#            color: var(--primary);#}
+{#        }#}
+{##}
+{#        /* Page Header */#}
+{#        .page-header {#}
+{#            padding: 60px 0 40px;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .page-header h1 {#}
+{#            font-size: 42px;#}
+{#            font-weight: 700;#}
+{#            margin-bottom: 12px;#}
+{#        }#}
+{##}
+{#        .page-header p {#}
+{#            color: var(--gray);#}
+{#            font-size: 18px;#}
+{#        }#}
+{##}
+{#        /* Search Bar */#}
+{#        .search-box {#}
+{#            display: flex;#}
+{#            justify-content: center;#}
+{#            margin-bottom: 40px;#}
+{#        }#}
+{##}
+{#        .search-container {#}
+{#            position: relative;#}
+{#            width: 100%;#}
+{#            max-width: 480px;#}
+{#        }#}
+{##}
+{#        .search-container input {#}
+{#            width: 100%;#}
+{#            padding: 16px 20px 16px 52px;#}
+{#            border: 2px solid #e2e8f0;#}
+{#            border-radius: 50px;#}
+{#            font-size: 16px;#}
+{#            outline: none;#}
+{#            transition: all 0.3s;#}
+{#        }#}
+{##}
+{#        .search-container input:focus {#}
+{#            border-color: var(--primary);#}
+{#            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);#}
+{#        }#}
+{##}
+{#        .search-icon {#}
+{#            position: absolute;#}
+{#            left: 22px;#}
+{#            top: 50%;#}
+{#            transform: translateY(-50%);#}
+{#            color: var(--gray);#}
+{#            font-size: 20px;#}
+{#        }#}
+{##}
+{#        /* Table Card */#}
+{#        .card {#}
+{#            background: white;#}
+{#            border-radius: 20px;#}
+{#            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);#}
+{#            overflow: hidden;#}
+{#        }#}
+{##}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#        }#}
+{##}
+{#        th, td {#}
+{#            padding: 18px 24px;#}
+{#            text-align: left;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background: linear-gradient(135deg, var(--primary), var(--secondary));#}
+{#            color: white;#}
+{#            font-weight: 600;#}
+{#            text-transform: uppercase;#}
+{#            font-size: 14.5px;#}
+{#            letter-spacing: 0.6px;#}
+{#        }#}
+{##}
+{#        tr {#}
+{#            border-bottom: 1px solid #f1f5f9;#}
+{#            transition: background 0.3s;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background: #f8fafc;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            vertical-align: middle;#}
+{#        }#}
+{##}
+{#        .student-name {#}
+{#            font-weight: 600;#}
+{#            color: var(--dark);#}
+{#        }#}
+{##}
+{#        .feedback-text {#}
+{#            max-width: 520px;#}
+{#            line-height: 1.55;#}
+{#            color: #334155;#}
+{#        }#}
+{##}
+{#        .rating {#}
+{#            font-size: 26px;#}
+{#            letter-spacing: 3px;#}
+{#        }#}
+{##}
+{#        .date {#}
+{#            color: var(--gray);#}
+{#            font-size: 15px;#}
+{#            white-space: nowrap;#}
+{#        }#}
+{##}
+{#        /* Responsive */#}
+{#        @media (max-width: 992px) {#}
+{#            .search-container {#}
+{#                max-width: 100%;#}
+{#            }#}
+{#        }#}
+{##}
+{#        @media (max-width: 768px) {#}
+{#            .page-header h1 {#}
+{#                font-size: 34px;#}
+{#            }#}
+{#            th, td {#}
+{#                padding: 14px 16px;#}
+{#            }#}
+{#            .nav-links {#}
+{#                display: none;#}
+{#            }#}
+{#            .feedback-text {#}
+{#                max-width: 300px;#}
+{#            }#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{##}
+{##}
+{#    <header>#}
+{#        <div class="container">#}
+{#            <nav>#}
+{#                <a href="/" class="logo">carriculam</a>#}
+{#                <div class="nav-links">#}
+{#                    <a href="/myapp/view_department/">Department</a>#}
+{#                    <a href="/myapp/view_student/">Student</a>#}
+{#                    <a href="/myapp/view_hod/">HOD</a>#}
+{#                    <a href="/myapp/view_feedback/">Feedback</a>#}
+{#                </div>#}
+{#            </nav>#}
+{#        </div>#}
+{#    </header>#}
+{##}
+{#    <div class="container">#}
+{#        <div class="page-header">#}
+{#            <h1>Student Feedback</h1>#}
+{#            <p>Review all feedback submitted by students</p>#}
+{#        </div>#}
+{##}
+{#        <div class="search-box">#}
+{#            <div class="search-container">#}
+{#                <span class="search-icon">🔍</span>#}
+{#                <input type="text" id="searchInput" placeholder="Search by student name or feedback content...">#}
+{#            </div>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <table>#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th>Student</th>#}
+{#                        <th>Feedback</th>#}
+{#                        <th>Rating</th>#}
+{#                        <th>Date</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                    {% for i in data %}#}
+{#                    <tr>#}
+{#                        <td><span class="student-name">{{ i.student }}</span></td>#}
+{#                        <td><div class="feedback-text">{{ i.feedback }}</div></td>#}
+{#                        <td>#}
+{#                            <span class="rating">#}
+{#                                {% for _ in range(i.rating) %}⭐{% endfor %}#}
+{#                            </span>#}
+{#                        </td>#}
+{#                        <td><span class="date">{{ i.date }}</span></td>#}
+{#                    </tr>#}
+{#                    {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <script>#}
+{#        // Live Search#}
+{#        document.getElementById('searchInput').addEventListener('keyup', function() {#}
+{#            const filter = this.value.toLowerCase().trim();#}
+{#            const rows = document.querySelectorAll('tbody tr');#}
+{##}
+{#            rows.forEach(row => {#}
+{#                const student = row.querySelector('.student-name').textContent.toLowerCase();#}
+{#                const feedback = row.querySelector('.feedback-text').textContent.toLowerCase();#}
+{##}
+{#                if (student.includes(filter) || feedback.includes(filter)) {#}
+{#                    row.style.display = '';#}
+{#                } else {#}
+{#                    row.style.display = 'none';#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{##}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedback - Carriculam AI</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --dark: #0f172a;
+            --gray: #64748b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #ffffff;           /* Clean white background */
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* Page Header */
+        .page-header {
+            padding: 80px 0 50px;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-size: 46px;
+            font-weight: 700;
+            color: #1e2937;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        .page-header p {
+            color: var(--gray);
+            font-size: 19px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Search Bar */
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 45px;
+        }
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 18px 24px 18px 58px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 16.5px;
+            outline: none;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .search-container input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.12);
+        }
+        .search-icon {
+            position: absolute;
+            left: 26px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 22px;
+        }
+        /* Table Card */
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.09);
+            overflow: hidden;
+            border: 1px solid #f1f5f9;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 20px 28px;
+            text-align: left;
+        }
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.8px;
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+        tr {
+            border-bottom: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        tr:hover {
+            background: #f8fafc;
+            transform: scale(1.01);
+        }
+        tr:last-child {
+            border-bottom: none;
+        }
+        .student-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 16.5px;
+        }
+        .feedback-text {
+            max-width: 580px;
+            line-height: 1.65;
+            color: #334155;
+            font-size: 15.5px;
+        }
+        .rating {
+            font-size: 28px;
+            letter-spacing: 4px;
+        }
+        .date {
+            color: var(--gray);
+            font-size: 15px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            color: var(--gray);
+        }
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #64748b;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .search-container {
+                max-width: 100%;
+            }
+        }
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 36px;
+            }
+            th, td {
+                padding: 16px 18px;
+            }
+            .feedback-text {
+                max-width: 300px;
+            }
+            .rating {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+{% extends "home.html" %}
+{% block body %}
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>Student Feedback</h1>
+            <p>Review all feedback submitted by students for workshops and sessions</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search by student name or feedback content...">
+            </div>
+        </div>
+
+        <!-- Feedback Table -->
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Feedback</th>
+                        <th>Rating</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+{#                <tbody>#}
+{#                    {% if data %}#}
+{#                        {% for i in data %}#}
+{#                        <tr>#}
+{#                            <td><span class="student-name">{{ i.student }}</span></td>#}
+{#                            <td><div class="feedback-text">{{ i.feedback }}</div></td>#}
+{#                            <td>#}
+{#                                <span class="rating">#}
+{#                                    {% for _ in range(i.rating) %}⭐{% endfor %}#}
+{#                                </span>#}
+{#                            </td>#}
+{#                            <td><span class="date">{{ i.date }}</span></td>#}
+{#                        </tr>#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                </tbody>#}
+            </table>
+
+            {% if not data %}
+            <div class="empty-state">
+                <h3>No feedback available yet</h3>
+                <p>Feedback from students will appear here once submitted.</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Live Search Functionality
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase().trim();
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const studentEl = row.querySelector('.student-name');
+                const feedbackEl = row.querySelector('.feedback-text');
+                if (studentEl && feedbackEl) {
+                    const student = studentEl.textContent.toLowerCase();
+                    const feedback = feedbackEl.textContent.toLowerCase();
+                    if (student.includes(filter) || feedback.includes(filter)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
+</body>
+</html>

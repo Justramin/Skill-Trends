@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Workshop Nmae</th>
+        <th>details</th>
+        <th>date</th>
+        <th>time</th>
+    </tr>
+     </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ i.workshop_name}}</td>
+        <td>{{ i.details}}</td>
+        <td>{{ i.date}}</td>
+        <td>{{ i.time}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
+

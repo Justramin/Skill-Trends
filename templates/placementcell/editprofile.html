@@ -1,0 +1,117 @@
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Edit Profile</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<h2>Edit Profile</h2>#}
+{##}
+{#<form action="/myapp/editprofile_post/" method="post" enctype="multipart/form-data">#}
+{#    {% csrf_token %}#}
+{##}
+{#    Name: <input type="text" name="name" value="{{ data.name }}"><br><br>#}
+{#    Place: <input type="text" name="place" value="{{ data.place }}"><br><br>#}
+{##}
+{#    Phone: <input type="number" name="phone" value="{{ data.phone }}"><br><br>#}
+{#    Email: <input type="email" name="email" value="{{ data.email }}"><br><br>#}
+{##}
+{#    <input type="submit" value="Update">#}
+{##}
+{#</form>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+{% extends 'placementcell/home.html' %}
+
+{% block body %}
+<div class="content-container" style="display: flex; justify-content: center; width: 100%; padding-top: 20px;">
+
+    <div class="profile-card" style="background: white; width: 100%; max-width: 500px; border-radius: 20px; padding: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+            <div style="background: #f0f7ff; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                <i class="fas fa-user-edit" style="font-size: 1.8rem; color: #3498db;"></i>
+            </div>
+            <h2 style="color: #2c3e50; margin: 0;">Edit Profile</h2>
+            <p style="color: #7f8c8d; font-size: 0.9rem;">Update your personal information</p>
+        </div>
+
+        <form action="/myapp/editprofile_post/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Name</label>
+                <input type="text" name="name" value="{{ data.name }}" class="form-input">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Place</label>
+                <input type="text" name="place" value="{{ data.place }}" class="form-input">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Phone</label>
+                <input type="number" name="phone" value="{{ data.phone }}" class="form-input">
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Email Address</label>
+                <input type="email" name="email" value="{{ data.email }}" class="form-input">
+            </div>
+
+            <button type="submit" class="update-btn">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="/myapp/viewprofilee/" style="color: #95a5a6; text-decoration: none; font-size: 0.9rem;">Cancel and Go Back</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<style>
+    /* Custom styles for the form elements */
+    .form-input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #edf2f7;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    .form-input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    .update-btn {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .update-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+    }
+</style>
+{% endblock %}

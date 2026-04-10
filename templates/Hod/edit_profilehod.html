@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+</head>
+<body>
+
+<h2>Edit Profile</h2>
+
+<form action="/myapp/editprofi_post/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    Name: <input type="text" name="name" value="{{ data.name }}"><br><br>
+    Place: <input type="text" name="place" value="{{ data.place }}"><br><br>
+    Place: <input type="text" name="post" value="{{ data.post }}"><br><br>
+    Place: <input type="text" name="pin" value="{{ data.pin }}"><br><br>
+
+    Phone: <input type="number" name="phone" value="{{ data.phone }}"><br><br>
+    Email: <input type="email" name="email" value="{{ data.email }}"><br><br>
+    Email: <input type="email" name="gender" value="{{ data.gender }}"><br><br>
+    Email: <input type="email" name="qualification" value="{{ data.qualification }}"><br><br>
+
+    <input type="submit" value="Update">
+
+</form>
+
+</body>
+</html>
+
+

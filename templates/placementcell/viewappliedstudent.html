@@ -1,0 +1,170 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'placementcell/home.html' %}#}
+{#{% block body %}#}
+{##}
+{#    <table border="1">#}
+{#    <tr>#}
+{#        <td>Student Name</td>#}
+{#        <td>Student Details</td>#}
+{#        <td>Vaccancy Deails</td>#}
+{#        <td>Job Deails</td>#}
+{#        <td>Date</td>#}
+{#        <td>Action</td>#}
+{#        </tr>#}
+{##}
+{#         {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.STUDENT.name}},</td>#}
+{#        <td>{{ i.STUDENT.post }},{{ i.STUDENT.pin }},{{ i.STUDENT.phone }},{{ i.STUDENT.email }},{{ i.STUDENT.photo }},{{ i.STUDENT.gender }},{{ i.STUDENT.skill }},{{ i.STUDENT.qualification }}</td>#}
+{#        <td>{{ i.VACCANCY.vaccancy}}</td>#}
+{#        <td>{{ i.date}}</td>#}
+{#        <td>{{ i.VACCANCY.JOB.job}}</td>#}
+{#        <td>#}
+{#<a href="">accept</a>#}
+{#            <br>#}
+{#<a href="">reject</a>#}
+{#        </td>#}
+{##}
+{##}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{##}
+{##}
+{#    </table>#}
+{#{% endblock %}#}
+{##}
+{#</body>#}
+{##}
+{#</html>#}
+
+
+
+
+{% extends 'placementcell/home.html' %}
+
+{% block body %}
+<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+
+    <div style="width: 100%; max-width: 1100px; margin-bottom: 25px;">
+        <h2 style="color: white; margin: 0; font-size: 1.8rem; text-align: left;">
+            <i class="fas fa-user-graduate"></i> Applied Students
+        </h2>
+        <p style="color: rgba(255,255,255,0.8); margin-top: 5px;">Review and manage student job applications</p>
+    </div>
+
+    <div style="background: white; width: 100%; max-width: 1100px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; min-width: 800px;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Student</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Contact & Skills</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Job / Vacancy</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Date</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase; text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr style="border-bottom: 1px solid #eee; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#f9fbff'" onmouseout="this.style.backgroundColor='transparent'">
+
+                    <td style="padding: 15px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; background: #e1e8ed; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #3498db;">
+                                {{ i.STUDENT.name|first }}
+                            </div>
+                            <div>
+                                <strong style="display: block; color: #2c3e50;">{{ i.STUDENT.name }}</strong>
+                                <small style="color: #7f8c8d;">{{ i.STUDENT.gender }} | {{ i.STUDENT.qualification }}</small>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td style="padding: 15px;">
+                        <div style="font-size: 0.9rem; color: #555;">
+                            <i class="fas fa-envelope" style="width: 15px; color: #3498db;"></i> {{ i.STUDENT.email }}<br>
+                            <i class="fas fa-phone" style="width: 15px; color: #3498db;"></i> {{ i.STUDENT.phone }}<br>
+                            <span style="display: inline-block; margin-top: 5px; padding: 2px 8px; background: #e8f4fd; color: #2980b9; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">
+                                {{ i.STUDENT.skill }}
+                            </span>
+                        </div>
+                    </td>
+
+                    <td style="padding: 15px;">
+                        <strong style="color: #2c3e50;">{{ i.VACCANCY.JOB.job }}</strong><br>
+                        <span style="color: #e67e22; font-size: 0.85rem;">{{ i.VACCANCY.vaccancy }} Positions</span>
+                    </td>
+
+                    <td style="padding: 15px; color: #7f8c8d; font-size: 0.9rem;">
+                        {{ i.date }}
+                    </td>
+
+                    <td style="padding: 15px; text-align: center;">
+                        <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
+                            <a href="#" class="btn-status accept">Accept</a>
+                            <a href="#" class="btn-status reject">Reject</a>
+                        </div>
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="padding: 50px; text-align: center; color: #95a5a6;">
+                        <i class="fas fa-user-slash" style="font-size: 3rem; display: block; margin-bottom: 15px; opacity: 0.5;"></i>
+                        No student applications found at this time.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn-status {
+        text-decoration: none;
+        padding: 6px 15px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        width: 80px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    .accept {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+    .accept:hover {
+        background-color: #28a745;
+        color: white;
+    }
+    .reject {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+    .reject:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+</style>
+{% endblock %}

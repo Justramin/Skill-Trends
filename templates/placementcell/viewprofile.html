@@ -1,0 +1,85 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{##}
+{#{% extends "placementcell/home.html" %}#}
+{#{% block body %}#}
+{#<table class="table table-bordered">#}
+{#    <tr>#}
+{#        <th>name</th>#}
+{#        <th>place</th>#}
+{#        <th>phone</th>#}
+{#        <th>email</th>#}
+{#        <th>status</th>#}
+{##}
+{#    </tr>#}
+{#    <tr>#}
+{#        <td>{{ data.name}}</td>#}
+{#        <td>{{ data.place}}</td>#}
+{#        <td>{{ data.phone}}</td>#}
+{#        <td>{{ data.email}}</td>#}
+{##}
+{#        <td>#}
+{#<a href="/myapp/editprofilee/">edit</a>#}
+{#        </td>#}
+{##}
+{##}
+{#    </tr>#}
+{##}
+{#</table>#}
+{#{% endblock %}#}
+{##}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+{% extends "placementcell/home.html" %}
+
+{% block body %}
+<div class="content-container">
+    <div class="profile-view-card">
+
+        <div class="profile-header">
+            <div class="avatar" style="margin: 0 auto 15px; width: 80px; height: 80px; font-size: 2.5rem; background: #f8f9fa;">👤</div>
+            <h2 style="margin: 0;">User Profile</h2>
+            <p style="color: #95a5a6;">Personal Information</p>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-user"></i> Name</span>
+            <span class="info-value">{{ data.name }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Place</span>
+            <span class="info-value">{{ data.place }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-phone"></i> Phone</span>
+            <span class="info-value">{{ data.phone }}</span>
+        </div>
+
+        <div class="info-row">
+            <span class="info-label"><i class="fas fa-envelope"></i> Email</span>
+            <span class="info-value">{{ data.email }}</span>
+        </div>
+
+        <div class="info-row" style="border-bottom: none;">
+            <span class="info-label"><i class="fas fa-info-circle"></i> Status</span>
+            <span class="info-value" style="color: #2ecc71;">Active</span>
+        </div>
+
+        <a href="/myapp/editprofilee/" class="edit-profile-btn">
+            <i class="fas fa-user-edit"></i> Edit Profile
+        </a>
+
+    </div>
+</div>
+{% endblock %}

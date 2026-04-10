@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+
+<table border="1">
+    <tr>
+        <th>name</th>
+        <th>place</th>
+        <th>post</th>
+        <th>pin</th>
+        <th>phone</th>
+        <th>email</th>
+        <th>gender</th>
+        <th>qualification</th>
+        <th>skill</th>
+        <th>photo</th>
+        <th>Edit</th>
+
+    </tr>
+    {% for i in data %}
+    <tr>
+        <td>{{ i.name}}</td>
+        <td>{{ i.place}}</td>
+         <td>{{ i.post}}</td>
+         <td>{{ i.pin}}</td>
+         <td>{{ i.phone}}</td>
+         <td>{{ i.email}}</td>
+         <td>{{ i.gender}}</td>
+         <td>{{ i.qualification}}</td>
+          <td>{{ i.skill}}</td>
+         <td><img src="/media/{{ i.photo}}" width="100px" height="100px"></td>
+         <td><a href="/myapp/edit_student/{{ i.id }}">Edit</a></td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+{#<a href="/myapp/add_student/">student</a>#}
+
+
+</body>
+</html>

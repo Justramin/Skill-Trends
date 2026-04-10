@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name • Home</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --accent: #6366f1;
+      --accent-dark: #4f46e5;
+      --gray: #64748b;
+      --light: #f1f5f9;
+      --border: rgba(241, 245, 249, 0.8);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f172a;
+        --text: #f1f5f9;
+        --accent: #818cf8;
+        --accent-dark: #6366f1;
+        --gray: #94a3b8;
+        --light: #1e293b;
+        --border: rgba(30, 41, 59, 0.8);
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ─── Navigation Bar ─────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    nav {
+      height: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: color 0.22s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 5rem 0 8rem;
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 9vw, 6rem);
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      color: var(--gray);
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 1rem 2.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.28s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      margin-left: 1.4rem;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Features section */
+    section {
+      padding: 10rem 0;
+    }
+
+    h2 {
+      font-size: 3.5rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      font-weight: 800;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .card {
+      background: var(--light);
+      padding: 2.8rem;
+      border-radius: 1.4rem;
+      transition: all 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-14px);
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 5rem 0 3rem;
+      color: var(--gray);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 820px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--bg);
+        padding: 2rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1.8rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .hero {
+        min-height: 80vh;
+        padding: 4rem 0 6rem;
+      }
+
+      h1 {
+        font-size: clamp(3rem, 10vw, 5rem);
+      }
+
+      .btn {
+        padding: 0.95rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo"> CURRICULAM AI</a>
+
+        <div class="nav-links" id="navLinks">
+          <a href="/myapp/view_department/">Department</a>
+          <a href="/myapp/view_student/">student</a>
+          <a href="/myapp/view_hod/">Hod</a>
+          <a href="/myapp/view_feedback/">feedback</a>
+          <a href="/myapp/view_complaint/">complaint</a>
+          <a href="/myapp/view_placementofficer/">placementcell</a>
+          <a href="/myapp/vieworganizeworkshop/">workshop</a>
+          <a href="/myapp/changepassword/"> password</a>
+          <a href="/myapp/logout/">Logout</a>
+
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+      {% block body %}
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Creating digital products people love</h1>
+          <p>Designer & developer focused on clean interfaces, fast experiences, and meaningful details.</p>
+          <div>
+            <a href="#contact" class="btn">Get in touch</a>
+            <a href="#work" class="btn btn-outline">View projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2>What I focus on</h2>
+        <div class="features">
+          <div class="card">
+            <h3>Interface Design</h3>
+            <p>Pixel-perfect, accessible, responsive UI — from concept to polished product.</p>
+          </div>
+          <div class="card">
+            <h3>Frontend Engineering</h3>
+            <p>Modern HTML/CSS/JS · React · Next.js · Tailwind · performance & animations.</p>
+          </div>
+          <div class="card">
+            <h3>Product Thinking</h3>
+            <p>Helping define direction, user flows, branding, and launch strategy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock %}
+    <!-- You can add more sections here (portfolio, testimonials, contact form, etc.) -->
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Your Name — Crafted with care</p>
+    </div>
+  </footer>
+
+  <!-- Simple hamburger menu toggle (pure CSS + minimal JS) -->
+  <script>
+    const toggle = document.getElementById('menuToggle');
+    const links = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('active');
+      toggle.textContent = links.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        links.classList.remove('active');
+        toggle.textContent = '☰';
+      });
+    });
+  </script>
+
+</body>
+</html>

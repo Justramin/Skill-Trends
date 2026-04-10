@@ -1,0 +1,191 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>Course</th>#}
+{#        <th>Details</th>#}
+{#        <th>edit</th>#}
+{##}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.course}}</td>#}
+{#        <td>{{ i.details}}</td>#}
+{#        <td><a href="/myapp/edit_course/{{ i.id }}">edit course</a></td>#}
+{##}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{#<a href="/myapp/add_course/">course</a>#}
+{##}
+{#</body>#}
+{#</html>#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .header-actions {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: #2c3e50;
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 16px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .edit-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .edit-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+{% extends "home.html" %}
+    {% block body %}
+    <div class="container">
+        <header>
+            <h1>📚 Course Management</h1>
+            <p class="subtitle">Manage your courses efficiently</p>
+        </header>
+
+        <div class="header-actions">
+            <a href="/myapp/add_course/" class="btn">+ Add New Course</a>
+        </div>
+
+        {% if data %}
+        <table>
+            <tr>
+                <th>Course Name</th>
+                <th>Details</th>
+                <th style="width: 150px; text-align: center;">Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td><strong>{{ i.course }}</strong></td>
+                <td>{{ i.details|truncatewords:30 }}</td>
+                <td style="text-align: center;">
+                    <a href="/myapp/edit_course/{{ i.id }}" class="edit-link">✏️ Edit Course</a>
+                    <a href="/myapp/delete_course/{{ i.id }}" class="edit-link">✏️ delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <div class="no-data">
+            <h2>No courses found</h2>
+            <p>Click the "Add New Course" button to get started!</p>
+        </div>
+        {% endif %}
+
+        <footer>
+            Course Management System • Built with Django
+        </footer>
+    </div>
+
+{% endblock %}
+</body>
+</html>
