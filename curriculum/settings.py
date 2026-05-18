@@ -74,11 +74,13 @@ WSGI_APPLICATION = 'curriculum.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.config(
+        default='postgresql://neondb_owner:npg_C2ByPKd0sTcJ@ep-damp-mode-ap5uykwm-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
