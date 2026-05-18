@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=8=@5v17pym9e1o16bw^gi(mnf_0^0fjxtq_a=j_xbg)-yg9b7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -76,12 +76,8 @@ WSGI_APPLICATION = 'curriculum.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'curriculum',
-        'USER':'root',
-        'PORT':'3306',
-        'HOST':'localhost',
-        'PASSWORD':'123456789',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -123,8 +119,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS =[os.path.join(BASE_DIR,'static')]
 STATIC_ROOT=os.path.join(BASE_DIR,'asset')
-# MEDIA_URL='/media/'
-# MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
