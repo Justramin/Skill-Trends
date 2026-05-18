@@ -16,6 +16,16 @@
 {#        <option value="{{ i.id }}">{{ i.course }}</option>#}
 {#        {% endfor %}#}
 {#    </select><br>#}
+{##}
+{#    <select name="course" class="form-control">#}
+{#    <option value="">-- Select Course --</option>#}
+{##}
+{#    {% for i in data %}#}
+{#        <option value="{{ i.id }}">{{ i.course }}</option>#}
+{#    {% endfor %}#}
+{##}
+{#</select>#}
+{##}
 {#    post:<br>#}
 {#    <input type="text" name="post"><br><br>#}
 {#    pin:<br>#}
@@ -44,9 +54,9 @@
 {##}
 {#</body>#}
 {#</html>#}
-
-
-
+{##}
+{##}
+{##}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -155,6 +165,13 @@
                                 </div>
 
                                 <div class="col-md-6">
+                                    <label class="form-label">District</label>
+                                    <input type="text" name="district" class="form-control" placeholder="district" required>
+                                </div>
+
+
+
+                                <div class="col-md-6">
                                     <label class="form-label">Course</label>
                                     <select name="course" class="form-select" required>
                                         <option value="">-- Select Course --</option>
@@ -171,18 +188,18 @@
 
                                 <div class="col-md-6">
                                     <label class="form-label">PIN Code</label>
-                                    <input type="text" name="pin" class="form-control" maxlength="6" placeholder="6-digit PIN" required>
+                                    <input type="text" name="pin" class="form-control" maxlength="6" placeholder="6-digit PIN" requiredpattern="[0-9]{6}" title="pin code must be 6 digit" >
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label">Phone Number</label>
-                                    <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXXXXXXX" required>
+                                    <input type="tel" name="phone" class="form-control" placeholder="+91 XXXXXXXXXX" required pattern ="[9876][0-9]{9}">
                                 </div>
 
                                 <!-- Contact & Other Details -->
                                 <div class="col-12">
                                     <label class="form-label">Email Address</label>
-                                    <input type="email" name="email" class="form-control" placeholder="student@example.com" required>
+                                    <input type="email" name="email" class="form-control" placeholder="student@example.com" required  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$">
                                 </div>
 
                                 <div class="col-md-6">
@@ -219,13 +236,13 @@
 
                                 <div class="col-md-6">
                                     <label class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Create username" required>
+                                    <input type="text" name="username" class="form-control" placeholder="Create username" required  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"  title="Enter a valid email address (e.g., example@gmail.com)">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Create strong password" required>
-                                </div>
+                                    <input type="password" name="password" class="form-control" placeholder="Create strong password" required   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
                             </div>
 
                             <!-- Submit Button -->

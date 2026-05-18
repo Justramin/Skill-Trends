@@ -24,94 +24,702 @@
 {##}
 {#</body>#}
 {#</html>#}
+{##}
 
-{% extends 'placementcell/home.html' %}
+
+{##}
+{#{% extends 'placementcell/placementhome.html' %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<div class="content-container">#}
+{##}
+{#    <div class="profile-card">#}
+{##}
+{#        <!-- Header -->#}
+{#        <div class="profile-header">#}
+{#            <div class="icon-circle">#}
+{#                <i class="fas fa-user-edit"></i>#}
+{#            </div>#}
+{##}
+{#            <h2>Edit Profile</h2>#}
+{#            <p>Update your personal information</p>#}
+{#        </div>#}
+{##}
+{#        <form action="/myapp/editprofile_post/" method="post" enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{##}
+{#            <!-- Profile Picture -->#}
+{#            <div class="profile-section">#}
+{#                <label class="label-title">Profile Picture</label>#}
+{##}
+{#                {% if data.photo %}#}
+{#                    <img src="/media/{{ data.photo }}" alt="Current Profile" class="profile-img">#}
+{#                {% else %}#}
+{#                    <div class="empty-profile">#}
+{#                        <i class="fas fa-user"></i>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{##}
+{#                <div class="file-upload">#}
+{#                    <input type="file" name="profile_pic" accept="image/*">#}
+{#                </div>#}
+{##}
+{#                <small>Leave empty if you don't want to change</small>#}
+{#            </div>#}
+{##}
+{#            <!-- Name -->#}
+{#            <div class="form-group">#}
+{#                <label for="name">Full Name</label>#}
+{#                <input type="text" id="name" name="name"#}
+{#                       value="{{ data.name|default:'' }}"#}
+{#                       class="form-input" required>#}
+{#            </div>#}
+{##}
+{#            <!-- Place -->#}
+{#            <div class="form-group">#}
+{#                <label for="place">Place / Location</label>#}
+{#                <input type="text" id="place" name="place"#}
+{#                       value="{{ data.place|default:'' }}"#}
+{#                       class="form-input">#}
+{#            </div>#}
+{##}
+{#            <!-- Phone -->#}
+{#            <div class="form-group">#}
+{#                <label for="phone">Phone Number</label>#}
+{#                <input type="tel" id="phone" name="phone"#}
+{#                       value="{{ data.phone|default:'' }}"#}
+{#                       class="form-input"#}
+{#                       placeholder="9876543210">#}
+{#            </div>#}
+{##}
+{#            <!-- Email -->#}
+{#            <div class="form-group">#}
+{#                <label for="email">Email Address</label>#}
+{#                <input type="email" id="email" name="email"#}
+{#                       value="{{ data.email|default:'' }}"#}
+{#                       class="form-input" required>#}
+{#            </div>#}
+{##}
+{#            <!-- Button -->#}
+{#            <button type="submit" class="update-btn">#}
+{#                <i class="fas fa-save"></i> Save Changes#}
+{#            </button>#}
+{##}
+{#            <!-- Cancel -->#}
+{#            <div class="cancel-link">#}
+{#                <a href="/myapp/viewprofilee/">#}
+{#                    ← Cancel and Go Back#}
+{#                </a>#}
+{#            </div>#}
+{##}
+{#        </form>#}
+{##}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<style>#}
+{##}
+{#    .content-container {#}
+{#        width: 100%;#}
+{#        min-height: 100vh;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        padding: 30px 15px;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    .profile-card {#}
+{#        width: 100%;#}
+{#        max-width: 520px;#}
+{#        background: #fff;#}
+{#        border-radius: 22px;#}
+{#        padding: 40px;#}
+{#        box-shadow: 0 15px 35px rgba(0,0,0,0.12);#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    .profile-header {#}
+{#        text-align: center;#}
+{#        margin-bottom: 35px;#}
+{#    }#}
+{##}
+{#    .icon-circle {#}
+{#        width: 80px;#}
+{#        height: 80px;#}
+{#        background: #eef6ff;#}
+{#        border-radius: 50%;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        margin: 0 auto 15px;#}
+{#    }#}
+{##}
+{#    .icon-circle i {#}
+{#        font-size: 32px;#}
+{#        color: #3498db;#}
+{#    }#}
+{##}
+{#    .profile-header h2 {#}
+{#        margin: 0;#}
+{#        color: #2c3e50;#}
+{#        font-size: 28px;#}
+{#    }#}
+{##}
+{#    .profile-header p {#}
+{#        margin-top: 8px;#}
+{#        color: #7f8c8d;#}
+{#        font-size: 15px;#}
+{#    }#}
+{##}
+{#    .profile-section {#}
+{#        text-align: center;#}
+{#        margin-bottom: 30px;#}
+{#    }#}
+{##}
+{#    .label-title {#}
+{#        display: block;#}
+{#        margin-bottom: 15px;#}
+{#        font-weight: 600;#}
+{#        color: #444;#}
+{#        font-size: 18px;#}
+{#    }#}
+{##}
+{#    .profile-img,#}
+{#    .empty-profile {#}
+{#        width: 110px;#}
+{#        height: 110px;#}
+{#        border-radius: 50%;#}
+{#        object-fit: cover;#}
+{#        margin: 0 auto 15px;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#    }#}
+{##}
+{#    .profile-img {#}
+{#        border: 4px solid #3498db;#}
+{#    }#}
+{##}
+{#    .empty-profile {#}
+{#        background: #edf2f7;#}
+{#    }#}
+{##}
+{#    .empty-profile i {#}
+{#        font-size: 40px;#}
+{#        color: #b0b7c3;#}
+{#    }#}
+{##}
+{#    .file-upload {#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        margin-bottom: 8px;#}
+{#    }#}
+{##}
+{#    input[type="file"] {#}
+{#        text-align: center;#}
+{#    }#}
+{##}
+{#    .profile-section small {#}
+{#        color: #7f8c8d;#}
+{#        font-size: 13px;#}
+{#    }#}
+{##}
+{#    .form-group {#}
+{#        margin-bottom: 22px;#}
+{#    }#}
+{##}
+{#    .form-group label {#}
+{#        display: block;#}
+{#        margin-bottom: 8px;#}
+{#        font-weight: 600;#}
+{#        color: #555;#}
+{#    }#}
+{##}
+{#    .form-input {#}
+{#        width: 100%;#}
+{#        padding: 14px 16px;#}
+{#        border: 2px solid #edf2f7;#}
+{#        border-radius: 12px;#}
+{#        font-size: 15px;#}
+{#        outline: none;#}
+{#        transition: 0.3s;#}
+{#        box-sizing: border-box;#}
+{#    }#}
+{##}
+{#    .form-input:focus {#}
+{#        border-color: #3498db;#}
+{#        box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.12);#}
+{#    }#}
+{##}
+{#    .update-btn {#}
+{#        width: 100%;#}
+{#        padding: 15px;#}
+{#        border: none;#}
+{#        border-radius: 12px;#}
+{#        background: linear-gradient(135deg, #3498db, #2980b9);#}
+{#        color: white;#}
+{#        font-size: 17px;#}
+{#        font-weight: 600;#}
+{#        cursor: pointer;#}
+{#        display: flex;#}
+{#        justify-content: center;#}
+{#        align-items: center;#}
+{#        gap: 10px;#}
+{#        transition: 0.3s;#}
+{#    }#}
+{##}
+{#    .update-btn:hover {#}
+{#        transform: translateY(-2px);#}
+{#        box-shadow: 0 10px 20px rgba(52,152,219,0.3);#}
+{#    }#}
+{##}
+{#    .cancel-link {#}
+{#        text-align: center;#}
+{#        margin-top: 25px;#}
+{#    }#}
+{##}
+{#    .cancel-link a {#}
+{#        color: #95a5a6;#}
+{#        text-decoration: none;#}
+{#        font-size: 15px;#}
+{#    }#}
+{##}
+{#    /* Mobile Responsive */#}
+{#    @media(max-width: 600px) {#}
+{##}
+{#        .profile-card {#}
+{#            padding: 25px;#}
+{#        }#}
+{##}
+{#        .profile-header h2 {#}
+{#            font-size: 24px;#}
+{#        }#}
+{##}
+{#        .profile-img,#}
+{#        .empty-profile {#}
+{#            width: 95px;#}
+{#            height: 95px;#}
+{#        }#}
+{#    }#}
+{##}
+{#</style>#}
+{##}
+{#{% endblock %}#}
+
+
+
+{% extends 'placementcell/placementhome.html' %}
 
 {% block body %}
-<div class="content-container" style="display: flex; justify-content: center; width: 100%; padding-top: 20px;">
 
-    <div class="profile-card" style="background: white; width: 100%; max-width: 500px; border-radius: 20px; padding: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.15);">
+<div class="content-container">
 
-        <div style="text-align: center; margin-bottom: 30px;">
-            <div style="background: #f0f7ff; width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
-                <i class="fas fa-user-edit" style="font-size: 1.8rem; color: #3498db;"></i>
+    <div class="profile-card">
+
+        <!-- Header -->
+        <div class="profile-header">
+            <div class="icon-circle">
+                <i class="fas fa-user-edit"></i>
             </div>
-            <h2 style="color: #2c3e50; margin: 0;">Edit Profile</h2>
-            <p style="color: #7f8c8d; font-size: 0.9rem;">Update your personal information</p>
+
+            <h2>Edit Profile</h2>
+            <p>Update your personal information</p>
         </div>
 
-        <form action="/myapp/editprofile_post/" method="post" enctype="multipart/form-data">
+        <form action="/myapp/editprofile_post/"
+              method="post"
+              enctype="multipart/form-data"
+              onsubmit="return validateForm()">
+
             {% csrf_token %}
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Name</label>
-                <input type="text" name="name" value="{{ data.name }}" class="form-input">
+            <!-- Profile Picture -->
+            <div class="profile-section">
+
+                <label class="label-title">Profile Picture</label>
+
+                {% if data.photo %}
+                    <img src="/media/{{ data.photo }}"
+                         alt="Current Profile"
+                         class="profile-img">
+                {% else %}
+                    <div class="empty-profile">
+                        <i class="fas fa-user"></i>
+                    </div>
+                {% endif %}
+
+                <div class="file-upload">
+                    <input type="file"
+                           name="profile_pic"
+                           id="profile_pic"
+                           accept=".jpg,.jpeg,.png,.webp,image/*">
+                </div>
+
+                <small>Upload JPG, PNG or WEBP image</small>
+
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Place</label>
-                <input type="text" name="place" value="{{ data.place }}" class="form-input">
+            <!-- Name -->
+            <div class="form-group">
+
+                <label for="name">Full Name</label>
+
+                <input type="text"
+                       id="name"
+                       name="name"
+                       value="{{ data.name|default:'' }}"
+                       class="form-input"
+                       placeholder="Enter your full name"
+                       required>
+
+                <span class="error" id="nameError"></span>
+
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Phone</label>
-                <input type="number" name="phone" value="{{ data.phone }}" class="form-input">
+            <!-- Place -->
+            <div class="form-group">
+
+                <label for="place">Place / Location</label>
+
+                <input type="text"
+                       id="place"
+                       name="place"
+                       value="{{ data.place|default:'' }}"
+                       class="form-input"
+                       placeholder="Enter your location"
+                       required>
+
+                <span class="error" id="placeError"></span>
+
             </div>
 
-            <div style="margin-bottom: 25px;">
-                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Email Address</label>
-                <input type="email" name="email" value="{{ data.email }}" class="form-input">
+            <!-- Phone -->
+            <div class="form-group">
+
+                <label for="phone">Phone Number</label>
+
+                <input type="tel"
+                       id="phone"
+                       name="phone"
+                       value="{{ data.phone|default:'' }}"
+                       class="form-input"
+                       placeholder="9876543210"
+                       maxlength="10"
+                       required>
+
+                <span class="error" id="phoneError"></span>
+
             </div>
 
+            <!-- Email -->
+            <div class="form-group">
+
+                <label for="email">Email Address</label>
+
+                <input type="email"
+                       id="email"
+                       name="email"
+                       value="{{ data.email|default:'' }}"
+                       class="form-input"
+                       placeholder="Enter your email"
+                       required>
+
+                <span class="error" id="emailError"></span>
+
+            </div>
+
+            <!-- Submit Button -->
             <button type="submit" class="update-btn">
                 <i class="fas fa-save"></i> Save Changes
             </button>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="/myapp/viewprofilee/" style="color: #95a5a6; text-decoration: none; font-size: 0.9rem;">Cancel and Go Back</a>
+            <!-- Cancel -->
+            <div class="cancel-link">
+                <a href="/myapp/viewprofilee/">
+                    ← Cancel and Go Back
+                </a>
             </div>
+
         </form>
 
     </div>
+
 </div>
 
 <style>
-    /* Custom styles for the form elements */
-    .form-input {
+
+    *{
+        box-sizing: border-box;
+    }
+
+    .content-container{
         width: 100%;
-        padding: 12px 15px;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 15px;
+    }
+
+    .profile-card{
+        width: 100%;
+        max-width: 520px;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+    }
+
+    .profile-header{
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .icon-circle{
+        width: 80px;
+        height: 80px;
+        background: #eef6ff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 15px;
+    }
+
+    .icon-circle i{
+        font-size: 32px;
+        color: #3498db;
+    }
+
+    .profile-header h2{
+        margin: 0;
+        color: #2c3e50;
+        font-size: 28px;
+    }
+
+    .profile-header p{
+        margin-top: 8px;
+        color: #7f8c8d;
+        font-size: 15px;
+    }
+
+    .profile-section{
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .label-title{
+        display: block;
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #444;
+        font-size: 18px;
+    }
+
+    .profile-img,
+    .empty-profile{
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profile-img{
+        border: 4px solid #3498db;
+    }
+
+    .empty-profile{
+        background: #edf2f7;
+    }
+
+    .empty-profile i{
+        font-size: 40px;
+        color: #b0b7c3;
+    }
+
+    .file-upload{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 8px;
+    }
+
+    input[type="file"]{
+        cursor: pointer;
+    }
+
+    .profile-section small{
+        color: #7f8c8d;
+        font-size: 13px;
+    }
+
+    .form-group{
+        margin-bottom: 22px;
+    }
+
+    .form-group label{
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-input{
+        width: 100%;
+        padding: 14px 16px;
         border: 2px solid #edf2f7;
-        border-radius: 10px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        font-size: 15px;
         outline: none;
+        transition: 0.3s ease;
     }
 
-    .form-input:focus {
+    .form-input:focus{
         border-color: #3498db;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        box-shadow: 0 0 0 4px rgba(52,152,219,0.12);
     }
 
-    .update-btn {
+    .error{
+        color: red;
+        font-size: 13px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .update-btn{
         width: 100%;
-        padding: 14px;
+        padding: 15px;
+        border: none;
+        border-radius: 12px;
         background: linear-gradient(135deg, #3498db, #2980b9);
         color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 1.1rem;
+        font-size: 17px;
         font-weight: 600;
         cursor: pointer;
-        transition: all 0.3s ease;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 10px;
+        transition: 0.3s;
     }
 
-    .update-btn:hover {
+    .update-btn:hover{
         transform: translateY(-2px);
-        box-shadow: 0 8px 15px rgba(52, 152, 219, 0.3);
+        box-shadow: 0 10px 20px rgba(52,152,219,0.3);
     }
+
+    .cancel-link{
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .cancel-link a{
+        color: #95a5a6;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    @media(max-width: 600px){
+
+        .profile-card{
+            padding: 25px;
+        }
+
+        .profile-header h2{
+            font-size: 24px;
+        }
+
+        .profile-img,
+        .empty-profile{
+            width: 95px;
+            height: 95px;
+        }
+    }
+
 </style>
+
+<script>
+
+function validateForm() {
+
+    let isValid = true;
+
+    // Name Validation
+    let name = document.getElementById("name").value.trim();
+    let namePattern = /^[A-Za-z ]{3,50}$/;
+
+    if (!namePattern.test(name)) {
+        document.getElementById("nameError").innerHTML =
+            "Name must contain only letters and spaces";
+        isValid = false;
+    } else {
+        document.getElementById("nameError").innerHTML = "";
+    }
+
+    // Place Validation
+    let place = document.getElementById("place").value.trim();
+    let placePattern = /^[A-Za-z ]{2,50}$/;
+
+    if (!placePattern.test(place)) {
+        document.getElementById("placeError").innerHTML =
+            "Enter a valid location";
+        isValid = false;
+    } else {
+        document.getElementById("placeError").innerHTML = "";
+    }
+
+    // Phone Validation
+    let phone = document.getElementById("phone").value.trim();
+    let phonePattern = /^[6-9][0-9]{9}$/;
+
+    if (!phonePattern.test(phone)) {
+        document.getElementById("phoneError").innerHTML =
+            "Enter a valid 10-digit phone number";
+        isValid = false;
+    } else {
+        document.getElementById("phoneError").innerHTML = "";
+    }
+
+    // Email Validation
+    let email = document.getElementById("email").value.trim();
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerHTML =
+            "Enter a valid email address";
+        isValid = false;
+    } else {
+        document.getElementById("emailError").innerHTML = "";
+    }
+
+    // File Validation
+    let fileInput = document.getElementById("profile_pic");
+
+    if (fileInput.files.length > 0) {
+
+        let file = fileInput.files[0];
+        let allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+
+        if (!allowedTypes.includes(file.type)) {
+            alert("Only JPG, PNG and WEBP images are allowed");
+            isValid = false;
+        }
+
+        // Max 2MB
+        if (file.size > 2 * 1024 * 1024) {
+            alert("Image size must be less than 2MB");
+            isValid = false;
+        }
+    }
+
+    return isValid;
+}
+
+</script>
+
 {% endblock %}

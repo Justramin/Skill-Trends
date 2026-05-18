@@ -1,10 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Industry Trends | {{ hod_department }}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --teal: #0f766e;
+      --gray: #f8fafc;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f1f5f9;
+      color: #1e2937;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    header {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-left h1 {
+      color: var(--primary);
+      font-size: 1.8rem;
+    }
+    .course-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      transition: transform 0.3s;
+    }
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+    .course-title {
+      font-size: 1.4rem;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .skill-box {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .skill-box h4 {
+      color: #475569;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .jobs-list {
+      margin-top: 1rem;
+    }
+    .jobs-list ul {
+      list-style: none;
+    }
+    .jobs-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .jobs-list li:last-child { border-bottom: none; }
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
 
+    <header>
+      <div class="header-left">
+        <h1><i class="fas fa-chart-line"></i> Industry Trends</h1>
+        <p style="color:#64748b; margin-top:5px;">
+          <strong>Department:</strong> {{ hod_department }}
+        </p>
+      </div>
+      <div>
+        <small>Last Updated: {{ career_data.cached_at|date:"d M Y" }}</small>
+      </div>
+    </header>
+
+    {% if career_data.departments %}
+      {% for dept_name, courses in career_data.departments.items %}
+        <h2 style="margin: 2rem 0 1rem; color: #1e40af;">
+          <i class="fas fa-building"></i> {{ dept_name }}
+        </h2>
+
+        {% for course in courses %}
+          <div class="course-card">
+            <h3 class="course-title">{{ course.label }}</h3>
+
+            <div class="skills-grid">
+              <!-- Technical Skills -->
+              {% if course.skills.Technical_Skills %}
+              <div class="skill-box">
+                <h4><i class="fas fa-laptop-code"></i> Technical Skills</h4>
+                <div class="skill-tags">
+                  {% for skill in course.skills.Technical_Skills %}
+                    <span class="tag">{{ skill }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+
+              <!-- Domain Skills -->
+              {% if course.skills.Domain_Skills %}
+              <div class="skill-box">
+                <h4><i class="fas fa-book"></i> Domain Knowledge</h4>
+                <div class="skill-tags">
+                  {% for skill in course.skills.Domain_Skills %}
+                    <span class="tag">{{ skill }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+
+              <!-- Soft Skills -->
+              {% if course.skills.Soft_Skills %}
+              <div class="skill-box">
+                <h4><i class="fas fa-handshake"></i> Soft Skills</h4>
+                <div class="skill-tags">
+                  {% for skill in course.skills.Soft_Skills %}
+                    <span class="tag">{{ skill }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+              {% endif %}
+            </div>
+
+            <!-- Job Opportunities -->
+            <div class="jobs-list">
+              <h4><i class="fas fa-briefcase"></i> Top Job Opportunities</h4>
+              <ul>
+                {% for job in course.jobs %}
+                  <li><i class="fas fa-arrow-right" style="color:#0ea5e9;"></i> {{ job }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    {% else %}
+      <p>No data available for this department.</p>
+    {% endif %}
+
+    <div class="footer">
+      <p>Skill Trends • Industry Alignment Dashboard • Powered by Real-time Analysis</p>
+    </div>
+  </div>
 </body>
 </html>

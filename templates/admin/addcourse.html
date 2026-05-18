@@ -16,6 +16,158 @@
 {#</html>#}
 {##}
 
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Add New Course | EduManage</title>#}
+{##}
+{#    <!-- Bootstrap 5 -->#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#    <!-- Font Awesome -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">#}
+{##}
+{#    <style>#}
+{#        body {#}
+{#            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            min-height: 100vh;#}
+{#        }#}
+{##}
+{#        .navbar {#}
+{#            background: linear-gradient(90deg, #1e40af, #3b82f6);#}
+{#            box-shadow: 0 4px 15px rgba(0,0,0,0.1);#}
+{#        }#}
+{##}
+{##}
+{##}
+{#        .main-card {#}
+{#            border: none;#}
+{#            border-radius: 20px;#}
+{#            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);#}
+{#            overflow: hidden;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .form-label {#}
+{#            font-weight: 600;#}
+{#            color: rgba(2, 17, 15, 0.97);#}
+{#            font-size: 1.1rem;#}
+{#        }#}
+{##}
+{#        .form-control {#}
+{#            border-radius: 12px;#}
+{#            padding: 14px 16px;#}
+{#            border: 2px solid #bfdbfe;#}
+{#            font-size: 1.05rem;#}
+{#        }#}
+{##}
+{#        .form-control:focus {#}
+{#            border-color:white;#}
+{#            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);#}
+{#        }#}
+{##}
+{#        .btn-add {#}
+{#            background: linear-gradient(90deg, #2563eb, #1e40af);#}
+{#            border: none;#}
+{#            padding: 14px 50px;#}
+{#            font-size: 1.15rem;#}
+{#            font-weight: 600;#}
+{#            border-radius: 50px;#}
+{#            transition: all 0.3s ease;#}
+{##}
+{#        }#}
+{##}
+{#        .btn-add:hover {#}
+{#            transform: translateY(-4px);#}
+{#            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.01);#}
+{#            color: inherit;#}
+{#        }#}
+{##}
+{#        .page-icon {#}
+{#            font-size: 3.5rem;#}
+{#            color: antiquewhite;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{##}
+{##}
+{#    <div class="container py-5">#}
+{#        <div class="row justify-content-center">#}
+{#            <div class="col-lg-8 col-md-10">#}
+{##}
+{#                <!-- Header -->#}
+{#                <div class="text-center mb-5">#}
+{#                    <i class="fas fa-book-open page-icon mb-3"></i>#}
+{#                    <h1 class="text-primary fw-bold">Add New Course</h1>#}
+{#                    <p class="lead text-muted">Create a new course in the system</p>#}
+{#                </div>#}
+{##}
+{#                <!-- Form Card -->#}
+{#                <div class="main-card bg-white">#}
+{#                    <div class="card-body p-5">#}
+{##}
+{#                        <form action="/myapp/add_course_post/" method="post">#}
+{#                            {% csrf_token %}#}
+{##}
+{#                            <div class="mb-4">#}
+{#                                <label class="form-label">#}
+{#                                    <i class="fas fa-graduation-cap me-2"></i>Course Name#}
+{#                                </label>#}
+{#                                <input type="text"#}
+{#                                       class="form-control"#}
+{#                                       name="course"#}
+{#                                       value="{{ data.course|default:'' }}"#}
+{#                                       placeholder="Enter course name (e.g. B.Sc Computer Science)"#}
+{#                                       required>#}
+{#                            </div>#}
+{##}
+{#                            <div class="mb-5">#}
+{#                                <label class="form-label">#}
+{#                                    <i class="fas fa-align-left me-2"></i>Course Details#}
+{#                                </label>#}
+{#                                <textarea class="form-control"#}
+{#                                          name="details"#}
+{#                                          rows="5"#}
+{#                                          placeholder="Enter course description, duration, eligibility, etc..."></textarea>#}
+{#                            </div>#}
+{##}
+{#                            <div class="d-grid">#}
+{#                                <button type="submit" class="btn btn-add text-white btn-lg">#}
+{#                                    <i class="fas fa-plus-circle me-2"></i> Add Course#}
+{#                                </button>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{##}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#    <!-- Footer -->#}
+{#    <footer class="bg-dark text-white py-4 mt-5">#}
+{#        <div class="container text-center">#}
+{#            <p class="mb-0">&copy; 2026 EduManage - Department & Course Management System</p>#}
+{#        </div>#}
+{#    </footer>#}
+{##}
+{#    <!-- Bootstrap JS -->#}
+{# <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
 
 
 <!DOCTYPE html>
@@ -27,6 +179,7 @@
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -47,11 +200,12 @@
             border-radius: 20px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
             overflow: hidden;
+            color: white;
         }
 
         .form-label {
             font-weight: 600;
-            color: #1e40af;
+            color: rgba(2, 17, 15, 0.97);
             font-size: 1.1rem;
         }
 
@@ -63,7 +217,7 @@
         }
 
         .form-control:focus {
-            border-color: #3b82f6;
+            border-color: white;
             box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
         }
 
@@ -79,100 +233,142 @@
 
         .btn-add:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.01);
+            color: inherit;
         }
 
         .page-icon {
             font-size: 3.5rem;
-            color: #3b82f6;
+            color: antiquewhite;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-4" href="/myapp/home/">
-                <i class="fas fa-university me-2"></i> EduManage
-            </a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/myapp/home/">Home</a>
-                <a class="nav-link" href="/myapp/allocatehod/">Allocate HOD</a>
-                <a class="nav-link active" href="#">Add Course</a>
-                <a class="nav-link" href="/myapp/view_hod/">View HODs</a>
+{% extends "home.html" %}
+{% block body %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <i class="fas fa-book-open page-icon mb-3"></i>
+                <h1 class="text-primary fw-bold">Add New Course</h1>
+                <p class="lead text-muted">Create a new course in the system</p>
             </div>
-        </div>
-    </nav>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-10">
+            <!-- Form Card -->
+            <div class="main-card bg-white">
+                <div class="card-body p-5">
 
-                <!-- Header -->
-                <div class="text-center mb-5">
-                    <i class="fas fa-book-open page-icon mb-3"></i>
-                    <h1 class="text-primary fw-bold">Add New Course</h1>
-                    <p class="lead text-muted">Create a new course in the system</p>
+                    <form action="/myapp/add_course_post/" method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                <i class="fas fa-graduation-cap me-2"></i>Course Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   name="course"
+                                   value="{{ data.course|default:'' }}"
+                                   placeholder="Enter course name (e.g. B.Sc Computer Science)"
+                                   required>
+                        </div>
+
+                        <div class="mb-5">
+                            <label class="form-label">
+                                <i class="fas fa-align-left me-2"></i>Course Details
+                            </label>
+
+                            <textarea class="form-control"
+                                      name="details"
+                                      rows="5"
+                                      placeholder="Enter course description, duration, eligibility, etc..."></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-add text-white btn-lg">
+                                <i class="fas fa-plus-circle me-2"></i> Add Course
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
-
-                <!-- Form Card -->
-                <div class="main-card bg-white">
-                    <div class="card-body p-5">
-
-                        <form action="/myapp/add_course_post/" method="post">
-                            {% csrf_token %}
-
-                            <div class="mb-4">
-                                <label class="form-label">
-                                    <i class="fas fa-graduation-cap me-2"></i>Course Name
-                                </label>
-                                <input type="text"
-                                       class="form-control"
-                                       name="course"
-                                       value="{{ data.course|default:'' }}"
-                                       placeholder="Enter course name (e.g. B.Sc Computer Science)"
-                                       required>
-                            </div>
-
-                            <div class="mb-5">
-                                <label class="form-label">
-                                    <i class="fas fa-align-left me-2"></i>Course Details
-                                </label>
-                                <textarea class="form-control"
-                                          name="details"
-                                          rows="5"
-                                          placeholder="Enter course description, duration, eligibility, etc..."></textarea>
-                            </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-add text-white btn-lg">
-                                    <i class="fas fa-plus-circle me-2"></i> Add Course
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Back Button -->
-                <div class="text-center mt-4">
-                    <a href="/myapp/admin_home/" class="btn btn-outline-secondary">
-                        <i class="fas fa-arrow-left me-2"></i> Back to Home
-                    </a>
-                </div>
-
             </div>
+
         </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2026 EduManage - Department & Course Management System</p>
-        </div>
-    </footer>
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-0">&copy; 2026 EduManage - Department & Course Management System</p>
+    </div>
+</footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Validation Script -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+
+        let course = document.querySelector('input[name="course"]').value.trim();
+        let details = document.querySelector('textarea[name="details"]').value.trim();
+
+        // Course name validation pattern
+        let coursePattern = /^[A-Za-z0-9\s.,&()-]+$/;
+
+        // Course Name Validation
+        if (course === "") {
+            alert("Course name is required");
+            e.preventDefault();
+            return;
+        }
+
+        if (course.length < 3) {
+            alert("Course name must contain at least 3 characters");
+            e.preventDefault();
+            return;
+        }
+
+        if (!coursePattern.test(course)) {
+            alert("Invalid course name");
+            e.preventDefault();
+            return;
+        }
+
+        // Course Details Validation
+        if (details === "") {
+            alert("Course details are required");
+            e.preventDefault();
+            return;
+        }
+
+        if (details.length < 10) {
+            alert("Course details must contain at least 10 characters");
+            e.preventDefault();
+            return;
+        }
+
+    });
+
+});
+
+</script>
+
+{% endblock %}
+
 </body>
 </html>

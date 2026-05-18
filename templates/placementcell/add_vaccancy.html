@@ -1,10 +1,255 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Add Vacancy</title>#}
+{#    <style>#}
+{#        body {#}
+{#            font-family: Arial, sans-serif;#}
+{#            background-color: #f4f7fb;#}
+{#            padding: 20px;#}
+{#        }#}
+{#        h1 {#}
+{#            text-align: center;#}
+{#            color: #1E2840;#}
+{#        }#}
+{#        form {#}
+{#            max-width: 600px;#}
+{#            margin: 0 auto;#}
+{#            background-color: #fff;#}
+{#            padding: 25px;#}
+{#            border-radius: 12px;#}
+{#            box-shadow: 0 0 15px rgba(0,0,0,0.1);#}
+{#        }#}
+{#        label {#}
+{#            display: block;#}
+{#            margin-top: 15px;#}
+{#            font-weight: bold;#}
+{#        }#}
+{#        input, textarea {#}
+{#            width: 100%;#}
+{#            padding: 10px;#}
+{#            margin-top: 5px;#}
+{#            border-radius: 6px;#}
+{#            border: 1px solid #ccc;#}
+{#        }#}
+{#        input[type="date"] {#}
+{#            padding: 8px;#}
+{#        }#}
+{#        button {#}
+{#            background-color: #1E2840;#}
+{#            color: white;#}
+{#            border: none;#}
+{#            padding: 12px 20px;#}
+{#            margin-top: 20px;#}
+{#            cursor: pointer;#}
+{#            border-radius: 8px;#}
+{#            width: 100%;#}
+{#            font-size: 16px;#}
+{#        }#}
+{#        button:hover {#}
+{#            background-color: #162038;#}
+{#        }#}
+{#        .message {#}
+{#            text-align: center;#}
+{#            color: green;#}
+{#            margin-bottom: 15px;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#    <h1>Add New Vacancy</h1>#}
+{##}
+{#    {% if messages %}#}
+{#        {% for message in messages %}#}
+{#            <div class="message">{{ message }}</div>#}
+{#        {% endfor %}#}
+{#    {% endif %}#}
+{##}
+{#    <form action="/myapp/add_vacancy_post/" method="post">#}
+{#        {% csrf_token %}#}
+{#        <label for="job">Job Title</label>#}
+{#        <input type="text" id="job" name="job" required>#}
+{##}
+{#        <label for="company_name">Company Name</label>#}
+{#        <input type="text" id="company_name" name="company_name" required>#}
+{##}
+{#        <label for="job_details">Job Details</label>#}
+{#        <textarea id="job_details" name="job_details" required></textarea>#}
+{##}
+{#        <label for="vaccancy">Vacancy</label>#}
+{#        <input type="text" id="vaccancy" name="vaccancy" required>#}
+{##}
+{#        <label for="apply_from_date">Apply From Date</label>#}
+{#        <input type="date" id="apply_from_date" name="apply_from_date" required>#}
+{##}
+{#        <label for="apply_to_date">Apply To Date</label>#}
+{#        <input type="date" id="apply_to_date" name="apply_to_date" required>#}
+{##}
+{#        <label for="time_duration">Time Duration</label>#}
+{#        <input type="text" id="time_duration" name="time_duration" required>#}
+{##}
+{#        <label for="post_details">Post Details</label>#}
+{#        <textarea id="post_details" name="post_details" required></textarea>#}
+{##}
+{#        <button type="submit">Add Vacancy</button>#}
+{#    </form>#}
+{#</body>#}
+{#</html>#}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vacancy</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fb;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #1E2840;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 8px;
+            border: 1px solid #ced4da;
+            box-sizing: border-box; /* Crucial for width alignment */
+            font-size: 14px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #1E2840;
+            box-shadow: 0 0 0 2px rgba(30, 40, 64, 0.1);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            background-color: #1E2840;
+            color: white;
+            border: none;
+            padding: 14px;
+            margin-top: 25px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background-color: #162038;
+        }
+        .message {
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Django Message Tags Mapping */
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
 </head>
 <body>
-$END$
+
+    <h1>Add New Vacancy</h1>
+
+    <!-- Display Django Success/Error Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form action="/myapp/add_vacancy_post/" method="post" id="vacancyForm">
+        {% csrf_token %}
+
+        <label for="job">Job Title</label>
+        <input type="text" id="job" name="job" placeholder="e.g. Senior Developer" required>
+
+        <label for="company_name">Company Name</label>
+        <input type="text" id="company_name" name="company_name" placeholder="e.g. Tech Solutions Inc" required>
+
+        <label for="job_details">Job Details</label>
+        <textarea id="job_details" name="job_details" placeholder="Describe the job responsibilities..." required></textarea>
+
+        <label for="vaccancy">Number of Openings</label>
+        <input type="number" id="vaccancy" name="vaccancy" min="1" placeholder="e.g. 5" required>
+
+        <label for="apply_from_date">Apply From Date</label>
+        <input type="date" id="apply_from_date" name="apply_from_date" required>
+
+        <label for="apply_to_date">Apply To Date (Deadline)</label>
+        <input type="date" id="apply_to_date" name="apply_to_date" required>
+
+        <label for="time_duration">Employment Duration</label>
+        <input type="text" id="time_duration" name="time_duration" placeholder="e.g. 2 Years / Permanent" required>
+
+        <label for="post_details">Additional Post Info</label>
+        <textarea id="post_details" name="post_details" placeholder="Mention shifts, benefits, etc." required></textarea>
+
+        <button type="submit">Publish Vacancy</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current date in YYYY-MM-DD format based on local time
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const today = `${year}-${month}-${day}`;
+
+            const fromDateInput = document.getElementById('apply_from_date');
+            const toDateInput = document.getElementById('apply_to_date');
+
+            // 1. Block past dates: Set 'min' attribute for both to TODAY
+            fromDateInput.min = today;
+            toDateInput.min = today;
+
+            // 2. Logic: Deadline (To Date) cannot be before Start (From Date)
+            fromDateInput.addEventListener('change', function() {
+                if (this.value) {
+                    toDateInput.min = this.value;
+
+                    // If 'To Date' was already selected and is now before new 'From Date'
+                    if (toDateInput.value && toDateInput.value < this.value) {
+                        toDateInput.value = ""; // Reset the invalid deadline
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

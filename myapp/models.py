@@ -19,6 +19,7 @@ class STUDENT_table(models.Model):
 
     name= models.CharField(max_length=100)
     place= models.CharField(max_length=100)
+    district= models.CharField(max_length=100,default='')
     post= models.CharField(max_length=100)
     pin= models.IntegerField()
     phone= models.BigIntegerField()
@@ -27,6 +28,8 @@ class STUDENT_table(models.Model):
     gender= models.CharField(max_length=100)
     skill= models.CharField(max_length=100)
     qualification = models.CharField(max_length=100)
+    status=models.CharField(max_length=20,default="student")
+
 
 
 
@@ -44,22 +47,15 @@ class COMPLAINT_table(models.Model):
     reply= models.CharField(max_length=100)
 
 
-
-class JOB_table(models.Model):
-    job=  models.CharField(max_length=100)
-    company_name=  models.CharField(max_length=100)
-    job_details=  models.CharField(max_length=100)
-
-
-
 class VACCANCY_table(models.Model):
-    JOB= models.ForeignKey(JOB_table,on_delete=models.CASCADE)
+    job = models.CharField(max_length=100)
+    company_name = models.CharField(max_length=100)
+    job_details = models.CharField(max_length=100)
     vaccancy= models.CharField(max_length=100)
     apply_from_date=models.TextField()
     apply_to_date= models.DateField()
     time_duration= models.CharField(max_length=100)
     post_details= models.CharField(max_length=100)
-
 
 
 class APPLICATION_table(models.Model):
@@ -81,13 +77,13 @@ class HOD_table(models.Model):
     gender = models.CharField(max_length=100)
     qualification= models.CharField(max_length=100)
     photo= models.FileField()
-
+    status=models.CharField(max_length=20,default="hod")
 
 
 
 class ALLOCATION_table(models.Model):
     HOD= models.ForeignKey(HOD_table, on_delete=models.CASCADE)
-    Department = models.ForeignKey(DEPARTMENT_table, on_delete=models.CASCADE)
+    department = models.ForeignKey(DEPARTMENT_table, on_delete=models.CASCADE)
     date = models.DateField()
     status= models.CharField(max_length=100)
 
@@ -99,9 +95,8 @@ class PLACEMENTCELL_table(models.Model):
     place = models.CharField(max_length=100)
     phone = models.BigIntegerField()
     email = models.CharField(max_length=100)
+    photo=models.FileField()
     status= models.CharField(max_length=100)
-
-
 
 
 class REQUEST_TO_PLACEMENTCELL_table(models.Model):
@@ -110,8 +105,6 @@ class REQUEST_TO_PLACEMENTCELL_table(models.Model):
     date = models.DateField()
     need=models.CharField(max_length=100)
     status= models.CharField(max_length=100)
-
-
 
 
 class WORKSHOP_table(models.Model):
@@ -130,6 +123,29 @@ class CHAT_table(models.Model):
     msg=models.CharField(max_length=100)
     status = models.CharField(max_length=100)
 
+
+class ATTENDWORKSHOP_REQUEST_table(models.Model):
+    WORKSHOP=models.ForeignKey(WORKSHOP_table,on_delete=models.CASCADE)
+    STUDENT = models.ForeignKey(STUDENT_table, on_delete=models.CASCADE)
+    date = models.DateField()
+    status = models.CharField(max_length=100)
+    score = models.CharField(max_length=100)
+
+
+
+class CERTIFICATE_table(models.Model):
+    WORKSHOP = models.ForeignKey(WORKSHOP_table, on_delete=models.CASCADE)
+    STUDENT = models.ForeignKey(STUDENT_table, on_delete=models.CASCADE)
+    date = models.DateField()
+    certificate = models.FileField()
+
+
+class COMPLAINT_hod_table(models.Model):
+    STUDENT= models.ForeignKey(STUDENT_table,on_delete=models.CASCADE)
+    HOD = models.ForeignKey(HOD_table, on_delete=models.CASCADE)
+    complaint= models.CharField(max_length=100)
+    date=models.DateField()
+    reply= models.CharField(max_length=100)
 
 
 

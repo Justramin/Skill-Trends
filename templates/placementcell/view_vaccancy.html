@@ -2,9 +2,122 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Vacancies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc;
+            transition: all 0.2s;
+        }
+        .btn-add {
+            transition: all 0.3s;
+        }
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+    </style>
 </head>
-<body>
-$END$
+<body class="bg-gray-100 min-h-screen">
+{% extends 'placementcell/placementhome.html' %}
+{% block body %}
+    <div class="max-w-7xl mx-auto px-6 py-10">
+
+        <!-- Header Section -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-3">
+                    <i class="fas fa-briefcase text-blue-600"></i>
+                    All Job Vacancies
+                </h1>
+                <p class="text-gray-600 mt-1">Manage current job openings and placements</p>
+            </div>
+
+            <!-- Add Vacancy Button (Top Right) -->
+            <a href="/myapp/add_vaccancy/"
+               class="btn-add bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg">
+                <i class="fas fa-plus"></i>
+                Add New Vacancy
+            </a>
+        </div>
+
+        {% if data %}
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <table class="w-full">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left">Job Title</th>
+                            <th class="px-6 py-4 text-left">Company Name</th>
+                            <th class="px-6 py-4 text-left">Job Details</th>
+                            <th class="px-6 py-4 text-center">Vacancies</th>
+                            <th class="px-6 py-4 text-left">Apply From</th>
+                            <th class="px-6 py-4 text-left">Apply To</th>
+                            <th class="px-6 py-4 text-left">Duration</th>
+                            <th class="px-6 py-4 text-left">Post Details</th>
+                            <th class="px-6 py-4 text-left">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-hover divide-y divide-gray-200 text-gray-700">
+                        {% for i in data %}
+                        <tr>
+                            <td class="px-6 py-5 font-medium">{{ i.job }}</td>
+                            <td class="px-6 py-5">{{ i.company_name }}</td>
+                            <td class="px-6 py-5 text-sm max-w-md">{{ i.job_details|truncatechars:80 }}</td>
+                            <td class="px-6 py-5 text-center">
+                                <span class="inline-block bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-sm font-semibold">
+                                    {{ i.vaccancy }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-5 text-sm">{{ i.apply_from_date }}</td>
+                            <td class="px-6 py-5 text-sm">{{ i.apply_to_date }}</td>
+                            <td class="px-6 py-5 text-sm">{{ i.time_duration }}</td>
+                            <td class="px-6 py-5 text-sm">{{ i.post_details|truncatechars:60 }}
+                            </td>
+                        <td>
+                            <a href="/myapp/delete_vaccancy/{{ i.id }}" class="edit-link">✏️ delete</a>
+
+                        </td>
+
+
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Summary -->
+            <div class="text-center mt-6 text-gray-600">
+                <strong>{{ vaccancies|length }}</strong> vacancies found
+            </div>
+
+        {% else %}
+            <!-- Empty State -->
+            <div class="bg-white rounded-2xl shadow p-16 text-center">
+                <i class="fas fa-folder-open text-7xl text-gray-300 mb-6"></i>
+                <h3 class="text-2xl font-semibold text-gray-700 mb-2">No Vacancies Available</h3>
+                <p class="text-gray-500 mb-8">There are no job vacancies posted yet.</p>
+
+                <a href="/myapp/add_vaccancy/"
+                   class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-2xl text-lg">
+                    <i class="fas fa-plus"></i>
+                    Add Your First Vacancy
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+
 </body>
+{% endblock %}
 </html>

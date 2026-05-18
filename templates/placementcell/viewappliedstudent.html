@@ -16,7 +16,7 @@
 {#    <title>Title</title>#}
 {#</head>#}
 {#<body>#}
-{#{% extends 'placementcell/home.html' %}#}
+{#{% extends 'placementcell/placementhome.html' %}#}
 {#{% block body %}#}
 {##}
 {#    <table border="1">#}
@@ -58,16 +58,17 @@
 
 
 
-{% extends 'placementcell/home.html' %}
+{% extends 'placementcell/placementhome.html' %}
 
 {% block body %}
 <div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
 
+
     <div style="width: 100%; max-width: 1100px; margin-bottom: 25px;">
-        <h2 style="color: white; margin: 0; font-size: 1.8rem; text-align: left;">
+        <h2 style="color: black; margin: 0; font-size: 1.8rem; text-align: left;">
             <i class="fas fa-user-graduate"></i> Applied Students
         </h2>
-        <p style="color: rgba(255,255,255,0.8); margin-top: 5px;">Review and manage student job applications</p>
+        <p style="color: black; margin-top: 5px;">Review and manage student job applications</p>
     </div>
 
     <div style="background: white; width: 100%; max-width: 1100px; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow-x: auto;">
@@ -78,6 +79,7 @@
                     <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Contact & Skills</th>
                     <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Job / Vacancy</th>
                     <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Date</th>
+                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">file</th>
                     <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase; text-align: center;">Actions</th>
                 </tr>
             </thead>
@@ -115,12 +117,17 @@
                     <td style="padding: 15px; color: #7f8c8d; font-size: 0.9rem;">
                         {{ i.date }}
                     </td>
+                    <td><a href="{{ i.file.url }}">resume</a> </td>
 
                     <td style="padding: 15px; text-align: center;">
+                        {% if i.status == 'pending' %}
                         <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
-                            <a href="#" class="btn-status accept">Accept</a>
-                            <a href="#" class="btn-status reject">Reject</a>
+                            <a href="/myapp/accept_eligibility/{{ i.id }}" class="btn-status accept">Accept</a>
+                            <a href="/myapp/reject_eligibility/{{ i.id }}" class="btn-status reject">Reject</a>
                         </div>
+                        {% else %}
+                        {{ i.status }}
+                        {% endif %}
                     </td>
 
                 </tr>

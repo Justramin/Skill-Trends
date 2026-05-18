@@ -5,7 +5,7 @@
 {#    <title>Title</title>#}
 {#</head>#}
 {#<body>#}
-{#{% extends 'placementcell/home.html' %}#}
+{#{% extends 'placementcell/placementhome.html' %}#}
 {#{% block body %}#}
 {#<table border="1">#}
 {#    <tr>#}
@@ -23,73 +23,327 @@
 {#        <td>{{ i.time}}</td>#}
 {#    </tr>#}
 {#    {% endfor %}#}
-{##}
+
 {#</table>#}
 {#{% endblock %}#}
 {##}
 {#</body>#}
 {#</html>#}
 
-
-
-{% extends 'placementcell/home.html' %}
+{% extends 'placementcell/placementhome.html' %}
 
 {% block body %}
-<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
 
-    <div style="width: 100%; max-width: 950px; margin-bottom: 25px;">
-        <h2 style="color: white; margin: 0; font-size: 1.8rem; text-align: left;">
-            <i class="fas fa-chalkboard-teacher"></i> Upcoming Sessions & Workshops
+<div class="content-container">
+
+    <!-- Heading Section -->
+    <div class="page-header">
+        <h2>
+            <i class="fas fa-chalkboard-teacher"></i>
+            Upcoming Sessions & Workshops
         </h2>
-        <p style="color: rgba(255,255,255,0.8); margin-top: 5px;">View and track scheduled training sessions</p>
+
+        <p>
+            View and track scheduled training sessions
+        </p>
     </div>
 
-    <div style="background: white; width: 100%; max-width: 950px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-                <tr style="background-color: #f8f9fa;">
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Workshop Name</th>
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Details</th>
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; font-size: 0.85rem; text-transform: uppercase;">Schedule</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in data %}
-                <tr style="border-bottom: 1px solid #eee; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#f4f9ff'" onmouseout="this.style.backgroundColor='transparent'">
+    <!-- Table Card -->
+    <div class="table-card">
 
-                    <td style="padding: 18px 15px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <div style="background: #e1f5fe; color: #03a9f4; width: 35px; height: 35px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
-                                <i class="fas fa-laptop-code"></i>
+        <div class="table-responsive">
+
+            <table class="custom-table">
+
+                <thead>
+                    <tr>
+                        <th>Workshop Name</th>
+                        <th>Details</th>
+                        <th>Schedule</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for i in data %}
+
+                    <tr>
+
+                        <!-- Workshop -->
+                        <td>
+                            <div class="workshop-info">
+
+                                <div class="workshop-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+
+                                <strong>
+                                    {{ i.workshop_name }}
+                                </strong>
+
                             </div>
-                            <strong style="color: #2c3e50; font-size: 1rem;">{{ i.workshop_name }}</strong>
-                        </div>
-                    </td>
+                        </td>
 
-                    <td style="padding: 18px 15px; color: #555; line-height: 1.5; max-width: 300px;">
-                        {{ i.details }}
-                    </td>
+                        <!-- Details -->
+                        <td class="details-text">
+                            {{ i.details }}
+                        </td>
 
-                    <td style="padding: 18px 15px;">
-                        <div style="color: #2c3e50; font-weight: 500;">
-                            <i class="far fa-calendar-alt" style="color: #3498db; margin-right: 8px;"></i>{{ i.date }}
-                        </div>
-                        <div style="color: #7f8c8d; font-size: 0.85rem; margin-top: 4px;">
-                            <i class="far fa-clock" style="color: #e67e22; margin-right: 8px;"></i>{{ i.time }}
-                        </div>
-                    </td>
+                        <!-- Schedule -->
+                        <td>
 
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3" style="padding: 50px; text-align: center; color: #95a5a6;">
-                        <i class="fas fa-calendar-times" style="font-size: 2.5rem; display: block; margin-bottom: 15px; opacity: 0.4;"></i>
-                        No workshops or sessions are currently scheduled.
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                            <div class="schedule-date">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ i.date }}
+                            </div>
+
+                            <div class="schedule-time">
+                                <i class="far fa-clock"></i>
+                                {{ i.time }}
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="3">
+
+                            <div class="empty-state">
+
+                                <i class="fas fa-calendar-times"></i>
+
+                                <h3>No Workshops Available</h3>
+
+                                <p>
+                                    No workshops or sessions are currently scheduled.
+                                </p>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
     </div>
+
 </div>
+
+<style>
+
+    *{
+        box-sizing: border-box;
+    }
+
+    .content-container{
+        width: 100%;
+        padding: 20px;
+    }
+
+    /* Header */
+
+    .page-header{
+        margin-bottom: 25px;
+    }
+
+    .page-header h2{
+        margin: 0;
+        font-size: 30px;
+        font-weight: 700;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .page-header h2 i{
+        color: #2563eb;
+    }
+
+    .page-header p{
+        margin-top: 8px;
+        color: #64748b;
+        font-size: 15px;
+    }
+
+    /* Card */
+
+    .table-card{
+        width: 100%;
+        background: #ffffff;
+        border-radius: 22px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .table-responsive{
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    /* Table */
+
+    .custom-table{
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+    }
+
+    .custom-table thead tr{
+        background: #f8fafc;
+    }
+
+    .custom-table th{
+        padding: 18px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        border-bottom: 2px solid #e2e8f0;
+        letter-spacing: 0.5px;
+    }
+
+    .custom-table td{
+        padding: 22px 18px;
+        border-bottom: 1px solid #edf2f7;
+        vertical-align: top;
+    }
+
+    .custom-table tbody tr{
+        transition: 0.3s ease;
+    }
+
+    .custom-table tbody tr:hover{
+        background: #f8fbff;
+    }
+
+    /* Workshop */
+
+    .workshop-info{
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .workshop-icon{
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        background: #eff6ff;
+        color: #2563eb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .workshop-info strong{
+        color: #1e293b;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    /* Details */
+
+    .details-text{
+        color: #64748b;
+        line-height: 1.7;
+        max-width: 350px;
+        font-size: 15px;
+    }
+
+    /* Schedule */
+
+    .schedule-date{
+        color: #1e293b;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .schedule-date i{
+        color: #2563eb;
+    }
+
+    .schedule-time{
+        color: #64748b;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .schedule-time i{
+        color: #f59e0b;
+    }
+
+    /* Empty */
+
+    .empty-state{
+        padding: 60px 20px;
+        text-align: center;
+    }
+
+    .empty-state i{
+        font-size: 60px;
+        color: #cbd5e1;
+        margin-bottom: 18px;
+    }
+
+    .empty-state h3{
+        margin: 0;
+        color: #334155;
+        font-size: 24px;
+    }
+
+    .empty-state p{
+        margin-top: 10px;
+        color: #94a3b8;
+        font-size: 15px;
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+        .content-container{
+            padding: 10px;
+        }
+
+        .page-header h2{
+            font-size: 24px;
+        }
+
+        .table-card{
+            padding: 15px;
+            border-radius: 18px;
+        }
+
+        .custom-table td,
+        .custom-table th{
+            padding: 16px;
+        }
+
+        .workshop-info strong{
+            font-size: 15px;
+        }
+
+    }
+
+</style>
+
 {% endblock %}

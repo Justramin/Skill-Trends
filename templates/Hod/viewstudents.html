@@ -1,51 +1,389 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-
-
-
-<table border="1">
-    <tr>
-        <th>name</th>
-        <th>place</th>
-        <th>post</th>
-        <th>pin</th>
-        <th>phone</th>
-        <th>email</th>
-        <th>gender</th>
-        <th>qualification</th>
-        <th>skill</th>
-        <th>photo</th>
-        <th>Edit</th>
-
-    </tr>
-    {% for i in data %}
-    <tr>
-        <td>{{ i.name}}</td>
-        <td>{{ i.place}}</td>
-         <td>{{ i.post}}</td>
-         <td>{{ i.pin}}</td>
-         <td>{{ i.phone}}</td>
-         <td>{{ i.email}}</td>
-         <td>{{ i.gender}}</td>
-         <td>{{ i.qualification}}</td>
-          <td>{{ i.skill}}</td>
-         <td><img src="/media/{{ i.photo}}" width="100px" height="100px"></td>
-         <td><a href="/myapp/edit_student/{{ i.id }}">Edit</a></td>
-
-    </tr>
-    {% endfor %}
-
-</table>
-
-
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{##}
+{##}
+{##}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>name</th>#}
+{#        <th>place</th>#}
+{#        <th>post</th>#}
+{#        <th>pin</th>#}
+{#        <th>phone</th>#}
+{#        <th>email</th>#}
+{#        <th>gender</th>#}
+{#        <th>qualification</th>#}
+{#        <th>skill</th>#}
+{#        <th>photo</th>#}
+{#        <th>Edit</th>#}
+{##}
+{#    </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.name}}</td>#}
+{#        <td>{{ i.place}}</td>#}
+{#         <td>{{ i.post}}</td>#}
+{#         <td>{{ i.pin}}</td>#}
+{#         <td>{{ i.phone}}</td>#}
+{#         <td>{{ i.email}}</td>#}
+{#         <td>{{ i.gender}}</td>#}
+{#         <td>{{ i.qualification}}</td>#}
+{#          <td>{{ i.skill}}</td>#}
+{#         <td><img src="/media/{{ i.photo}}" width="100px" height="100px"></td>#}
+{#         <td><a href="/myapp/edit_studentss/{{ i.id }}">Edit</a></td>#}
+{##}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##}
+{#</table>#}
+{##}
+{##}
 {#<a href="/myapp/add_student/">student</a>#}
+{##}
+{##}
+{#</body>#}
+{#</html>#}
 
 
-</body>
-</html>
+
+
+
+{##}
+{#{% extends "Hod/hod_home.html" %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Student Management</title>#}
+{##}
+{#    <!-- Font Awesome for Icons -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">#}
+{##}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 219, 213, 0.22) 100%);#}
+{#            min-height: 100vh;#}
+{#            padding: 20px;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1200px;#}
+{#            margin: 0 auto;#}
+{#        }#}
+{##}
+{#        header {#}
+{#            text-align: center;#}
+{#            margin-bottom: 30px;#}
+{#        }#}
+{##}
+{#        h1 {#}
+{#            color: #2c3e50;#}
+{#            font-size: 2.5rem;#}
+{#            margin-bottom: 2px;#}
+{#        }#}
+{##}
+{#        .subtitle {#}
+{#            color: #7f8c8d;#}
+{#            font-size: 1.1rem;#}
+{#        }#}
+{##}
+{#        /* Add Student Button */#}
+{#        .add-btn {#}
+{#            display: inline-flex;#}
+{#            align-items: center;#}
+{#            gap: 10px;#}
+{#            background: #3498db;#}
+{#            color: white;#}
+{#            padding: 12px 25px;#}
+{#            border-radius: 50px;#}
+{#            text-decoration: none;#}
+{#            font-weight: 600;#}
+{#            margin-bottom: 30px;#}
+{#            transition: all 0.3s ease;#}
+{#            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            background: #2980b9;#}
+{#            transform: translateY(-3px);#}
+{#            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);#}
+{#        }#}
+{##}
+{#        /* Table Styling */#}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            background: white;#}
+{#            border-radius: 12px;#}
+{#            overflow: hidden;#}
+{#            box-shadow:  0 8px 25px rgba(37, 99, 235, 0.1);#}
+{##}
+{#        th {#}
+{#            background: #2c3e50;#}
+{#            color: black;#}
+{#            padding: 18px 12px;#}
+{#            text-align: left;#}
+{#            font-weight: 600;#}
+{#            text-transform: uppercase;#}
+{#            font-size: 0.9rem;#}
+{#            letter-spacing: 0.5px;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 15px 12px;#}
+{#            border-bottom: 1px solid #eee;#}
+{#            color: #34495e;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background-color: #f8f9fa;#}
+{#            transition: background 0.3s;#}
+{#        }#}
+{##}
+{##}
+{#        .photo-cell {#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .photo-cell img {#}
+{#            width: 80px;#}
+{#            height: 80px;#}
+{#            object-fit: cover;#}
+{#            border-radius: 50%;#}
+{#            border: 3px solid #ecf0f1;#}
+{#            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);#}
+{#        }#}
+{##}
+{#        .edit-btn {#}
+{#            display: inline-flex;#}
+{#            align-items: center;#}
+{#            gap: 6px;#}
+{#            background: #27ae60;#}
+{#            color: white;#}
+{#            padding: 8px 16px;#}
+{#            border-radius: 30px;#}
+{#            text-decoration: none;#}
+{#            font-size: 0.9rem;#}
+{#            transition: all 0.3s;#}
+{#        }#}
+{##}
+{#        .edit-btn:hover {#}
+{#            background: #219a52;#}
+{#            transform: scale(1.05);#}
+{#        }#}
+{##}
+{##}
+{#        @media (max-width: 768px) {#}
+{#            h1 { font-size: 2rem; }#}
+{#            table { font-size: 0.9rem; }#}
+{#            th, td { padding: 12px 8px; }#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% extends "Hod/hod_home.html" %}#}
+{##}
+{#{% block body %}#}
+{##}
+{##}
+{#<div class="container">#}
+{#    <header>#}
+{#        <h1><i class="fas fa-graduation-cap"></i> Student Management</h1>#}
+{#        <p class="subtitle">View and Manage All Students</p>#}
+{#    </header>#}
+{##}
+{#  <div class="table-responsive">#}
+{#            <table>#}
+{#                <thead>#}
+{#                    <tr>#}
+{#                        <th>Name</th>#}
+{#                        <th>Place</th>#}
+{#                        <th>district</th>#}
+{#                        <th>Post</th>#}
+{#                        <th>PIN</th>#}
+{#                        <th>Phone</th>#}
+{#                        <th>Email</th>#}
+{#                        <th>Gender</th>#}
+{#                        <th>Qualification</th>#}
+{#                        <th>skill</th>#}
+{#                        <th>Photo</th>#}
+{#                        <th style="text-align: center;">Actions</th>#}
+{#                    </tr>#}
+{#                </thead>#}
+{#            <tbody>#}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#            <td>{{ i.name }}</td>#}
+{#            <td>{{ i.place }}</td>#}
+{#            <td>{{ i.district }}</td>#}
+{#            <td>{{ i.post }}</td>#}
+{#            <td>{{ i.pin }}</td>#}
+{#            <td>{{ i.phone }}</td>#}
+{#            <td>{{ i.email }}</td>#}
+{#            <td>{{ i.gender }}</td>#}
+{#            <td>{{ i.qualification }}</td>#}
+{#            <td>{{ i.skill }}</td>#}
+{#            <td class="photo-cell">#}
+{#                <img src="/media/{{ i.photo }}" alt="Student Photo">#}
+{#            </td>#}
+{#            <td>#}
+{#                <a href="/myapp/edit_studentss/{{ i.id }}" class="edit-btn">#}
+{#                    <i class="fas fa-edit"></i> Edit#}
+{#                </a>#}
+{#            </td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#            </tbody>#}
+{#    </table>#}
+{#</div>#}
+{#</div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+{% extends "Hod/hod_home.html" %}
+
+{% block body %}
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        margin-bottom: 25px;
+    }
+
+    h1 {
+        color: #2c3e50;
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        color: #7f8c8d;
+        font-size: 1rem;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.1);
+    }
+
+    th {
+        background: #2c3e50;
+        color: white;
+        padding: 15px 10px;
+        text-align: left;
+        font-size: 0.85rem;
+    }
+
+    td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #eee;
+        font-size: 0.9rem;
+    }
+
+    tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .photo-cell {
+        text-align: center;
+    }
+
+    .photo-cell img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .edit-btn {
+        background: #27ae60;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.85rem;
+    }
+
+    .edit-btn:hover {
+        background: #219a52;
+    }
+
+</style>
+
+<div class="container">
+    <header>
+        <h1><i class="fas fa-graduation-cap"></i> Student Management</h1>
+        <p class="subtitle">View and Manage All Students</p>
+    </header>
+
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                   <th>Address</th>
+                    <th>Contact Details</th>
+                    <th>Gender</th>
+                    <th>Qualification</th>
+                    <th>Skill</th>
+                    <th>Photo</th>
+                    <th style="text-align:center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.name }}</td>
+                    <td>Place:{{ i.place }},<br>District:{{ i.district }},<br>Post:{{ i.post }},<br>Pin:{{ i.pin }}</td>
+                    <td>Phone:{{ i.phone }},<br>Email:{{ i.email }}</td>
+                    <td>{{ i.gender }}</td>
+                    <td>{{ i.qualification }}</td>
+                    <td>{{ i.skill }}</td>
+                    <td class="photo-cell">
+                        <img src="/media/{{ i.photo }}" alt="Student">
+                    </td>
+                    <td style="text-align:center;">
+                        <a href="/myapp/edit_studentss/{{ i.id }}" class="edit-btn">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

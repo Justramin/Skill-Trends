@@ -1,10 +1,970 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{#{% extends 'placementcell/placementhome.html' %}#}
+{#{% block body %}#}
+{#<h1>Industry Trending Skills & Career Opportunities</h1>#}
+{##}
+{#{% if error %}#}
+{#    <p style="color:red;">{{ error }}</p>#}
+{#{% endif %}#}
+{##}
+{#{% for dept_name, courses in career_data.departments.items %}#}
+{#    <h2>{{ dept_name }} ({{ courses|length }} courses)</h2>#}
+{##}
+{#    {% for course in courses %}#}
+{#        <div style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">#}
+{#            <h3>{{ course.label }}</h3>#}
+{##}
+{#            <h4>🔧 Technical & Key Skills</h4>#}
+{#            <ul>#}
+{#                {% for skill in course.skills.Technical_Skills %}#}
+{#                    <li>{{ skill }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{##}
+{#            <h4>💼 Top Job Opportunities</h4>#}
+{#            <ul>#}
+{#                {% for job in course.jobs %}#}
+{#                    <li>{{ job }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{##}
+{#            <h4>🔥 Industry Trends</h4>#}
+{#            <ul>#}
+{#                {% for trend in course.industry_trends %}#}
+{#                    <li>{{ trend|title }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% endfor %}#}
+{##}
+{#{% endblock %}#}
+
+{% extends 'placementcell/placementhome.html' %}
+
+{% block body %}
+
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+
+
+:root {
+
+--ink: #0d0d14;
+
+--ink-muted: #4a4a5e;
+
+--ink-faint: #9898b0;
+
+--surface: #f7f6f2;
+
+--surface-2: #ffffff;
+
+--accent-1: #2d6be4;
+
+--accent-2: #e8400c;
+
+--accent-3: #0fa86e;
+
+--accent-4: #8b35d6;
+
+--border: rgba(13,13,20,0.09);
+
+--radius: 16px;
+
+--radius-sm: 10px;
+
+}
+
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+
+body, .trends-root {
+
+font-family: 'DM Sans', sans-serif;
+
+background: var(--surface);
+
+color: var(--ink);
+
+-webkit-font-smoothing: antialiased;
+
+}
+
+
+
+.trends-root {
+
+max-width: 1120px;
+
+margin: 0 auto;
+
+padding: 3.5rem 2rem 5rem;
+
+}
+
+
+
+/* ─── Hero Header ─── */
+
+.page-hero {
+
+display: grid;
+
+grid-template-columns: 1fr auto;
+
+align-items: end;
+
+gap: 2rem;
+
+margin-bottom: 4rem;
+
+padding-bottom: 2.5rem;
+
+border-bottom: 1.5px solid var(--border);
+
+}
+
+.hero-eyebrow {
+
+display: inline-flex;
+
+align-items: center;
+
+gap: 8px;
+
+font-size: 11px;
+
+font-weight: 500;
+
+letter-spacing: 0.13em;
+
+text-transform: uppercase;
+
+color: var(--accent-1);
+
+background: rgba(45,107,228,0.08);
+
+padding: 6px 14px;
+
+border-radius: 100px;
+
+margin-bottom: 1.1rem;
+
+}
+
+.hero-eyebrow::before {
+
+content: '';
+
+width: 6px; height: 6px;
+
+border-radius: 50%;
+
+background: var(--accent-1);
+
+animation: pulse 2s ease-in-out infinite;
+
+}
+
+@keyframes pulse {
+
+0%,100% { opacity:1; transform:scale(1); }
+
+50% { opacity:0.4; transform:scale(0.7); }
+
+}
+
+.hero-title {
+
+font-family: 'Syne', sans-serif;
+
+font-size: clamp(2rem, 4vw, 3rem);
+
+font-weight: 800;
+
+line-height: 1.1;
+
+letter-spacing: -0.03em;
+
+color: var(--ink);
+
+max-width: 600px;
+
+}
+
+.hero-title span { color: var(--accent-1); }
+
+.hero-meta {
+
+font-size: 13px;
+
+color: var(--ink-faint);
+
+margin-top: 0.85rem;
+
+display: flex;
+
+align-items: center;
+
+gap: 16px;
+
+}
+
+.hero-stat {
+
+display: flex;
+
+flex-direction: column;
+
+align-items: flex-end;
+
+gap: 4px;
+
+}
+
+.hero-stat-num {
+
+font-family: 'Syne', sans-serif;
+
+font-size: 2.4rem;
+
+font-weight: 800;
+
+color: var(--ink);
+
+letter-spacing: -0.04em;
+
+line-height: 1;
+
+}
+
+.hero-stat-label {
+
+font-size: 12px;
+
+color: var(--ink-faint);
+
+letter-spacing: 0.06em;
+
+text-transform: uppercase;
+
+}
+
+
+
+/* ─── Error ─── */
+
+.error-banner {
+
+background: #fff0ee;
+
+border: 1px solid #f5bfb4;
+
+color: #b73c1e;
+
+padding: 14px 18px;
+
+border-radius: var(--radius-sm);
+
+font-size: 14px;
+
+margin-bottom: 2rem;
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+}
+
+
+
+/* ─── Department Section ─── */
+
+.dept-section {
+
+margin-bottom: 4.5rem;
+
+}
+
+.dept-header {
+
+display: flex;
+
+align-items: center;
+
+gap: 1.2rem;
+
+margin-bottom: 1.8rem;
+
+position: relative;
+
+}
+
+.dept-bar {
+
+width: 4px;
+
+height: 2.4rem;
+
+border-radius: 2px;
+
+flex-shrink: 0;
+
+}
+
+.dept-name {
+
+font-family: 'Syne', sans-serif;
+
+font-size: 1.5rem;
+
+font-weight: 700;
+
+color: var(--ink);
+
+letter-spacing: -0.02em;
+
+}
+
+.dept-count {
+
+margin-left: auto;
+
+font-size: 12px;
+
+font-weight: 500;
+
+letter-spacing: 0.06em;
+
+text-transform: uppercase;
+
+color: var(--ink-faint);
+
+background: var(--border);
+
+padding: 5px 12px;
+
+border-radius: 100px;
+
+}
+
+.dept-colors { --d-color: var(--accent-1); }
+
+.dept-section:nth-child(2) .dept-bar { background: var(--accent-2); }
+
+.dept-section:nth-child(2) .dept-count { color: var(--accent-2); background: rgba(232,64,12,0.08); }
+
+.dept-section:nth-child(3) .dept-bar { background: var(--accent-3); }
+
+.dept-section:nth-child(3) .dept-count { color: var(--accent-3); background: rgba(15,168,110,0.08); }
+
+.dept-section:nth-child(4) .dept-bar { background: var(--accent-4); }
+
+.dept-section:nth-child(4) .dept-count { color: var(--accent-4); background: rgba(139,53,214,0.08); }
+
+.dept-section:nth-child(1) .dept-bar { background: var(--accent-1); }
+
+.dept-section:nth-child(1) .dept-count { color: var(--accent-1); background: rgba(45,107,228,0.08); }
+
+
+
+/* ─── Course Cards ─── */
+
+.courses-grid {
+
+display: grid;
+
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+gap: 1.25rem;
+
+}
+
+.course-card {
+
+background: var(--surface-2);
+
+border: 1px solid var(--border);
+
+border-radius: var(--radius);
+
+overflow: hidden;
+
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+display: flex;
+
+flex-direction: column;
+
+}
+
+.course-card:hover {
+
+transform: translateY(-3px);
+
+box-shadow: 0 16px 40px rgba(13,13,20,0.09);
+
+}
+
+
+
+.card-top {
+
+padding: 1.5rem 1.5rem 1.2rem;
+
+border-bottom: 1px solid var(--border);
+
+position: relative;
+
+}
+
+.card-index {
+
+font-family: 'Syne', sans-serif;
+
+font-size: 11px;
+
+font-weight: 700;
+
+letter-spacing: 0.12em;
+
+text-transform: uppercase;
+
+color: var(--ink-faint);
+
+margin-bottom: 0.5rem;
+
+}
+
+.card-title {
+
+font-family: 'Syne', sans-serif;
+
+font-size: 1.1rem;
+
+font-weight: 700;
+
+letter-spacing: -0.02em;
+
+color: var(--ink);
+
+line-height: 1.3;
+
+}
+
+.card-accent-bar {
+
+position: absolute;
+
+top: 0; left: 0;
+
+width: 100%;
+
+height: 3px;
+
+}
+
+
+
+.card-body {
+
+padding: 1.25rem 1.5rem;
+
+display: flex;
+
+flex-direction: column;
+
+gap: 1.4rem;
+
+flex: 1;
+
+}
+
+
+
+.section-label {
+
+display: flex;
+
+align-items: center;
+
+gap: 8px;
+
+font-size: 10.5px;
+
+font-weight: 600;
+
+letter-spacing: 0.12em;
+
+text-transform: uppercase;
+
+color: var(--ink-faint);
+
+margin-bottom: 0.65rem;
+
+}
+
+.section-label .dot {
+
+width: 6px; height: 6px;
+
+border-radius: 50%;
+
+flex-shrink: 0;
+
+}
+
+
+
+/* Skills */
+
+.skills-wrap {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 6px;
+
+}
+
+.skill-tag {
+
+font-size: 12px;
+
+font-weight: 500;
+
+padding: 5px 11px;
+
+border-radius: 100px;
+
+background: #f0f0f7;
+
+color: #3a3a55;
+
+border: 1px solid rgba(13,13,20,0.07);
+
+white-space: nowrap;
+
+transition: background 0.15s;
+
+}
+
+.skill-tag:hover { background: #e4e4f0; }
+
+
+
+/* Jobs */
+
+.jobs-list {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 4px;
+
+}
+
+.job-item {
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+font-size: 13px;
+
+color: var(--ink);
+
+padding: 6px 0;
+
+border-bottom: 1px solid var(--border);
+
+}
+
+.job-item:last-child { border-bottom: none; }
+
+.job-arrow {
+
+width: 18px; height: 18px;
+
+border-radius: 50%;
+
+background: rgba(45,107,228,0.1);
+
+color: var(--accent-1);
+
+display: flex; align-items: center; justify-content: center;
+
+font-size: 10px;
+
+flex-shrink: 0;
+
+}
+
+
+
+/* Trends */
+
+.trends-list {
+
+display: flex;
+
+flex-direction: column;
+
+gap: 5px;
+
+}
+
+.trend-item {
+
+display: flex;
+
+align-items: center;
+
+gap: 9px;
+
+font-size: 12.5px;
+
+color: var(--ink);
+
+padding: 5px 10px;
+
+background: #f7f6f2;
+
+border-radius: 8px;
+
+border-left: 2px solid transparent;
+
+transition: border-color 0.15s, background 0.15s;
+
+}
+
+.trend-item:hover { border-left-color: var(--accent-3); background: #f0f9f5; }
+
+.trend-fire { font-size: 12px; }
+
+
+
+/* dept-color theming via data attrs */
+
+.dept-section[data-color="blue"] .dot { background: var(--accent-1); }
+
+.dept-section[data-color="blue"] .card-accent-bar { background: linear-gradient(90deg, var(--accent-1), #7fa8f5); }
+
+.dept-section[data-color="blue"] .job-arrow { background: rgba(45,107,228,0.1); color: var(--accent-1); }
+
+
+
+.dept-section[data-color="orange"] .dot { background: var(--accent-2); }
+
+.dept-section[data-color="orange"] .card-accent-bar { background: linear-gradient(90deg, var(--accent-2), #f5824a); }
+
+.dept-section[data-color="orange"] .job-arrow { background: rgba(232,64,12,0.1); color: var(--accent-2); }
+
+
+
+.dept-section[data-color="green"] .dot { background: var(--accent-3); }
+
+.dept-section[data-color="green"] .card-accent-bar { background: linear-gradient(90deg, var(--accent-3), #5ddaac); }
+
+.dept-section[data-color="green"] .job-arrow { background: rgba(15,168,110,0.1); color: var(--accent-3); }
+
+
+
+.dept-section[data-color="purple"] .dot { background: var(--accent-4); }
+
+.dept-section[data-color="purple"] .card-accent-bar { background: linear-gradient(90deg, var(--accent-4), #c07cf4); }
+
+.dept-section[data-color="purple"] .job-arrow { background: rgba(139,53,214,0.1); color: var(--accent-4); }
+
+
+
+/* fallback */
+
+.dept-section .dot { background: var(--ink-faint); }
+
+.dept-section .card-accent-bar { background: var(--ink-faint); }
+
+
+
+/* ─── Empty state ─── */
+
+.empty-state {
+
+text-align: center;
+
+padding: 5rem 2rem;
+
+color: var(--ink-faint);
+
+font-size: 15px;
+
+}
+
+
+
+@media (max-width: 640px) {
+
+.page-hero { grid-template-columns: 1fr; }
+
+.hero-stat { align-items: flex-start; }
+
+.courses-grid { grid-template-columns: 1fr; }
+
+}
+
+</style>
+
+
+
+<div class="trends-root">
+
+
+
+<!-- Hero -->
+
+<header class="page-hero">
+
+<div>
+
+<div class="hero-eyebrow">Live Industry Data</div>
+
+<h1 class="hero-title">Industry <span>Trending Skills</span><br>& Career Opportunities</h1>
+
+<div class="hero-meta">
+
+<span>Updated this semester &nbsp;·&nbsp; Placement Cell</span>
+
+</div>
+
+</div>
+
+<div class="hero-stat">
+
+<span class="hero-stat-num">{{ career_data.departments|length }}</span>
+
+<span class="hero-stat-label">Departments</span>
+
+</div>
+
+</header>
+
+
+
+<!-- Error banner -->
+
+{% if error %}
+
+<div class="error-banner">
+
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+
+{{ error }}
+
+</div>
+
+{% endif %}
+
+
+
+<!-- Department Sections -->
+
+{% if career_data.departments %}
+
+{% for dept_name, courses in career_data.departments.items %}
+
+
+
+{# Assign a color based on loop position #}
+
+{% with forloop.counter0|divisibleby:4 as c4 %}
+
+<section class="dept-section"
+
+data-color="{% if forloop.counter0|divisibleby:4 %}blue{% elif forloop.counter == 2 %}orange{% elif forloop.counter == 3 %}green{% else %}purple{% endif %}">
+
+
+
+<div class="dept-header">
+
+<div class="dept-bar"></div>
+
+<h2 class="dept-name">{{ dept_name }}</h2>
+
+<span class="dept-count">{{ courses|length }} course{% if courses|length != 1 %}s{% endif %}</span>
+
+</div>
+
+
+
+<div class="courses-grid">
+
+{% for course in courses %}
+
+<div class="course-card">
+
+<div class="card-top">
+
+<div class="card-accent-bar"></div>
+
+<div class="card-index">Course {{ forloop.counter }}</div>
+
+<h3 class="card-title">{{ course.label }}</h3>
+
+</div>
+
+
+
+<div class="card-body">
+
+
+
+<!-- Technical Skills -->
+
+{% if course.skills.Technical_Skills %}
+
+<div>
+
+<div class="section-label">
+
+<span class="dot" aria-hidden="true"></span>
+
+Technical &amp; Key Skills
+
+</div>
+
+<div class="skills-wrap">
+
+{% for skill in course.skills.Technical_Skills %}
+
+<span class="skill-tag">{{ skill }}</span>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- Job Opportunities -->
+
+{% if course.jobs %}
+
+<div>
+
+<div class="section-label">
+
+<span class="dot" aria-hidden="true"></span>
+
+Top Job Opportunities
+
+</div>
+
+<div class="jobs-list">
+
+{% for job in course.jobs %}
+
+<div class="job-item">
+
+<span class="job-arrow" aria-hidden="true">&#x2192;</span>
+
+{{ job }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- Industry Trends -->
+
+{% if course.industry_trends %}
+
+<div>
+
+<div class="section-label">
+
+<span class="dot" aria-hidden="true"></span>
+
+Industry Trends
+
+</div>
+
+<div class="trends-list">
+
+{% for trend in course.industry_trends %}
+
+<div class="trend-item">
+
+<span class="trend-fire" aria-hidden="true">🔥</span>
+
+{{ trend|title }}
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endif %}
+
+
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+
+</section>
+
+{% endwith %}
+
+{% endfor %}
+
+
+
+{% else %}
+
+<div class="empty-state">
+
+<p>No career data available at the moment. Please check back later.</p>
+
+</div>
+
+{% endif %}
+
+
+
+</div>
+
+
+
+{% endblock %}

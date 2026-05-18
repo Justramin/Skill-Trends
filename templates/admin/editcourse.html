@@ -100,18 +100,6 @@
             <form action="/myapp/edit_coursepost/" method="post">
                 {% csrf_token %}
 
-{#                <div class="mb-4">#}
-{#                    <label class="form-label">Department</label>#}
-{#                    <select name="department" class="form-select" required>#}
-{#                        <option value="">-- Select Department --</option>#}
-{#                        {% for i in dept %}#}
-{#                        <option value="{{ i.id }}"#}
-{#                            {% if data.Department.id == i.id %} selected {% endif %}>#}
-{#                            {{ i.department }}#}
-{#                        </option>#}
-{#                        {% endfor %}#}
-{#                    </select>#}
-{#                </div>#}
 
                 <div class="mb-4">
                     <label class="form-label">Course Name</label>

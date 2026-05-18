@@ -1,10 +1,157 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<table border="1">#}
+{#    <th>Sl no</th>#}
+{#    <th>date</th>#}
+{#    <th>workshop details</th>#}
+{#    <th>cetificate</th>#}
+{#      {% for i in data %}#}
+{#     <tr>#}
+{#                 <td>{{ forloop.counter }}</td>#}
+{#         <td>{{ i.date }}</td>#}
+{#    <td>{{ i.WORKSHOP.workshop_name }}</td>#}
+{#    <td>#}
+{#    <a href="{{ i.certificate.url }}">view cetificate</a>#}
+{#</td>#}
+{#     </tr>#}
+{##}
+{#     {% endfor %}#}
+{##}
+{##}
+{#</table>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Workshop Certificates</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        table th {
+            background-color: #f1f3f5;
+            color: #495057;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        table td {
+            vertical-align: middle;
+            padding: 1rem;
+        }
+        .certificate-btn {
+            background-color: #667eea;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .certificate-btn:hover {
+            background-color: #5a67d8;
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .sl-no {
+            font-weight: 600;
+            color: #667eea;
+        }
+        .workshop-name {
+            font-weight: 500;
+            color: #2d3748;
+        }
+    </style>
 </head>
 <body>
-$END$
+{% extends 'home.html' %}
+{% block body %}
+
+    <div class="page-header text-center">
+        <div class="container">
+            <h1><i class="fas fa-graduation-cap me-3"></i>My Workshop Certificates</h1>
+            <p class="lead mb-0">Track and view all your completed workshops</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="table-container p-4">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th width="80">Sl No</th>
+                        <th width="150">Date</th>
+                        <th>Workshop Details</th>
+                        <th width="180" class="text-center">Certificate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td class="sl-no">{{ forloop.counter }}</td>
+                        <td>{{ i.date|date:"d M, Y" }}</td>
+                        <td>
+                            <div class="workshop-name">{{ i.WORKSHOP.workshop_name }}</div>
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ i.certificate.url }}"
+                               class="certificate-btn"
+                               target="_blank">
+                                <i class="fas fa-eye me-2"></i>Certificate
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center py-5">
+                            <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No workshops found</h5>
+                            <p class="text-muted">You haven't attended any workshops yet.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
 </body>
 </html>

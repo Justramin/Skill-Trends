@@ -17,258 +17,483 @@
 {#</body>#}
 {#</html>#}
 
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Dashboard - Management Portal</title>#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">#}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, #93e4e7 0%, rgba(53, 228, 241, 0.05) 100%);#}
+{#            min-height: 100vh;#}
+{#            padding: 20px;#}
+{#        }#}
+{##}
+{#        .navbar {#}
+{#            background: rgba(255, 255, 255, 0.95);#}
+{#            backdrop-filter: blur(12px);#}
+{#            padding: 15px 30px;#}
+{#            border-radius: 16px;#}
+{#            margin-bottom: 30px;#}
+{#            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#        }#}
+{##}
+{#        .logo {#}
+{#            font-size: 26px;#}
+{#            font-weight: 700;#}
+{#            color: #3498db;#}
+{#        }#}
+{##}
+{#        .user-info {#}
+{#            display: flex;#}
+{#            align-items: center;#}
+{#            gap: 12px;#}
+{#            color: #2c3e50;#}
+{#        }#}
+{##}
+{#        .avatar {#}
+{#            width: 40px;#}
+{#            height: 40px;#}
+{#            background: #3498db;#}
+{#            color: white;#}
+{#            border-radius: 50%;#}
+{#            display: flex;#}
+{#            align-items: center;#}
+{#            justify-content: center;#}
+{#            font-weight: bold;#}
+{#        }#}
+{##}
+{#        .header {#}
+{#            text-align: center;#}
+{#            color: black;#}
+{#            margin-bottom: 40px;#}
+{#        }#}
+{##}
+{#        .header h1 {#}
+{#            font-size: 48px;#}
+{#            font-weight: 700;#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{##}
+{#        .header p {#}
+{#            font-size: 20px;#}
+{#            opacity: 0.9;#}
+{#        }#}
+{##}
+{#        .dashboard {#}
+{#            display: grid;#}
+{#            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));#}
+{#            gap: 25px;#}
+{#            max-width: 1200px;#}
+{#            margin: 0 auto;#}
+{#        }#}
+{##}
+{#        .card {#}
+{#            background: white;#}
+{#            border-radius: 20px;#}
+{#            padding: 32px 28px;#}
+{#            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);#}
+{#            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);#}
+{#            position: relative;#}
+{#            overflow: hidden;#}
+{#        }#}
+{##}
+{#        .card:hover {#}
+{#            transform: translateY(-15px);#}
+{#            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);#}
+{#        }#}
+{##}
+{#        .card::before {#}
+{#            content: '';#}
+{#            position: absolute;#}
+{#            top: 0;#}
+{#            left: 0;#}
+{#            width: 100%;#}
+{#            height: 4px;#}
+{#            background: linear-gradient(90deg, #3498db, #9b59b6);#}
+{#        }#}
+{##}
+{#        .icon {#}
+{#            font-size: 52px;#}
+{#            margin-bottom: 20px;#}
+{#            display: block;#}
+{#        }#}
+{##}
+{#        .card h3 {#}
+{#            font-size: 22px;#}
+{#            margin-bottom: 10px;#}
+{#            color: #2c3e50;#}
+{#        }#}
+{##}
+{#        .card p {#}
+{#            color: #7f8c8d;#}
+{#            line-height: 1.6;#}
+{#            margin-bottom: 25px;#}
+{#        }#}
+{##}
+{#        .btn {#}
+{#            padding: 14px 32px;#}
+{#            border: none;#}
+{#            border-radius: 50px;#}
+{#            font-size: 15px;#}
+{#            font-weight: 600;#}
+{#            cursor: pointer;#}
+{#            text-decoration: none;#}
+{#            display: inline-block;#}
+{#            transition: all 0.3s;#}
+{#            width: 100%;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .btn-primary {#}
+{#            background: linear-gradient(135deg, #3498db, #2980b9);#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .btn-primary:hover {#}
+{#            background: linear-gradient(135deg, #2980b9, #2471a3);#}
+{#            transform: scale(1.03);#}
+{#        }#}
+{##}
+{#        .logout {#}
+{#            background: linear-gradient(135deg, #e74c3c, #c0392b);#}
+{#            color: white;#}
+{#            margin-top: 30px;#}
+{#            display: block;#}
+{#            width: fit-content;#}
+{#            margin-left: auto;#}
+{#            margin-right: auto;#}
+{#            padding: 14px 50px;#}
+{#        }#}
+{##}
+{#        .logout:hover {#}
+{#            background: linear-gradient(135deg, #c0392b, #a93226);#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#                    {% block body %}#}
+{#    <!-- Navbar -->#}
+{#    <nav class="navbar">#}
+{#        <div class="logo">🎓 EduManage</div>#}
+{#        <div class="user-info">#}
+{#            <div class="avatar">T</div>#}
+{#            <div>#}
+{#                <strong>Thejaswini</strong><br>#}
+{#                <small>Administrator</small>#}
+{#            </div>#}
+{#        </div>#}
+{#    </nav>#}
+{##}
+{#    <div class="header">#}
+{#        <h1>Welcome Back, Thejaswini!</h1>#}
+{#        <p>Manage your institution efficiently from one dashboard</p>#}
+{#    </div>#}
+{##}
+{#    <div class="dashboard">#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-user icon" style="color:#3498db"></i>#}
+{#            <h3>Profile</h3>#}
+{#            <p>View and update your personal information and account details.</p>#}
+{#            <a href="/myapp/view_hodprofile/" class="btn btn-primary">Go to Profile</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-key icon" style="color:#e67e22"></i>#}
+{#            <h3>Change Password</h3>#}
+{#            <p>Securely update your login password.</p>#}
+{#            <a href="/myapp/password/" class="btn btn-primary">Change Password</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-building icon" style="color:#27ae60"></i>#}
+{#            <h3> allocated department</h3>#}
+{#            <p>view all allocated department.</p>#}
+{#            <a href="/myapp/view_departments/" class="btn btn-primary">View Departments</a>#}
+{#        </div>#}
+{#         <div class="card">#}
+{#            <i class="fas fa-building icon" style="color:#27ae60"></i>#}
+{#            <h3>Add session</h3>#}
+{#            <p>Add new session,workshops</p>#}
+{#            <a href="/myapp/addsession_workshop/" class="btn btn-primary">Add Session/Workshop</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-users icon" style="color:#9b59b6"></i>#}
+{#            <h3>Students</h3>#}
+{#            <p>Access and manage student records and data.</p>#}
+{#            <a href="/myapp/view_students/" class="btn btn-primary">View Students</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-chart-bar icon" style="color:#f1c40f"></i>#}
+{#            <h3>Industry Reports</h3>#}
+{#            <p>View placement and industry performance reports.</p>#}
+{#            <a href="/myapp/view_industyreport/" class="btn btn-primary">View Reports</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-chalkboard-teacher icon" style="color:#1abc9c"></i>#}
+{#            <h3>Sessions & Workshops</h3>#}
+{#            <p>Manage training sessions and workshops.</p>#}
+{#            <a href="/myapp/view_sessionworkshop/" class="btn btn-primary">View Sessions</a>#}
+{#        </div>#}
+{##}
+{#        <div class="card">#}
+{#            <i class="fas fa-paper-plane icon" style="color:#e74c3c"></i>#}
+{#            <h3>Forward Eligible Students</h3>#}
+{#            <p>Send eligible students for placement opportunities.</p>#}
+{#            <a href="/myapp/for_eligiblestudent/" class="btn btn-primary">Forward Students</a>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{##}
+{#    <!-- Logout -->#}
+{#    <div style="text-align: center; margin-top: 50px;">#}
+{#        <a href="/myapp/logout/" class="btn logout">#}
+{#            <i class="fas fa-sign-out-alt"></i> Logout#}
+{#        </a>#}
+{#    </div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{##}
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Management Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Home - HOD Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
+            background-color: #f4f6f9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar {
             min-height: 100vh;
-            padding: 20px;
-        }
-
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 15px 30px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: 700;
-            color: #3498db;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #2c3e50;
-        }
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-            background: #3498db;
+            background: linear-gradient(180deg, #1e3a8a, #3b82f6);
             color: white;
+            padding-top: 30px;
+        }
+        .nav-link {
+            color: white !important;
+            padding: 10px 20px;
+            margin: 6px 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+        .welcome-card {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+        .icon-circle {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-        }
-
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 40px;
-        }
-
-        .header h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 20px;
-            opacity: 0.9;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 32px 28px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #9b59b6);
-        }
-
-        .icon {
-            font-size: 52px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #2c3e50;
-        }
-
-        .card p {
-            color: #7f8c8d;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #2980b9, #2471a3);
-            transform: scale(1.03);
-        }
-
-        .logout {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            margin-top: 30px;
-            display: block;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 14px 50px;
-        }
-
-        .logout:hover {
-            background: linear-gradient(135deg, #c0392b, #a93226);
+            font-size: 28px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">🎓 EduManage</div>
-        <div class="user-info">
-            <div class="avatar">T</div>
-            <div>
-                <strong>Thejaswini</strong><br>
-                <small>Administrator</small>
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 sidebar">
+            <div class="text-center mb-5 px-3">
+                <h3 class="fw-bold">HOD Portal</h3>
+                <p class="mb-0 opacity-75">Payyanur College</p>
+            </div>
+
+            <div class="nav flex-column">
+                <a href="/myapp/view_hodprofile/" class="nav-link">
+                    <i class="bi bi-person-circle me-2"></i> My Profile
+                </a>
+                <a href="/myapp/password/" class="nav-link">
+                    <i class="bi bi-key me-2"></i> Change Password
+                </a>
+                <a href="/myapp/view_departments/" class="nav-link">
+                    <i class="bi bi-building me-2"></i> Departments
+                </a>
+                <a href="/myapp/view_students/" class="nav-link">
+                    <i class="bi bi-people-fill me-2"></i> Students
+                </a>
+                <a href="/myapp/view_industyreport/" class="nav-link">
+                    <i class="bi bi-graph-up me-2"></i> Industry Reports
+                </a>
+                <a href="/myapp/view_sessionworkshop/" class="nav-link">
+                    <i class="bi bi-calendar-event me-2"></i> Sessions & Workshops
+                </a>
+                 <a href="/myapp/view_complaint_hod/" class="nav-link">
+                    <i class="bi bi-calendar-event me-2"></i>  complaint
+                 </a>
+                <a href="/myapp/hod_view_feedback/" class="nav-link">
+                    <i class="bi bi-calendar-event me-2"></i>  Feedback
+                 </a>
+                <a href="/myapp/for_eligiblestudent/" class="nav-link">
+                    <i class="bi bi-forward me-2"></i> Forward Eligible Students
+                </a>
+                <hr class="text-white mx-3 my-4">
+                <a href="/myapp/logout/" class="nav-link text-danger">
+                    <i class="bi bi-box-arrow-right me-2"></i> Logout
+                </a>
             </div>
         </div>
-    </nav>
 
-    <div class="header">
-        <h1>Welcome Back, Thejaswini!</h1>
-        <p>Manage your institution efficiently from one dashboard</p>
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 p-4">
+
+            <!-- Welcome Section -->
+            <div class="welcome-card">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <h1 class="display-5 fw-bold mb-2">Welcome back, {{ i.name }}!</h1>
+                        <p class="lead opacity-90">Head of Department</p>
+                        <p class="mb-0">Manage your department, students, and industry collaborations efficiently from one place.</p>
+                    </div>
+                    <div class="col-lg-4 text-end">
+                        <div class="icon-circle bg-white text-primary mx-auto" style="width: 90px; height: 90px; font-size: 42px;">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{#            <!-- Quick Stats -->#}
+{#            <h4 class="mb-4 text-muted fw-semibold">Quick Overview</h4>#}
+{#            <div class="row g-4">#}
+{#                <div class="col-md-6 col-lg-3">#}
+{#                    <div class="stat-card card h-100">#}
+{#                        <div class="card-body text-center p-4">#}
+{#                            <div class="icon-circle bg-primary text-white mx-auto mb-3">#}
+{#                                <i class="bi bi-people-fill"></i>#}
+{#                            </div>#}
+{#                            <h3 class="fw-bold text-primary">248</h3>#}
+{#                            <p class="text-muted mb-0">Total Students</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-3">#}
+{#                    <div class="stat-card card h-100">#}
+{#                        <div class="card-body text-center p-4">#}
+{#                            <div class="icon-circle bg-success text-white mx-auto mb-3">#}
+{#                                <i class="bi bi-building"></i>#}
+{#                            </div>#}
+{#                            <h3 class="fw-bold text-success">8</h3>#}
+{#                            <p class="text-muted mb-0">Departments</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-3">#}
+{#                    <div class="stat-card card h-100">#}
+{#                        <div class="card-body text-center p-4">#}
+{#                            <div class="icon-circle bg-warning text-white mx-auto mb-3">#}
+{#                                <i class="bi bi-calendar-event"></i>#}
+{#                            </div>#}
+{#                            <h3 class="fw-bold text-warning">12</h3>#}
+{#                            <p class="text-muted mb-0">Upcoming Sessions</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-md-6 col-lg-3">#}
+{#                    <div class="stat-card card h-100">#}
+{#                        <div class="card-body text-center p-4">#}
+{#                            <div class="icon-circle bg-info text-white mx-auto mb-3">#}
+{#                                <i class="bi bi-graph-up"></i>#}
+{#                            </div>#}
+{#                            <h3 class="fw-bold text-info">15</h3>#}
+{#                            <p class="text-muted mb-0">Industry Reports</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+             {% block body %}
+
+            <div class="mt-5">
+                <h4 class="mb-4 text-muted fw-semibold">Quick Actions</h4>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <a href="/myapp/view_students/" class="text-decoration-none">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-people-fill text-primary fs-1"></i>
+                                    <h5 class="mt-3">View All Students</h5>
+                                    <p class="text-muted small">Manage student records and eligibility</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/myapp/view_sessionworkshop/" class="text-decoration-none">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-calendar-event text-success fs-1"></i>
+                                    <h5 class="mt-3">Sessions & Workshops</h5>
+                                    <p class="text-muted small">Schedule and manage events</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/myapp/for_eligiblestudent/" class="text-decoration-none">
+                            <div class="card stat-card h-100">
+                                <div class="card-body">
+                                    <i class="bi bi-forward text-warning fs-1"></i>
+                                    <h5 class="mt-3">Forward Eligible Students</h5>
+                                    <p class="text-muted small">Send student list to industry</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <div class="dashboard">
-
-        <div class="card">
-            <i class="fas fa-user icon" style="color:#3498db"></i>
-            <h3>Profile</h3>
-            <p>View and update your personal information and account details.</p>
-            <a href="/myapp/view_hodprofile/" class="btn btn-primary">Go to Profile</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-key icon" style="color:#e67e22"></i>
-            <h3>Change Password</h3>
-            <p>Securely update your login password.</p>
-            <a href="/myapp/password/" class="btn btn-primary">Change Password</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-building icon" style="color:#27ae60"></i>
-            <h3> allocated department</h3>
-            <p>view all allocated department.</p>
-            <a href="/myapp/view_departments/" class="btn btn-primary">View Departments</a>
-        </div>
-         <div class="card">
-            <i class="fas fa-building icon" style="color:#27ae60"></i>
-            <h3>Add session</h3>
-            <p>Add new session,workshops</p>
-            <a href="/myapp/addsession_workshop/" class="btn btn-primary">View Departments</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-users icon" style="color:#9b59b6"></i>
-            <h3>Students</h3>
-            <p>Access and manage student records and data.</p>
-            <a href="/myapp/view_students/" class="btn btn-primary">View Students</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-chart-bar icon" style="color:#f1c40f"></i>
-            <h3>Industry Reports</h3>
-            <p>View placement and industry performance reports.</p>
-            <a href="/myapp/view_industyreport/" class="btn btn-primary">View Reports</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-chalkboard-teacher icon" style="color:#1abc9c"></i>
-            <h3>Sessions & Workshops</h3>
-            <p>Manage training sessions and workshops.</p>
-            <a href="/myapp/view_sessionworkshop/" class="btn btn-primary">View Sessions</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-paper-plane icon" style="color:#e74c3c"></i>
-            <h3>Forward Eligible Students</h3>
-            <p>Send eligible students for placement opportunities.</p>
-            <a href="/myapp/for_eligiblestudent/" class="btn btn-primary">Forward Students</a>
-        </div>
-
-    </div>
-
-    <!-- Logout -->
-    <div style="text-align: center; margin-top: 50px;">
-        <a href="/myapp/logout/" class="btn logout">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-    </div>
-
+</div>
+{% endblock %}
 </body>
 </html>
-

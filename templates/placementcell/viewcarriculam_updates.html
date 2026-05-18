@@ -6,7 +6,7 @@
 {#</head>#}
 {#<body>#}
 {#{% extends '' %}#}
-{#{% extends 'placementcell/home.html' %}#}
+{#{% extends 'placementcell/placementhome.html' %}#}
 {#{% block body %}#}
 {##}
 {#<table border="1">#}
@@ -32,44 +32,112 @@
 {#</html>#}
 
 
+{##}
+{#{% extends 'placementcell/placementhome.html' %}#}
+{##}
+{#{% block body %}#}
+{#<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%; padding: 20px;">#}
+{##}
+{#    <!-- Logged In User Profile Section -->#}
+{##}
+{##}
+{#    <!-- Header Section -->#}
+{#    <div style="width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">#}
+{#        <h2 style="color: white; margin: 0; font-size: 1.8rem;">#}
+{#            <i class="fas fa-book-reader"></i> Curriculum Updates#}
+{#        </h2>#}
+{#        <a href="/myapp/sendcarriculam_updates/" class="action-btn" style="background: #2ecc71; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s;">#}
+{#            <i class="fas fa-plus"></i> New Request#}
+{#        </a>#}
+{#    </div>#}
+{##}
+{#    <!-- Data Table Card -->#}
+{#    <div style="background: white; width: 100%; max-width: 900px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden;">#}
+{#        <table style="width: 100%; border-collapse: collapse; text-align: left;">#}
+{#            <thead>#}
+{#                <tr style="background-color: #f8f9fa;">#}
+{#                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Subject</th>#}
+{#                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Date</th>#}
+{#                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Need / Description</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#                {% for i in data %}#}
+{#                <tr style="border-bottom: 1px solid #eee; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#f1f7ff'" onmouseout="this.style.backgroundColor='transparent'">#}
+{#                    <td style="padding: 15px; font-weight: 600; color: #34495e;">{{ i.subject }}</td>#}
+{#                    <td style="padding: 15px; color: #7f8c8d;">#}
+{#                        <i class="far fa-calendar-alt" style="margin-right: 5px; color: #3498db;"></i>#}
+{#                        {{ i.date }}#}
+{#                    </td>#}
+{#                    <td style="padding: 15px; color: #555; line-height: 1.5;">{{ i.need }}</td>#}
+{#                </tr>#}
+{#                {% empty %}#}
+{#                <tr>#}
+{#                    <td colspan="3" style="padding: 40px; text-align: center; color: #95a5a6;">#}
+{#                        <i class="fas fa-folder-open" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>#}
+{#                        No curriculum updates available.#}
+{#                    </td>#}
+{#                </tr>#}
+{#                {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+{#</div>#}
+{##}
+{#<style>#}
+{#    .action-btn:hover {#}
+{#        background: #27ae60 !important;#}
+{#        transform: translateY(-2px);#}
+{#        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);#}
+{#    }#}
+{#</style>#}
+{#{% endblock %}#}
 
-{% extends 'placementcell/home.html' %}
+
+
+
+{% extends 'placementcell/placementhome.html' %}
 
 {% block body %}
-<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+<div class="content-container" style="display: flex; flex-direction: column; align-items: center; width: 100%; padding: 30px 15px; background: #ecf0f1;">
 
-    <div style="width: 100%; max-width: 900px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <h2 style="color: white; margin: 0; font-size: 1.8rem;">
-            <i class="fas fa-book-reader"></i> Curriculum Updates
+    <!-- Header Section -->
+    <div style="width: 100%; max-width: 1000px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="color: #2c3e50; margin: 0; font-size: 2rem; display: flex; align-items: center;">
+            <i class="fas fa-book-reader" style="margin-right: 10px; color: #3498db;"></i>
+            Curriculum Updates
         </h2>
-        <a href="/myapp/sendcarriculam_updates/" class="action-btn" style="background: #2ecc71; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: 0.3s;">
-            <i class="fas fa-plus"></i> New Request
+        <a href="/myapp/sendcarriculam_updates/" class="action-btn" style="background: #3498db; color: white; padding: 12px 25px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+            <i class="fas fa-plus" style="margin-right: 8px;"></i> New Request
         </a>
     </div>
 
-    <div style="background: white; width: 100%; max-width: 900px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); overflow: hidden;">
-        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+    <!-- Data Table Card -->
+    <div style="background: white; width: 100%; max-width: 1000px; border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
             <thead>
-                <tr style="background-color: #f8f9fa;">
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Subject</th>
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Date</th>
-                    <th style="padding: 15px; border-bottom: 2px solid #eee; color: #2c3e50; text-transform: uppercase; font-size: 0.85rem;">Need / Description</th>
+                <tr style="background-color: #f0f3f7; text-transform: uppercase; font-size: 0.9rem; color: #34495e;">
+                    <th style="padding: 18px; border-bottom: 2px solid #e0e0e0;">Subject</th>
+                    <th style="padding: 18px; border-bottom: 2px solid #e0e0e0;">Date</th>
+                    <th style="padding: 18px; border-bottom: 2px solid #e0e0e0;">Need / Description</th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in data %}
-                <tr style="border-bottom: 1px solid #eee; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#f1f7ff'" onmouseout="this.style.backgroundColor='transparent'">
-                    <td style="padding: 15px; font-weight: 600; color: #34495e;">{{ i.subject }}</td>
-                    <td style="padding: 15px; color: #7f8c8d;">
-                        <i class="far fa-calendar-alt" style="margin-right: 5px; color: #3498db;"></i>
+                <tr style="border-bottom: 1px solid #eee; transition: all 0.3s ease;"
+                    onmouseover="this.style.backgroundColor='#f9faff'; this.style.transform='translateX(5px)';"
+                    onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateX(0)';">
+                    <td style="padding: 15px; font-weight: 600; color: #2c3e50;">{{ i.subject }}</td>
+                    <td style="padding: 15px; color: #7f8c8d; display: flex; align-items: center;">
+                        <i class="far fa-calendar-alt" style="margin-right: 8px; color: #3498db;"></i>
                         {{ i.date }}
                     </td>
-                    <td style="padding: 15px; color: #555; line-height: 1.5;">{{ i.need }}</td>
+                    <td style="padding: 15px; color: #555; line-height: 1.6;">{{ i.need }}</td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="3" style="padding: 40px; text-align: center; color: #95a5a6;">
-                        <i class="fas fa-folder-open" style="font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                    <td colspan="3" style="padding: 50px; text-align: center; color: #95a5a6;">
+                        <i class="fas fa-folder-open" style="font-size: 2.5rem; display: block; margin-bottom: 12px;"></i>
                         No curriculum updates available.
                     </td>
                 </tr>
@@ -79,12 +147,29 @@
     </div>
 </div>
 
-{#<style>#}
-{#    /* Adding a slight hover effect to the 'New Request' button */#}
-{#    .action-btn:hover {#}
-{#        background: #27ae60 !important;#}
-{#        transform: translateY(-2px);#}
-{#        box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);#}
-{#    }#}
-{#</style>#}
+<style>
+    .action-btn:hover {
+        background: #2980b9 !important;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+    table tbody tr:hover td {
+        color: #2c3e50;
+    }
+
+    @media (max-width: 768px) {
+        .content-container {
+            padding: 20px 10px;
+        }
+
+        table {
+            font-size: 0.85rem;
+        }
+
+        .action-btn {
+            padding: 10px 18px;
+        }
+    }
+</style>
 {% endblock %}

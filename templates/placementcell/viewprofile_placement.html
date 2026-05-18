@@ -37,55 +37,211 @@
 {##}
 {#</body>#}
 {#</html>#}
+{##}
+{##}
+{#{% extends "placementcell/placementhome.html" %}#}
+{##}
+{#{% block body %}#}
+{#<div class="content-container">#}
+{#    <div class="profile-view-card">#}
+{##}
+{#        <div class="profile-header">#}
+{#            <div class="avatar" style="margin: 0 auto 15px; width: 80px; height: 80px; font-size: 2.5rem; background: #f8f9fa;border-radius: 100px"><img src="/media/{{ data.photo }}"></div>#}
+{#            <h2 style="margin: 0;">User Profile</h2>#}
+{#            <p style="color: #95a5a6;">Personal Information</p>#}
+{#        </div>#}
+{#        <div class="profile-header">#}
+{#    <div class="avatar"#}
+{#         style="margin: 0 auto 15px;#}
+{#                width: 80px;#}
+{#                height: 80px;#}
+{#                border-radius: 50%;#}
+{#                overflow: hidden;#}
+{#                background: #f8f9fa;#}
+{#                box-shadow: 0 4px 12px rgba(0,0,0,0.1);">#}
+{#        <img src="/media/{{ data.photo }}"#}
+{#             style="width: 100%;#}
+{#                    height: 100%;#}
+{#                    object-fit: cover;">#}
+{#    </div>#}
+{#    <h2 style="margin: 0;">User Profile</h2>#}
+{#    <p style="color: #95a5a6;">Personal Information</p>#}
+{#</div>#}
+{##}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-user"></i> Name</span>#}
+{#            <span class="info-value">{{ data.name }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Place</span>#}
+{#            <span class="info-value">{{ data.place }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-phone"></i> Phone</span>#}
+{#            <span class="info-value">{{ data.phone }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-envelope"></i> Email</span>#}
+{#            <span class="info-value">{{ data.email }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row" style="border-bottom: none;">#}
+{#            <span class="info-label"><i class="fas fa-info-circle"></i> Status</span>#}
+{#            <span class="info-value" style="color: #2ecc71;">Active</span>#}
+{#        </div>#}
+{##}
+{#        <a href="/myapp/editprofilee/" class="edit-profile-btn">#}
+{#            <i class="fas fa-user-edit"></i> Edit Profile#}
+{#        </a>#}
+{##}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
+
+
+
 
 
 {% extends "placementcell/placementhome.html" %}
 
 {% block body %}
+
+<style>
+.content-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.profile-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar i {
+    font-size: 35px;
+    color: #aaa;
+}
+
+.profile-header h2 {
+    margin: 0;
+}
+
+.profile-header p {
+    color: #888;
+    font-size: 14px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #777;
+}
+
+.info-value {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.edit-btn {
+    display: block;
+    margin-top: 25px;
+    text-align: center;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background: #2980b9;
+}
+</style>
+
 <div class="content-container">
-    <div class="profile-view-card">
+    <div class="profile-card">
 
         <div class="profile-header">
-            <div class="avatar" style="margin: 0 auto 15px; width: 80px; height: 80px; font-size: 2.5rem; background: #f8f9fa;">👤</div>
-            <h2 style="margin: 0;">User Profile</h2>
-            <p style="color: #95a5a6;">Personal Information</p>
+
+            <div class="avatar">
+
+                    <img src="/media/{{ data.photo }}" alt="Profile Photo">
+
+            </div>
+
+            <h2> Profile</h2>
+            <p>Personal Information</p>
         </div>
 
         <div class="info-row">
-            <span class="info-label"><i class="fas fa-user"></i> Name</span>
+            <span class="info-label">Name</span>
             <span class="info-value">{{ data.name }}</span>
         </div>
 
         <div class="info-row">
-            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Place</span>
+            <span class="info-label">Place</span>
             <span class="info-value">{{ data.place }}</span>
         </div>
 
         <div class="info-row">
-            <span class="info-label"><i class="fas fa-phone"></i> Phone</span>
+            <span class="info-label">Phone</span>
             <span class="info-value">{{ data.phone }}</span>
         </div>
 
         <div class="info-row">
-            <span class="info-label"><i class="fas fa-envelope"></i> Email</span>
+            <span class="info-label">Email</span>
             <span class="info-value">{{ data.email }}</span>
         </div>
 
-        <div class="info-row" style="border-bottom: none;">
-            <span class="info-label"><i class="fas fa-info-circle"></i> Status</span>
-            <span class="info-value" style="color: #2ecc71;">Active</span>
+        <div class="info-row" style="border-bottom:none;">
+            <span class="info-label">Status</span>
+            <span class="info-value" style="color:green;">Active</span>
         </div>
 
-        <a href="/myapp/editprofilee/" class="edit-profile-btn">
+        <a href="/myapp/editprofilee/" class="edit-btn">
             <i class="fas fa-user-edit"></i> Edit Profile
         </a>
 
     </div>
 </div>
+
 {% endblock %}
-
-
-
-
-
-

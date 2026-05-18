@@ -1,36 +1,235 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#    <style>#}
+{#    form {#}
+{#        width: 300px;#}
+{#    }#}
+{#    input {#}
+{#        margin-bottom: 10px;#}
+{#        padding: 5px;#}
+{#        width: 100%;#}
+{#    }#}
+{#</style>#}
+{#</head>#}
+{#<body>#}
+{#<form action="/myapp/sendcarriculam_update_post/" method="post">{% csrf_token %}#}
+{#    <div>#}
+{#    subject: <input type="text" name="subject">#}
+{#    </div>#}
+{#    <div>#}
+{#    date: <input type="text" name="date">#}
+{#        </div>#}
+{##}
+{#    <div>#}
+{#         need:<input type="text" name="need">#}
+{#    </div>#}
+{#    <div>#}
+{#        <input type="submit" value="add">#}
+{#    </div>#}
+{##}
+{##}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Curriculum Update</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
-    form {
-        width: 300px;
-    }
-    input {
-        margin-bottom: 10px;
-        padding: 5px;
-        width: 100%;
-    }
-</style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: fadeInScale 0.6s ease;
+        }
+
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 35px 25px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .form-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .form-body {
+            padding: 35px 30px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 16px 16px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .form-group input:focus {
+            border-color: #3498db;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group label {
+            position: absolute;
+            left: 45px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            background: #ffffff;
+            padding: 0 5px;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 35px;
+            font-size: 13px;
+            color: #3498db;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-size: 18px;
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+
+        .form-group input:focus ~ .input-icon {
+            color: #3498db;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #27ae60, #219a52);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(135deg, #219a52, #1e8449);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(39, 174, 96, 0.4);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(1px);
+        }
+
+        .form-footer {
+            text-align: center;
+            padding: 20px 30px 30px;
+            color: #95a5a6;
+            font-size: 13px;
+        }
+    </style>
 </head>
 <body>
-<form action="/myapp/sendcarriculam_update_post/" method="post">{% csrf_token %}
-    <div>
-    subject: <input type="text" name="subject">
-    </div>
-    <div>
-    date: <input type="text" name="date">
+
+    <div class="form-container">
+        <!-- Header -->
+        <div class="form-header">
+            <h2><i class="fas fa-book-open"></i> Curriculum Update</h2>
+            <p>Add new subject requirement</p>
         </div>
 
-    <div>
-         need:<input type="text" name="need">
-    </div>
-    <div>
-        <input type="submit" value="add">
+        <!-- Form Body -->
+        <div class="form-body">
+            <form action="/myapp/sendcarriculam_update_post/" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <input type="text" id="subject" name="subject" placeholder=" " required>
+                    <label for="subject">Subject <span style="color:#e74c3c">*</span></label>
+                    <i class="fas fa-book input-icon"></i>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="date" name="date" placeholder=" " required>
+                    <label for="date">Date <span style="color:#e74c3c">*</span></label>
+                    <i class="fas fa-calendar-alt input-icon"></i>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="need" name="need" placeholder=" " required>
+                    <label for="need">Need / Requirement <span style="color:#e74c3c">*</span></label>
+                    <i class="fas fa-lightbulb input-icon"></i>
+                </div>
+
+                <input type="submit" value="Add Update">
+            </form>
+        </div>
+
+        <div class="form-footer">
+            All fields are mandatory
+        </div>
     </div>
 
-
-</form>
 </body>
 </html>

@@ -1,10 +1,580 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{#{% extends "home.html" %}#}
+{#{% block body %}#}
+{##}
+{#<style>#}
+{#/* Container */#}
+{#.container {#}
+{#    max-width: 1300px;#}
+{#    margin: auto;#}
+{#    padding: 30px 20px;#}
+{#}#}
+{##}
+{#/* Header */#}
+{#.header {#}
+{#    margin-bottom: 30px;#}
+{#}#}
+{#.header h1 {#}
+{#    font-size: 32px;#}
+{#    font-weight: 700;#}
+{#}#}
+{#.header p {#}
+{#    color: #64748b;#}
+{#    margin-top: 6px;#}
+{#}#}
+{##}
+{#/* Table wrapper */#}
+{#.table-box {#}
+{#    background: white;#}
+{#    border-radius: 16px;#}
+{#    overflow: hidden;#}
+{#    box-shadow: 0 12px 35px rgba(0,0,0,0.08);#}
+{#}#}
+{##}
+{#/* Table */#}
+{#table {#}
+{#    width: 100%;#}
+{#    border-collapse: collapse;#}
+{#}#}
+{##}
+{#/* Head */#}
+{#thead {#}
+{#    background: linear-gradient(135deg, #4f46e5, #7c3aed);#}
+{#    color: white;#}
+{#    position: sticky;#}
+{#    top: 0;#}
+{#}#}
+{#th {#}
+{#    padding: 16px;#}
+{#    font-size: 14px;#}
+{#    text-transform: uppercase;#}
+{#    letter-spacing: 0.5px;#}
+{#}#}
+{##}
+{#/* Body */#}
+{#td {#}
+{#    padding: 14px;#}
+{#    font-size: 14px;#}
+{#    color: #334155;#}
+{#}#}
+{##}
+{#/* Row hover */#}
+{#tbody tr {#}
+{#    border-bottom: 1px solid #f1f5f9;#}
+{#    transition: 0.2s;#}
+{#}#}
+{#tbody tr:hover {#}
+{#    background: #f8fafc;#}
+{#}#}
+{##}
+{#/* Avatar */#}
+{#.avatar {#}
+{#    width: 42px;#}
+{#    height: 42px;#}
+{#    border-radius: 50%;#}
+{#    object-fit: cover;#}
+{#}#}
+{##}
+{#/* Status badges */#}
+{#.badge {#}
+{#    padding: 6px 12px;#}
+{#    border-radius: 20px;#}
+{#    font-size: 12px;#}
+{#    font-weight: 600;#}
+{#}#}
+{##}
+{#.pending { background: #FEF3C7; color: #92400E; }#}
+{#.approved { background: #DCFCE7; color: #166534; }#}
+{#.rejected { background: #FEE2E2; color: #991B1B; }#}
+{##}
+{#/* Buttons */#}
+{#.btn {#}
+{#    padding: 6px 12px;#}
+{#    border-radius: 8px;#}
+{#    font-size: 12px;#}
+{#    cursor: pointer;#}
+{#    border: none;#}
+{#    margin: 2px;#}
+{#}#}
+{#.btn-approve {#}
+{#    background: #22c55e;#}
+{#    color: white;#}
+{#}#}
+{#.btn-reject {#}
+{#    background: #ef4444;#}
+{#    color: white;#}
+{#}#}
+{#.btn:hover {#}
+{#    opacity: 0.85;#}
+{#}#}
+{#</style>#}
+{##}
+{#    {% include "messages.html" %}#}
+{##}
+{##}
+{#<div class="container">#}
+{##}
+{#    <!-- Header -->#}
+{#    <div class="header">#}
+{#        <h1>Workshop Requests</h1>#}
+{#        <p>Manage and track all student workshop registrations</p>#}
+{#    </div>#}
+{##}
+{#    {% if data %}#}
+{##}
+{#    <div class="table-box">#}
+{#        <table>#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>sl n</th>#}
+{#                    <th>Workshop</th>#}
+{#                    <th>Date</th>#}
+{#                    <th>Student</th>#}
+{#                    <th>Contact</th>#}
+{##}
+{#                    <th>Score</th>#}
+{#                     <th>Status</th>#}
+{##}
+{##}
+{##}
+{#                </tr>#}
+{#            </thead>#}
+{##}
+{#            <tbody>#}
+{#                {% for i in data %}#}
+{#                <tr>#}
+{##}
+{#                    <td>{{ forloop.counter }}</td>#}
+{##}
+{#                    <td><strong>{{ i.WORKSHOP.workshop_name }}</strong></td>#}
+{##}
+{#                    <td>{{ i.date }}</td>#}
+{##}
+{#                    <td style="display:flex; align-items:center; gap:10px;">#}
+{#                        <img src="{{ i.STUDENT.photo.url }}" class="avatar">#}
+{#                        <div>#}
+{#                            {{ i.STUDENT.name }}<br>#}
+{#                            <small style="color:#64748b;">{{ i.STUDENT.email }}</small>#}
+{#                        </div>#}
+{#                    </td>#}
+{##}
+{#                    <td>{{ i.STUDENT.phone }}</td>#}
+{#                      <td>{{ i.score }}</td>#}
+{##}
+{#<td>#}
+{#              {% if i.status == "pending" %}#}
+{#                <div class="actions">#}
+{#                  <a href="/myapp/accept_request/{{ i.id }}" class="btn btn-accept">Accept</a>#}
+{#                  <a href="/myapp/reject_workshp_request/{{ i.id }}" class="btn btn-reject">Reject</a>#}
+{#                </div>#}
+{#              {% elif i.status == "rejected" %}#}
+{#                <span class="status-rejected">Rejected</span>#}
+{#              {% else %}#}
+{#                <span class="status-approved">{{ i.status|title }}</span>#}
+{#              {% endif %}#}
+{#            </td>#}
+{##}
+{##}
+{#                </tr>#}
+{#                {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+{##}
+{#    {% else %}#}
+{#    <div class="no-data">#}
+{#        <h2>No requests yet</h2>#}
+{#        <p>All workshop requests will appear here</p>#}
+{#    </div>#}
+{#    {% endif %}#}
+{##}
+{#</div>#}
+{##}
+{#{% endblock %}#}
+
+{% extends "home.html" %}
+{% block body %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin:0; padding:0; box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body {
+    background:#f1f5f9;
+}
+
+.container {
+    max-width:1400px;
+    margin:auto;
+    padding:35px 20px;
+}
+
+/* Header */
+.header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.header-left h1 {
+    font-size:32px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.header-left p {
+    color:#64748b;
+    margin-top:6px;
+    font-size:14px;
+}
+
+.stats {
+    display:flex;
+    gap:15px;
+}
+
+.stat-card {
+    background:white;
+    padding:15px 22px;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    min-width:120px;
+}
+
+.stat-card h2 {
+    color:#4f46e5;
+    font-size:24px;
+}
+
+.stat-card span {
+    color:#64748b;
+    font-size:13px;
+}
+
+/* Table Card */
+.table-card {
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,0.07);
+}
+
+/* Table Header */
+.table-top {
+    padding:20px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #e2e8f0;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.table-top h2 {
+    color:#0f172a;
+    font-size:20px;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x:auto;
+}
+
+table {
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead {
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+
+th {
+    color:white;
+    padding:18px 16px;
+    text-align:left;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    white-space:nowrap;
+}
+
+td {
+    padding:18px 16px;
+    font-size:14px;
+    color:#334155;
+    vertical-align:middle;
+}
+
+tbody tr {
+    border-bottom:1px solid #f1f5f9;
+    transition:0.2s;
+}
+
+tbody tr:hover {
+    background:#f8fafc;
+}
+
+/* Student Info */
+.student {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar {
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #e2e8f0;
+}
+
+.student-info h4 {
+    font-size:15px;
+    color:#0f172a;
+}
+
+.student-info p {
+    font-size:12px;
+    color:#64748b;
+}
+
+/* Workshop Name */
+.workshop-name {
+    font-weight:600;
+    color:#0f172a;
+}
+
+/* Score */
+.score {
+    font-weight:600;
+    color:#4f46e5;
+}
+
+/* Status */
+.status {
+    padding:7px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+    display:inline-block;
+}
+
+.pending {
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.approved {
+    background:#dcfce7;
+    color:#166534;
+}
+
+.rejected {
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* Buttons */
+.actions {
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.btn {
+    padding:9px 15px;
+    border:none;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:600;
+    transition:0.3s;
+    display:inline-block;
+}
+
+.btn-accept {
+    background:#22c55e;
+    color:white;
+}
+
+.btn-accept:hover {
+    background:#16a34a;
+    transform:translateY(-2px);
+}
+
+.btn-reject {
+    background:#ef4444;
+    color:white;
+}
+
+.btn-reject:hover {
+    background:#dc2626;
+    transform:translateY(-2px);
+}
+
+/* Certificate link styling */
+.certificate-link {
+    color:#4f46e5;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.certificate-link:hover {
+    text-decoration:underline;
+}
+
+/* Empty State */
+.no-data {
+    background:white;
+    padding:80px 20px;
+    text-align:center;
+    border-radius:22px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.05);
+}
+
+.no-data h2 {
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.no-data p {
+    color:#64748b;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+    .stats{
+        width:100%;
+        flex-wrap:wrap;
+    }
+    .stat-card{
+        flex:1;
+    }
+    .table-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+</style>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+
+        <div class="header-left">
+            <h1>Workshop Requests</h1>
+            <p>Manage and track all student workshop registrations</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h2>{{ data|length }}</h2>
+                <span>Total Requests</span>
+            </div>
+        </div>
+
+    </div>
+
+    {% if data %}
+
+    <div class="table-card">
+
+        <!-- Top -->
+        <div class="table-top">
+            <h2>Recent Applications</h2>
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Sl no</th>
+                        <th>Workshop</th>
+                        <th>Date</th>
+                        <th>Student</th>
+                        <th>Phone</th>
+                        <th>Score</th>
+                        <th>Status / Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+
+                        <td><div class="workshop-name">{{ i.WORKSHOP.workshop_name }}</div></td>
+
+                        <td>{{ i.date }}</td>
+
+                        <td>
+                            <div class="student">
+                                <img src="{{ i.STUDENT.photo.url }}" class="avatar">
+                                <div class="student-info">
+                                    <h4>{{ i.STUDENT.name }}</h4>
+                                    <p>{{ i.STUDENT.email }}</p>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>{{ i.STUDENT.phone }}</td>
+
+                        <td>
+                            <span class="score">
+                                {% if i.score == '0' %}
+                                    <a href="/myapp/send_score/{{ i.id }}">ENTER SCORE</a>
+                                {% else %}
+                                    {{ i.score }}
+                                {% endif %}
+                            </span>
+                        </td>
+
+                        <td>
+                            {% if i.status == "pending" %}
+                            <div class="actions">
+                                <a href="/myapp/accept_request/{{ i.id }}" class="btn btn-accept">Accept</a>
+                                <a href="/myapp/reject_workshp_request/{{ i.id }}" class="btn btn-reject">Reject</a>
+                            </div>
+                            {% elif i.status == "rejected" %}
+                                <span class="status rejected">Rejected</span>
+                            {% else %}
+                                <span class="status approved">{{ i.status|title }}</span>
+                            {% endif %}
+                        </td>
+
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% else %}
+        <div class="no-data">
+            <h2>No Requests Yet</h2>
+            <p>All workshop registration requests will appear here.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

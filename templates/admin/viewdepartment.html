@@ -28,7 +28,213 @@
 {##}
 {#</body>#}
 {#</html>#}
+{##}
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Department Management System</title>#}
+{#    <style>#}
+{#        * {#}
+{#            margin-left:;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#            color: black;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);#}
+{#            min-height: 100vh;#}
+{#            padding: 20px;#}
+{#            color: black;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 100px;#}
+{#            margin: 0 auto;#}
+{#            background: rgba(8, 8, 9, 0.02);#}
+{#            border-radius: 10px;#}
+{#            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);#}
+{#            overflow: hidden;#}
+{#            color: rgba(8, 8, 9, 0.01);#}
+{#        }#}
+{##}
+{#        .header {#}
+{#            background: linear-gradient(135deg, #78dbcf, rgba(43, 89, 232, 0.89));#}
+{#            color: rgba(2, 17, 15, 0.96);#}
+{#            padding: 50px;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .header h1 {#}
+{#            font-size: 32px;#}
+{#            margin-bottom: 10px;#}
+{#        }#}
+{##}
+{#        .header p {#}
+{#            opacity: 0.9;#}
+{#            font-size: 18px;#}
+{#        }#}
+{##}
+{#        .content {#}
+{#            padding: 30px;#}
+{#        }#}
+{##}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            margin-bottom: 30px;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background-color: #1ddbda;#}
+{#            color: rgba(2, 17, 15, 0.99);#}
+{#            padding: 16px 15px;#}
+{#            text-align: center;#}
+{#            font-weight: 900;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 16px 15px;#}
+{#            border-bottom: 1px solid rgba(90, 238, 232, 0.2);#}
+{#            vertical-align: middle;#}
+{#            color: #02110f;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background-color: rgba(20, 184, 166, 0.22);#}
+{#             color: #02110f;#}
+{#        }#}
+{##}
+{#        /* Same Size Buttons */#}
+{#        .action-btn {#}
+{#            display: inline-block;#}
+{#            padding: 11px 20px;#}
+{#            margin: 5px 4px;#}
+{#            text-decoration: none;#}
+{#            border-radius: 6px;#}
+{#            font-size: 14.5px;#}
+{#            font-weight: 500;#}
+{#            text-align: center;#}
+{#            min-width: 135px;        /* Fixed same width */#}
+{#            height: 42px;            /* Fixed same height */#}
+{#            line-height: 20px;#}
+{#            transition: all 0.3s;#}
+{#        }#}
+{##}
+{#        .btn-view {#}
+{#            background-color: #78dbcf;#}
+{#            color: #080809;#}
+{#        }#}
+{##}
+{#        .btn-view:hover {#}
+{#            background-color: #78dbcf;#}
+{#        }#}
+{##}
+{#        .btn-delete {#}
+{#            background-color: #e74c3c;#}
+{#            color: #080809;#}
+{#        }#}
+{##}
+{#        .btn-delete:hover {#}
+{#            background-color: #c0392b;#}
+{#        }#}
+{##}
+{#        .add-btn {#}
+{#            display: inline-block;#}
+{#            background-color: #3498db;#}
+{#            color: #080809;#}
+{#            padding: 28px 28px;#}
+{#            text-decoration: none;#}
+{#            border-radius: 8px;#}
+{#            font-weight: 600;#}
+{#            font-size: 16px;#}
+{#            transition: all 0.3s;#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            background-color: #2980b9;#}
+{#            transform: translateY(-3px);#}
+{#        }#}
+{##}
+{#        .action-cell {#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .no-data {#}
+{#            text-align: center;#}
+{#            padding: 40px;#}
+{#            color: #080809;#}
+{#            font-size: 18px;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{##}
+{##}
+{#    <div class="container">#}
+{#        <!-- Header -->#}
+{#        <div class="header">#}
+{#            <h1>🏛️ Department Management System</h1>#}
+{#            <p>Manage your departments and courses efficiently</p>#}
+{#        </div>#}
+{##}
+{#        <!-- Content -->#}
+{#        <div class="content">#}
+{##}
+{#            <table>#}
+{#                <tr>#}
+{#                    <th>Department</th>#}
+{#                    <th>Details</th>#}
+{#                    <th>Action</th>#}
+{#                </tr>#}
+{#                {% for i in data %}#}
+{#                <tr>#}
+{#                    <td><strong>{{ i.department }}</strong></td>#}
+{#                    <td>{{ i.details|default:"No details available" }}</td>#}
+{#                    <td class="action-cell">#}
+{#                        <a href="/myapp/view_course/{{ i.id }}" class="action-btn btn-view">📚 View Courses</a>#}
+{#                        <a href="/myapp/edit_department/{{ i.id }}" class="action-btn btn-view">📚 Edit</a>#}
+{#                        <a href="/myapp/delete_department/{{ i.id }}" class="action-btn btn-delete">🗑️ Delete</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#                {% endfor %}#}
+{#            </table>#}
+{##}
+{#            {% if not data %}#}
+{#            <div class="no-data">#}
+{#                <p>No departments found.</p>#}
+{#            </div>#}
+{#            {% endif %}#}
+{##}
+{#            <center>#}
+{#                <a href="/myapp/add_department/" class="add-btn">#}
+{#                    ➕ Add New Department#}
+{#                </a>#}
+{##}
+{##}
+{##}
+{#        <div class="back-link">#}
+{#            <a href="/myapp/admin_home/">← Back to Home</a>#}
+{#        </div>#}
+{##}
+{#            </center>#}
+{##}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
 
+{##}
 
 
 <!DOCTYPE html>
@@ -38,6 +244,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Department Management System</title>
     <style>
+        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -45,38 +252,43 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
+            color: #2d3436;
         }
 
+        /* Container Fix: Changed max-width from 100px to 1000px */
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
 
+        /* Header Styling */
         .header {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: linear-gradient(135deg, #00b894, #0984e3);
             color: white;
-            padding: 30px;
+            padding: 40px 20px;
             text-align: center;
         }
 
         .header h1 {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
         .header p {
             opacity: 0.9;
-            font-size: 18px;
+            font-size: 1.1rem;
         }
 
+        /* Table Styling */
         .content {
             padding: 30px;
         }
@@ -85,146 +297,170 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
+            background: white;
         }
 
         th {
-            background-color: #3498db;
-            color: white;
-            padding: 16px 15px;
+            background-color: #727ddb;
+            color: #2d3436;
+            padding: 18px 15px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
+            border-bottom: 3px solid #dfe6e9;
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
 
         td {
             padding: 16px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #f1f2f6;
             vertical-align: middle;
+            color: #2d3436;
         }
 
         tr:hover {
-            background-color: #f8fbff;
+            background-color: #f9f9fb;
         }
 
-        /* Same Size Buttons */
+        /* Buttons Styling - Standardized Size */
+        .action-cell {
+            text-align: right;
+            white-space: nowrap; /* Prevents buttons from wrapping */
+        }
+
         .action-btn {
-            display: inline-block;
-            padding: 11px 20px;
-            margin: 5px 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 15px;
+            margin: 2px;
             text-decoration: none;
             border-radius: 6px;
-            font-size: 14.5px;
-            font-weight: 500;
-            text-align: center;
-            min-width: 135px;        /* Fixed same width */
-            height: 42px;            /* Fixed same height */
-            line-height: 20px;
-            transition: all 0.3s;
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 110px;
+            height: 38px;
+            transition: all 0.2s ease;
         }
 
         .btn-view {
-            background-color: #27ae60;
+            background-color: #00cec9;
             color: white;
         }
 
-        .btn-view:hover {
-            background-color: #219653;
+        .btn-edit {
+            background-color: #0984e3;
+            color: white;
         }
 
         .btn-delete {
-            background-color: #e74c3c;
+            background-color: #ff7675;
             color: white;
         }
 
-        .btn-delete:hover {
-            background-color: #c0392b;
+        .action-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Add Button Section */
+        .footer-actions {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
         }
 
         .add-btn {
             display: inline-block;
-            background-color: #3498db;
+            background-color: #6c5ce7;
             color: white;
-            padding: 28px 28px;
+            padding: 15px 35px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 30px;
             font-weight: 600;
             font-size: 16px;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
         }
 
         .add-btn:hover {
-            background-color: #2980b9;
+            background-color: #a29bfe;
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
         }
 
-        .action-cell {
-            text-align: center;
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            color: #636e72;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #2d3436;
+            text-decoration: underline;
         }
 
         .no-data {
             text-align: center;
             padding: 40px;
-            color: #7f8c8d;
-            font-size: 18px;
+            color: #b2bec3;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-
 {% extends "home.html" %}
     {% block body %}
-
-
     <div class="container">
-        <!-- Header -->
         <div class="header">
-            <h1>🏛️ Department Management System</h1>
-            <p>Manage your departments and courses efficiently</p>
+            <h1>🏛️ Department Management</h1>
+            <p>Admin Control Panel</p>
         </div>
 
-        <!-- Content -->
         <div class="content">
-
             <table>
-                <tr>
-                    <th>Department</th>
-                    <th>Details</th>
-                    <th>Action</th>
-                </tr>
-                {% for i in data %}
-                <tr>
-                    <td><strong>{{ i.department }}</strong></td>
-                    <td>{{ i.details|default:"No details available" }}</td>
-                    <td class="action-cell">
-                        <a href="/myapp/view_course/{{ i.id }}" class="action-btn btn-view">📚 View Courses</a>
-                        <a href="/myapp/edit_department/{{ i.id }}" class="action-btn btn-view">📚 Edit</a>
-                        <a href="/myapp/delete_department/{{ i.id }}" class="action-btn btn-delete">🗑️ Delete</a>
-                    </td>
-                </tr>
-                {% endfor %}
+                <thead>
+                    <tr>
+                        <th>Sl no</th>
+                        <th>Department Name</th>
+                        <th>Details / Description</th>
+                        <th style="text-align: center;">Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                     <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ i.department }}</strong></td>
+                        <td>{{ i.details|default:"No details available" }}</td>
+                        <td class="action-cell">
+                            <a href="/myapp/view_course/{{ i.id }}" class="action-btn btn-view">📚 Courses</a>
+                            <a href="/myapp/edit_department/{{ i.id }}" class="action-btn btn-edit">✏️ Edit</a>
+                            <a href="/myapp/delete_department/{{ i.id }}" class="action-btn btn-delete">🗑️ Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
             </table>
 
             {% if not data %}
             <div class="no-data">
-                <p>No departments found.</p>
+                <p>No departments found in the registry.</p>
             </div>
             {% endif %}
 
-            <center>
+            <div class="footer-actions">
                 <a href="/myapp/add_department/" class="add-btn">
                     ➕ Add New Department
                 </a>
-
-
-
-        <div class="back-link">
-            <a href="/myapp/admin_home/">← Back to Home</a>
-        </div>
-
-            </center>
-
+                <a href="/myapp/admin_home/" class="back-link">← Back to Dashboard</a>
+            </div>
         </div>
     </div>
-
 {% endblock %}
 </body>
 </html>

@@ -14,6 +14,8 @@
 {#<title>Edit HOD</title>#}
 {#</head>#}
 {#<body>#}
+{#{% extends 'home.html' %}#}
+{#{% block body %}#}
 {##}
 {#<h2>Edit HOD</h2>#}
 {##}
@@ -54,229 +56,158 @@
 {##}
 {#</form>#}
 {##}
+{#{% endblock %}#}
 {#</body>#}
 {#</html>#}
-
-
-
+{##}
+{##}
+{##}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit HOD - Admin Panel</title>
-
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
+    <title>Edit HOD</title>
     <style>
         body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
             padding: 40px 20px;
+            min-height: 100vh;
+            color: #333;
         }
-
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
-
-        .card-header {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            padding: 25px 30px;
-            border: none;
+            padding: 25px;
+            text-align: center;
         }
-
-        .card-header h2 {
+        .header h2 {
             margin: 0;
-            font-weight: 600;
+            font-size: 28px;
         }
-
-        .card-body {
+        .form-area {
             padding: 40px;
         }
-
-        .form-label {
-            font-weight: 600;
-            color: #374151;
+        label {
+            display: block;
             margin-bottom: 8px;
-        }
-
-        .form-control {
-            border-radius: 12px;
-            padding: 12px 16px;
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
-        }
-
-        .photo-preview {
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 16px;
-            border: 5px solid #fff;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-update {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-            border: none;
-            padding: 14px 40px;
-            font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            color: #2c3e50;
         }
-
+        input[type="text"],
+        input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        .photo-section {
+            margin: 25px 0;
+            text-align: center;
+        }
+        .photo-section img {
+            border-radius: 10px;
+            border: 4px solid #f8f9fa;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 160px;
+        }
+        .btn {
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .btn-update {
+            background: #27ae60;
+            color: white;
+        }
         .btn-update:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            background: #219653;
         }
-
-        .form-section {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 25px;
+        .btn-cancel {
+            background: #95a5a6;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-cancel:hover {
+            background: #7f8c8d;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
+    <div class="header">
+        <h2>Edit HOD</h2>
+    </div>
 
-            <!-- Main Card -->
-            <div class="card">
-                <!-- Header -->
-                <div class="card-header">
-                    <div class="d-flex align-items-center gap-3">
-                        <i class="bi bi-person-gear fs-1"></i>
-                        <div>
-                            <h2>Edit HOD Details</h2>
-                            <p class="mb-0 opacity-75">Update Head of Department Information</p>
-                        </div>
-                    </div>
-                </div>
+    <div class="form-area">
+        <form action="/myapp/edit_hod_post/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-                <!-- Form Body -->
-                <div class="card-body">
-                    <form action="/myapp/edit_hod_post/" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="hidden" name="id" value="{{ data.id }}">
+            <input type="hidden" name="id" value="{{ data.id }}">
 
-                        <div class="row">
-                            <!-- Left Column -->
-                            <div class="col-md-7">
-                                <div class="mb-3">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{ data.name }}" required>
-                                </div>
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ data.name }}">
 
-                                <div class="mb-3">
-                                    <label class="form-label">Designation / Post</label>
-                                    <input type="text" class="form-control" name="post" value="{{ data.post }}" required>
-                                </div>
+            <label>Place:</label>
+            <input type="text" name="place" value="{{ data.place }}">
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Place</label>
-                                            <input type="text" class="form-control" name="place" value="{{ data.place }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Pin Code</label>
-                                            <input type="text" class="form-control" name="pin" value="{{ data.pin }}" maxlength="6">
-                                        </div>
-                                    </div>
-                                </div>
+            <label>Post:</label>
+            <input type="text" name="post" value="{{ data.post }}">
 
-                                <div class="mb-3">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" name="phone" value="{{ data.phone }}">
-                                </div>
+            <label>Pin:</label>
+            <input type="text" name="pin" value="{{ data.pin }}">
 
-                                <div class="mb-3">
-                                    <label class="form-label">Email Address</label>
-                                    <input type="email" class="form-control" name="email" value="{{ data.email }}">
-                                </div>
+            <label>Phone:</label>
+            <input type="text" name="phone" value="{{ data.phone }}">
 
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Gender</label>
-                                            <input type="text" class="form-control" name="gender" value="{{ data.gender }}">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mb-3">
-                                            <label class="form-label">Qualification</label>
-                                            <input type="text" class="form-control" name="qualification" value="{{ data.qualification }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ data.email }}">
 
-                            <!-- Right Column - Photo -->
-                            <div class="col-md-5">
-                                <div class="form-section text-center">
-                                    <label class="form-label d-block mb-3">Profile Photo</label>
+            <label>Gender:</label>
+            <input type="text" name="gender" value="{{ data.gender }}">
 
-                                    <img src="/media/{{ data.photo }}"
-                                         class="photo-preview mb-3"
-                                         alt="Current Photo">
+            <label>Qualification:</label>
+            <input type="text" name="qualification" value="{{ data.qualification }}">
 
-                                    <div class="mb-3">
-                                        <label class="form-label small text-muted">Upload New Photo</label>
-                                        <input type="file" class="form-control" name="photo" accept="image/*">
-                                    </div>
-
-                                    <small class="text-muted">
-                                        Recommended: JPG or PNG, Square image (300x300 px)
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary btn-update px-5">
-                                <i class="bi bi-check-circle me-2"></i>
-                                Update HOD Details
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <!-- Photo Section -->
+            <label>Current Photo:</label>
+            <div class="photo-section">
+                <img src="/media/{{ data.photo }}" width="160" alt="HOD Photo">
             </div>
 
-            <!-- Back Button -->
-            <div class="text-center mt-4">
-                <a href="#" class="text-decoration-none text-muted">
-                    <i class="bi bi-arrow-left"></i> Back to HOD List
-                </a>
-            </div>
+            <label>Upload New Photo:</label>
+            <input type="file" name="photo">
 
-        </div>
+            <div style="margin-top: 35px; text-align: center;">
+                <button type="submit" class="btn btn-update">Update</button>
+                <a href="/myapp/view_hod/" class="btn btn-cancel">Cancel</a>
+            </div>
+        </form>
     </div>
 </div>
-
-<!-- Bootstrap 5 JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

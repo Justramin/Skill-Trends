@@ -32,11 +32,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Management - Home</title>
+
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            color: black;
         }
 
         body {
@@ -49,27 +52,31 @@
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            color: #02110f;
+
         }
 
         header {
             text-align: center;
             margin-bottom: 40px;
+            color: black;
         }
 
         h1 {
-            color: #2c3e50;
+            color: #02110f;
             font-size: 2.8rem;
             margin-bottom: 10px;
         }
 
         .subtitle {
-            color: #7f8c8d;
+            color: #000000;
             font-size: 1.2rem;
         }
 
         .header-actions {
             text-align: right;
             margin-bottom: 20px;
+
         }
 
         .btn {
@@ -81,11 +88,11 @@
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 4px 15px rgba(30, 219, 213, 0.3);
         }
 
         .btn:hover {
-            background: #2980b9;
+            background: #39c4db;
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
@@ -100,16 +107,17 @@
         }
 
         th {
-            background: #2c3e50;
-            color: white;
-            padding: 18px 15px;
-            text-align: left;
+            background: #0bd7db;
+            color: black;
+            padding: 18px 50px;
+            text-align: inherit;
             font-weight: 600;
         }
 
         td {
             padding: 16px 15px;
             border-bottom: 1px solid #eee;
+
         }
 
         tr:hover {
@@ -132,6 +140,7 @@
             padding: 50px;
             color: #7f8c8d;
             font-size: 1.1rem;
+
         }
 
         footer {
@@ -142,13 +151,14 @@
         }
     </style>
 </head>
+
 <body>
 
 {% extends "home.html" %}
     {% block body %}
     <div class="container">
         <header>
-            <h1>📚 Course Management</h1>
+            <h1>Course Management</h1>
             <p class="subtitle">Manage your courses efficiently</p>
         </header>
 
@@ -159,12 +169,14 @@
         {% if data %}
         <table>
             <tr>
+                <th>Sl no</th>
                 <th>Course Name</th>
                 <th>Details</th>
                 <th style="width: 150px; text-align: center;">Action</th>
             </tr>
             {% for i in data %}
             <tr>
+             <td>{{ forloop.counter }}</td>
                 <td><strong>{{ i.course }}</strong></td>
                 <td>{{ i.details|truncatewords:30 }}</td>
                 <td style="text-align: center;">
@@ -188,4 +200,6 @@
 
 {% endblock %}
 </body>
+
 </html>
+

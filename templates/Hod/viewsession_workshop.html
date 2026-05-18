@@ -1,29 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table border="1">
-    <tr>
-        <th>Workshop Nmae</th>
-        <th>details</th>
-        <th>date</th>
-        <th>time</th>
-    </tr>
-     </tr>
-    {% for i in data %}
-    <tr>
-        <td>{{ i.workshop_name}}</td>
-        <td>{{ i.details}}</td>
-        <td>{{ i.date}}</td>
-        <td>{{ i.time}}</td>
-    </tr>
-    {% endfor %}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#{% extends 'Hod/hod_home.html' %}#}
+{#{% block body %}#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>Workshop Nmae</th>#}
+{#        <th>details</th>#}
+{#        <th>date</th>#}
+{#        <th>time</th>#}
+{#    </tr>#}
+{#     </tr>#}
+{#    {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.workshop_name}}</td>#}
+{#        <td>{{ i.details}}</td>#}
+{#        <td>{{ i.date}}</td>#}
+{#        <td>{{ i.time}}</td>#}
+{#    </tr>#}
+{#    {% endfor %}#}
+{##<a href="/myapp/addsession_workshop/">Add session/worshop</a>#}
+{#</table>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
 
-</table>
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>Workshop Management</title>#}
+{##}
+{#    <!-- Font Awesome for Icons -->#}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">#}
+{##}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, #93e4e7 0%, rgba(241, 194, 106, 0.07) 100%);#}
+{#            min-height: 100vh;#}
+{#            padding: 30px 20px;#}
+{#            color: #333;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1100px;#}
+{#            margin: 0 auto;#}
+{#            background: white;#}
+{#            border-radius: 20px;#}
+{#            overflow: hidden;#}
+{#            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);#}
+{#        }#}
+{##}
+{#        header {#}
+{#            background: linear-gradient(135deg, #0f766e, #14b8a6);#}
+{#            color: white;#}
+{#            padding: 45px 30px;#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        h1 {#}
+{#            font-size: 2.8rem;#}
+{#            margin-bottom: 12px;#}
+{#        }#}
+{##}
+{#        .subtitle {#}
+{#            font-size: 1.25rem;#}
+{#            opacity: 0.95;#}
+{#        }#}
+{##}
+{#        .add-btn {#}
+{#            display: inline-flex;#}
+{#            align-items: center;#}
+{#            gap: 10px;#}
+{#            background: #f59e0b;#}
+{#            color: white;#}
+{#            padding: 14px 30px;#}
+{#            border-radius: 50px;#}
+{#            text-decoration: none;#}
+{#            font-weight: 600;#}
+{#            margin: 30px 0;#}
+{#            transition: all 0.3s ease;#}
+{#            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            background: #d97706;#}
+{#            transform: translateY(-4px);#}
+{#           box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);#}
+{#        }#}
+{##}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            background: white;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background: #1e2937;#}
+{#            color: white;#}
+{#            padding: 20px 18px;#}
+{#            text-align: left;#}
+{#            font-size: 1.05rem;#}
+{#            text-transform: uppercase;#}
+{#            letter-spacing: 0.7px;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 18px 18px;#}
+{#            border-bottom: 1px solid #e2e8f0;#}
+{#            vertical-align: top;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background-color: #f8fafc;#}
+{#            transition: background 0.3s ease;#}
+{#        }#}
+{##}
+{#        /* Workshop Name */#}
+{#        .workshop-name {#}
+{#            font-weight: 700;#}
+{#            color: #0f766e;#}
+{#            font-size: 1.15rem;#}
+{#        }#}
+{##}
+{#        /* Details */#}
+{#        .details {#}
+{#            max-width: 420px;#}
+{#            line-height: 1.65;#}
+{#            color: #334155;#}
+{#        }#}
+{##}
+{#        /* Date & Time */#}
+{#        .date {#}
+{#            color: #c026d3;#}
+{#            font-weight: 600;#}
+{#        }#}
+{##}
+{#        .time {#}
+{#            color: #ea580c;#}
+{#            font-weight: 600;#}
+{#        }#}
+{##}
+{#        /* Responsive */#}
+{#        @media (max-width: 768px) {#}
+{#            h1 { font-size: 2.2rem; }#}
+{#            th, td { padding: 15px 12px; }#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{##}
+{#{% extends "Hod/hod_home.html" %}#}
+{##}
+{#{% block body %}#}
+{#<div class="container">#}
+{#    <header>#}
+{#        <h1><i class="fas fa-chalkboard-teacher"></i> Workshops & Events</h1>#}
+{#        <p class="subtitle">Learn • Grow • Connect</p>#}
+{#    </header>#}
+{##}
+{#    <div style="padding: 0 35px;">#}
+{#        <a href="/add_workshop/" class="add-btn">#}
+{#            <i class="fas fa-plus-circle"></i> Add New Workshop#}
+{#        </a>#}
+{#    </div>#}
+{##}
+{#    <a href="/myapp/addsession_workshop/" class="add-btn">#}
+{#        <i class="fas fa-plus"></i> Add session/workshop#}
+{#    </a>#}
+{##}
+{#    <table>#}
+{#        <tr>#}
+{#            <th><i class="fas fa-book-open"></i> Workshop Name</th>#}
+{#            <th><i class="fas fa-info-circle"></i> Details</th>#}
+{#            <th><i class="fas fa-calendar-alt"></i> Date</th>#}
+{#            <th><i class="fas fa-clock"></i> Time</th>#}
+{#        </tr>#}
+{##}
+{#        {% for i in data %}#}
+{#        <tr>#}
+{#            <td class="workshop-name">{{ i.workshop_name }}</td>#}
+{#            <td class="details">{{ i.details }}</td>#}
+{#            <td class="date">{{ i.date }}</td>#}
+{#            <td class="time">{{ i.time }}</td>#}
+{#        </tr>#}
+{#        {% endfor %}#}
+{#    </table>#}
+{##}
+{#    <div style="padding: 25px 35px; text-align: center; color: #64748b; font-size: 0.95rem;">#}
+{#        <p>Total Workshops: <strong>{{ data|length }}</strong></p>#}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
 
-</body>
-</html>
+
+{% extends 'Hod/hod_home.html' %}
+{% block body %}
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f4f7fb;
+    }
+
+    .container {
+        width: 95%;
+        margin: 40px auto;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .title {
+        font-size: 26px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        background: #4CAF50;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: 0.3s;
+        font-size: 14px;
+    }
+
+    .btn:hover {
+        background: #45a049;
+    }
+
+    .table-container {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background: #4CAF50;
+        color: white;
+    }
+
+    th, td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        font-weight: 500;
+    }
+
+    tbody tr {
+        border-bottom: 1px solid #eee;
+        transition: 0.2s;
+    }
+
+    tbody tr:hover {
+        background: #f1f9f1;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 20px;
+        color: #888;
+    }
+</style>
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">Workshop Management</div>
+        <a href="/myapp/addsession_workshop/" class="btn">+ Add Workshop</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Workshop Name</th>
+                    <th>Details</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% if data %}
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ i.workshop_name }}</td>
+                        <td>{{ i.details }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>{{ i.time }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="empty">No workshops available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
 

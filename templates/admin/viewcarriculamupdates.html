@@ -1,10 +1,166 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>Placement details</th>#}
+{#        <th>Subject</th>#}
+{#        <th>Date</th>#}
+{#        <th>Need</th>#}
+{#        <th>Status</th>#}
+{#    </tr>#}
+{#     {% for i in data %}#}
+{#    <tr>#}
+{#        <td>{{ i.date }}</td>#}
+{#        <td>{{ i.subject }}</td>#}
+{#        <td>{{ i.need }}</td>#}
+{#        <td>{{ i.status }}</td>#}
+{#    <td>#}
+{#                                {% if i.status == 'pending' %}#}
+{#                                <a href="/myapp/accept_curriculumupdate/{{ i.id }}"#}
+{#                                   class="action-btn accept-btn">Accept</a>#}
+{#                                <a href="/myapp/reject_curriculumupdate/{{ i.id }}"#}
+{#                                   class="action-btn reject-btn">Reject</a>#}
+{#                                {% else %}#}
+{#                                {{ i.status }}#}
+{#                                {% endif %}#}
+{#                            </td>#}
+{##}
+{#    </tr>#}
+{#    {% endfor %}#}
+{#</table>#}
+{##}
+{#</body>#}
+{#</html>#}
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Updates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <style>
+        .status-pending { background-color: #fef3c7; color: #92400e; }
+        .status-accepted { background-color: #d1fae5; color: #065f46; }
+        .status-rejected { background-color: #fee2e2; color: #991b1b; }
+
+        tr:hover {
+            background-color: #f8fafc;
+            transition: all 0.2s;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans">
+
+<div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Curriculum Update Requests</h1>
+            <p class="text-gray-600 mt-1">Review and manage pending curriculum changes</p>
+        </div>
+
+        <a href="/myapp/view_placementofficer/"
+           class="flex items-center gap-2 text-gray-600 hover:text-gray-800">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </a>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Date</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Subject</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Need / Description</th>
+                        <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Status</th>
+                        <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for i in data %}
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-5 text-gray-700">
+                            {{ i.date }}
+                        </td>
+                        <td class="px-6 py-5 font-medium text-gray-800">
+                            {{ i.subject }}
+                        </td>
+                        <td class="px-6 py-5 text-gray-600 max-w-md">
+                            {{ i.need }}
+                        </td>
+                        <td class="px-6 py-5">
+                            {% if i.status == 'pending' %}
+                                <span class="px-4 py-1.5 rounded-full text-sm font-medium status-pending">
+                                    Pending
+                                </span>
+                            {% elif i.status == 'accepted' %}
+                                <span class="px-4 py-1.5 rounded-full text-sm font-medium status-accepted">
+                                    Accepted
+                                </span>
+                            {% elif i.status == 'rejected' %}
+                                <span class="px-4 py-1.5 rounded-full text-sm font-medium status-rejected">
+                                    Rejected
+                                </span>
+                            {% else %}
+                                <span class="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-200">
+                                    {{ i.status }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td class="px-6 py-5 text-center">
+                            {% if i.status == 'pending' %}
+                                <div class="flex justify-center gap-3">
+                                    <a href="/myapp/accept_curriculumupdate/{{ i.id }}"
+                                       class="action-btn accept-btn flex items-center gap-2 px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded-xl text-sm font-medium transition">
+                                        <i class="fas fa-check"></i>
+                                        Accept
+                                    </a>
+                                    <a href="/myapp/reject_curriculumupdate/{{ i.id }}"
+                                       class="action-btn reject-btn flex items-center gap-2 px-5 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-medium transition"
+                                       onclick="return confirm('Are you sure you want to reject this request?')">
+                                        <i class="fas fa-times"></i>
+                                        Reject
+                                    </a>
+                                </div>
+                            {% else %}
+                                <span class="text-sm text-gray-500 font-medium">
+                                    {{ i.status|title }}
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-16 text-gray-500">
+                            <i class="fas fa-inbox text-4xl mb-3 block"></i>
+                            No curriculum update requests found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer Info -->
+    <div class="text-center text-gray-500 text-sm mt-6">
+        Total Requests: <strong>{{ data|length }}</strong>
+    </div>
+</div>
 
 </body>
 </html>

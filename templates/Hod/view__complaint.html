@@ -2,9 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Admin - View Complaints</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f9;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #727ddb;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        .status-pending {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body>
-$END$
+{% extends "Hod/hod_home.html" %}
+    {% block body %}
+    <div class="container">
+        <h1>Complaints Management</h1>
+        <p class="subtitle">View All Student Complaints</p>
+
+        <table border="1">
+            <tr>
+                <th>Sl no</th>
+                <th>Complaint ID</th>
+                <th>Complaint</th>
+                <th>Date</th>
+                <th>Student</th>
+                <th>Reply</th>
+                <th>Action</th>
+            </tr>
+            {% for i in data %}
+            <tr>
+             <td>{{ forloop.counter }}</td>
+                <td>{{ i.id }}</td>
+                <td>{{ i.complaint }}</td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.STUDENT.id}},<br>Name:{{ i.STUDENT.name }}</td>
+                <td>
+                  {{ i.reply }}
+
+                </td>
+
+                <td>
+                    <a href="/myapp/send_reply/{{ i.id }}">Reply / Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <br><br>
+        <p style="text-align: center;">
+            <a href="/myapp/hod_home/">← Back to Admin Home</a>
+        </p>
+    </div>
+
+{% endblock %}
 </body>
 </html>

@@ -32,6 +32,8 @@
 {#         <td><img src="/media/{{ i.photo}}" width="100px" height="100px"></td>#}
 {#         <td><a href="/myapp/edit_hod/{{ i.id }}">Edit hod</a></td>#}
 {#         <td><a href="/myapp/view_allocation/{{ i.id }}">allocate</a></td>#}
+{#         <td><a href="/myapp/delete_hod/{{ i.id }}">delete</a></td>#}
+{#         <td><a href="/myapp/block_unblock_hod/{{ i.id }}">Block</a></td>#}
 {#    </tr>#}
 {#    {% endfor %}#}
 {##}
@@ -43,109 +45,652 @@
 {#</html>#}
 
 
+
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>View All HODs - Managed Table</title>#}
+{##}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);#}
+{#            padding: 30px 20px;#}
+{#            min-height: 100vh;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1600px;#}
+{#            margin: 0 auto;#}
+{#        }#}
+{##}
+{#        .header {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#            margin-bottom: 25px;#}
+{#        }#}
+{##}
+{#        h1 {#}
+{#            color: #1e3a8a;#}
+{#            font-size: 2.3rem;#}
+{#            font-weight: 700;#}
+{#        }#}
+{##}
+{#        .add-btn {#}
+{#            background: #1e40af;#}
+{#            color: white;#}
+{#            padding: 10px 28px;#}
+{#            border: none;#}
+{#            border-radius: 50px;#}
+{#            font-size: 1.1rem;#}
+{#            font-weight: 600;#}
+{#            text-decoration: none;#}
+{#            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);#}
+{#            transition: all 0.3s ease;#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            background: #1e3a8a;#}
+{#            transform: translateY(-3px);#}
+{#        }#}
+{##}
+{##}
+{#        .table-wrapper {#}
+{#            background: white;#}
+{#            border-radius: 16px;#}
+{#            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);#}
+{#            overflow: hidden;#}
+{#            max-height: 75vh;#}
+{#            overflow-y: auto;#}
+{#        }#}
+{##}
+{#        .table-scroll {#}
+{#            overflow-x: auto;#}
+{#            min-width: 100%;#}
+{#        }#}
+{##}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            table-layout: auto;#}
+{#            min-width: 1400px;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background: linear-gradient(135deg, #1e40af, #3b82f6);#}
+{#            color: white;#}
+{#            padding: 18px 14px;#}
+{#            text-align: center;#}
+{#            font-weight: 600;#}
+{#            position: sticky;#}
+{#            top: 0;#}
+{#            z-index: 10;#}
+{#            white-space: nowrap;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 16px 14px;#}
+{#            text-align: center;#}
+{#            border-bottom: 1px solid #e2e8f0;#}
+{#            color: #334155;#}
+{#            white-space: nowrap;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background-color: #f1f5f9;#}
+{#        }#}
+{##}
+{#        img {#}
+{#            width: 90px;#}
+{#            height: 90px;#}
+{#            object-fit: cover;#}
+{#            border-radius: 12px;#}
+{#            border: 3px solid #bae6fd;#}
+{#            transition: all 0.3s ease;#}
+{#        }#}
+{##}
+{#        img:hover {#}
+{#            transform: scale(1.1);#}
+{#            border-color: #60a5fa;#}
+{#        }#}
+{##}
+{#        .action-btn {#}
+{#            padding: 9px 18px;#}
+{#            margin: 4px;#}
+{#            border: none;#}
+{#            border-radius: 8px;#}
+{#            font-size: 0.95rem;#}
+{#            font-weight: 500;#}
+{#            text-decoration: none;#}
+{#            display: inline-block;#}
+{#            transition: all 0.3s ease;#}
+{#            white-space: nowrap;#}
+{#        }#}
+{##}
+{#        .edit-btn     { background: #f59e0b; color: white; }#}
+{#        .edit-btn:hover     { background: #d97706; transform: translateY(-2px); }#}
+{##}
+{#        .allocate-btn { background: #10b981; color: white; }#}
+{#        .allocate-btn:hover { background: #059669; transform: translateY(-2px); }#}
+{##}
+{#        .delete-btn   { background: #ef4444; color: white; }#}
+{#        .delete-btn:hover   { background: #dc2626; transform: translateY(-2px); }#}
+{##}
+{#        .email-link {#}
+{#            color: #2563eb;#}
+{#            text-decoration: none;#}
+{#        }#}
+{#        .email-link:hover {#}
+{#            text-decoration: underline;#}
+{#        }#}
+{##}
+{#        .no-data {#}
+{#            padding: 80px 20px;#}
+{#            text-align: center;#}
+{#            color: #64748b;#}
+{#            font-size: 1.4rem;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{##}
+{#    <div class="container">#}
+{#        <div class="header">#}
+{#            <h1>👨‍🏫 All Heads of Departments (HODs)</h1>#}
+{#            <a href="/myapp/add_hod/" class="add-btn">+ Add HOD</a>#}
+{#        </div>#}
+{##}
+{#        <!-- Manageable Table -->#}
+{#        <div class="table-wrapper">#}
+{#            <div class="table-scroll">#}
+{#                <table>#}
+{#                    <thead>#}
+{#                        <tr>#}
+{#                            <th>Name</th>#}
+{#                            <th>Place</th>#}
+{#                            <th>Post</th>#}
+{#                            <th>PIN Code</th>#}
+{#                            <th>Phone</th>#}
+{#                            <th>Email</th>#}
+{#                            <th>Gender</th>#}
+{#                            <th>Qualification</th>#}
+{#                            <th>Photo</th>#}
+{#                            <th>Edit</th>#}
+{#                            <th>Allocate</th>#}
+{#                            <th>status</th>#}
+{#                        </tr>#}
+{#                    </thead>#}
+{#                    <tbody>#}
+{#                        {% for i in data %}#}
+{#                        <tr>#}
+{#                            <td><strong>{{ i.name }}</strong></td>#}
+{#                            <td>{{ i.place|default:"-" }}</td>#}
+{#                            <td>{{ i.post|default:"-" }}</td>#}
+{#                            <td>{{ i.pin|default:"-" }}</td>#}
+{#                            <td>{{ i.phone|default:"-" }}</td>#}
+{#                            <td><a href="mailto:{{ i.email }}" class="email-link">{{ i.email }}</a></td>#}
+{#                            <td>{{ i.gender|default:"-" }}</td>#}
+{#                            <td>{{ i.qualification|default:"-" }}</td>#}
+{##}
+{#                            <td>#}
+{#                                {% if i.photo %}#}
+{#                                    <img src="{{ i.photo.url }}" alt="{{ i.name }}">#}
+{#                                {% else %}#}
+{#                                    <span style="color:#94a3b8;">No Photo</span>#}
+{#                                {% endif %}#}
+{#                            </td>#}
+{##}
+{#                            <td>#}
+{#                                <a href="/myapp/edit_hod/{{ i.id }}" class="action-btn edit-btn">✏️ Edit</a>#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                <a href="/myapp/view_allocation/{{ i.id }}" class="action-btn allocate-btn">📋 Allocate</a>#}
+{#                            </td>#}
+{#                            <td>#}
+{#                                <a href="/myapp/block_unblock_hod/{{ i.id }}" class="action-btn btn-block">🗑️ Block</a>#}
+{#                                </a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                        {% empty %}#}
+{#                        <tr>#}
+{#                            <td colspan="12" class="no-data">#}
+{#                                No HOD records available.#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                        {% endfor %}#}
+{#                    </tbody>#}
+{#                </table>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+
+
+
+{##}
+{##}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <title>HOD Management</title>#}
+{#    <style>#}
+{#        * {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            box-sizing: border-box;#}
+{#        }#}
+{##}
+{#        body {#}
+{#            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;#}
+{#            background-color: #f8f9fa;#}
+{#            color: #333;#}
+{#            padding: 20px;#}
+{#        }#}
+{##}
+{#        h1 {#}
+{#            text-align: center;#}
+{#            margin-bottom: 30px;#}
+{#            color: #2c3e50;#}
+{#        }#}
+{##}
+{#        .container {#}
+{#            max-width: 1400px;#}
+{#            margin: 0 auto;#}
+{#        }#}
+{##}
+{#        .header {#}
+{#            display: flex;#}
+{#            justify-content: space-between;#}
+{#            align-items: center;#}
+{#            margin-bottom: 20px;#}
+{#        }#}
+{##}
+{#        .add-btn {#}
+{#            background-color: #27ae60;#}
+{#            color: white;#}
+{#            padding: 12px 24px;#}
+{#            text-decoration: none;#}
+{#            border-radius: 8px;#}
+{#            font-weight: 600;#}
+{#            transition: all 0.3s;#}
+{#        }#}
+{##}
+{#        .add-btn:hover {#}
+{#            background-color: #219653;#}
+{#            transform: translateY(-2px);#}
+{#        }#}
+{##}
+{#        table {#}
+{#            width: 100%;#}
+{#            border-collapse: collapse;#}
+{#            background-color: white;#}
+{#            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);#}
+{#            border-radius: 12px;#}
+{#            overflow: hidden;#}
+{#        }#}
+{##}
+{#        th {#}
+{#            background-color: #34495e;#}
+{#            color: white;#}
+{#            padding: 15px 12px;#}
+{#            text-align: left;#}
+{#            font-weight: 600;#}
+{#        }#}
+{##}
+{#        td {#}
+{#            padding: 12px;#}
+{#            border-bottom: 1px solid #eee;#}
+{#            vertical-align: middle;#}
+{#        }#}
+{##}
+{#        tr:hover {#}
+{#            background-color: #f1f5f9;#}
+{#        }#}
+{##}
+{#        img {#}
+{#            border-radius: 8px;#}
+{#            object-fit: cover;#}
+{#            border: 2px solid #ddd;#}
+{#        }#}
+{##}
+{#        .action-btn {#}
+{#            padding: 8px 14px;#}
+{#            margin: 3px;#}
+{#            text-decoration: none;#}
+{#            border-radius: 6px;#}
+{#            font-size: 14px;#}
+{#            font-weight: 500;#}
+{#            display: inline-block;#}
+{#            text-align: center;#}
+{#            min-width: 80px;#}
+{#        }#}
+{##}
+{#        .edit-btn {#}
+{#            background-color: #3498db;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .edit-btn:hover { background-color: #2980b9; }#}
+{##}
+{#        .allocate-btn {#}
+{#            background-color: #9b59b6;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .allocate-btn:hover { background-color: #8e44ad; }#}
+{##}
+{#        .delete-btn {#}
+{#            background-color: #e74c3c;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .delete-btn:hover { background-color: #c0392b; }#}
+{##}
+{#        .block-btn {#}
+{#            background-color: #f39c12;#}
+{#            color: white;#}
+{#        }#}
+{##}
+{#        .block-btn:hover { background-color: #e67e22; }#}
+{##}
+{#        .photo-cell {#}
+{#            text-align: center;#}
+{#        }#}
+{##}
+{#        .no-data {#}
+{#            text-align: center;#}
+{#            padding: 40px;#}
+{#            font-size: 18px;#}
+{#            color: #777;#}
+{#        }#}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{#{% extends "home.html" %}#}
+{#    {% block body %}#}
+{#    <div class="container">#}
+{#        <h1>Head of Department (HOD) Management</h1>#}
+{##}
+{#        <div class="header">#}
+{#            <h2>All HODs</h2>#}
+{#            <a href="/myapp/add_hod/" class="add-btn">+ Add New HOD</a>#}
+{#        </div>#}
+{##}
+{#        <table>#}
+{#            <thead>#}
+{#                <tr>#}
+{#                    <th>Name</th>#}
+{#                    <th>Place</th>#}
+{#                    <th>Post</th>#}
+{#                    <th>PIN</th>#}
+{#                    <th>Phone</th>#}
+{#                    <th>Email</th>#}
+{#                    <th>Gender</th>#}
+{#                    <th>Qualification</th>#}
+{#                    <th>Photo</th>#}
+{#                    <th colspan="3">Actions</th>#}
+{#                </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#                {% for i in data %}#}
+{#                <tr>#}
+{#                    <td><strong>{{ i.name }}</strong></td>#}
+{#                    <td>{{ i.place }}</td>#}
+{#                    <td>{{ i.post }}</td>#}
+{#                    <td>{{ i.pin }}</td>#}
+{#                    <td>{{ i.phone }}</td>#}
+{#                    <td>{{ i.email }}</td>#}
+{#                    <td>{{ i.gender }}</td>#}
+{#                    <td>{{ i.qualification }}</td>#}
+{#                    <td class="photo-cell">#}
+{#                        <img src="/media/{{ i.photo }}" width="100" height="100" alt="Photo">#}
+{#                    </td>#}
+{#                    <td>#}
+{#                        <a href="/myapp/edit_hod/{{ i.id }}" class="action-btn edit-btn">Edit</a>#}
+{#                    </td>#}
+{#                    <td>#}
+{#                        <a href="/myapp/view_allocation/{{ i.id }}" class="action-btn allocate-btn">Allocate</a>#}
+{#                    </td>#}
+{##}
+{#                    <td>#}
+{#                        {% if i.status == "hod" %}#}
+{#                        <a href="/myapp/block_unblock_hod/{{ i.id }}/block"#}
+{#                           class="action-btn block-btn">Block</a>#}
+{#                        {% else %}#}
+{#                         <a href="/myapp/block_unblock_hod/{{ i.id }}/hod"#}
+{#                           class="action-btn block-btn">Unblock</a>#}
+{#                        {% endif %}#}
+{#                    </td>#}
+{#                </tr>#}
+{#                {% empty %}#}
+{#                <tr>#}
+{#                    <td colspan="13" class="no-data">No HODs found.</td>#}
+{#                </tr>#}
+{#                {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+
+
+{% extends "home.html" %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOD Management | Admin Panel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>HOD Management</title>
     <style>
-        .table-hover tr:hover {
-            background-color: #f8fafc;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        img.photo {
-            object-fit: cover;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .add-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
             border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .add-btn:hover {
+            background-color: #219653;
+            transform: translateY(-2px);
+        }
+
+        /* --- SCROLL FUNCTIONALITY START --- */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto; /* Adds horizontal scrollbar */
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid #ddd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px; /* Forces scroll on smaller screens */
+        }
+        /* --- SCROLL FUNCTIONALITY END --- */
+
+        th {
+            background-color: #727ddb;
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            white-space: nowrap; /* Keeps text in one line */
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        img {
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid #ddd;
+        }
+
+        .action-btn {
+            padding: 8px 14px;
+            margin: 2px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .edit-btn { background-color: #3498db; color: white; }
+        .allocate-btn { background-color: #9b59b6; color: white; }
+        .block-btn { background-color: #f39c12; color: white; }
+
+        .photo-cell {
+            text-align: center;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #777;
+        }
+
+        /* Custom Scrollbar for better look */
+        .table-responsive::-webkit-scrollbar {
+            height: 8px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: #bdc3c7;
+            border-radius: 10px;
+        }
+        .table-responsive::-webkit-scrollbar-thumb:hover {
+            background: #95a5a6;
         }
     </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body>
+    <div class="container">
+        <h1>Head of Department (HOD) Management</h1>
 
-{% extends "home.html" %}
-    {% block body %}
-
-<div class="max-w-7xl mx-auto py-8 px-6">
-
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8">
-        <div>
-            <h1 class="text-3xl font-bold text-gray-800">Heads of Department (HODs)</h1>
-            <p class="text-gray-600 mt-1">Manage all department heads and their details</p>
+        <div class="header">
+            <h2>All HODs</h2>
+            <a href="/myapp/add_hod/" class="add-btn">+ Add New HOD</a>
         </div>
-         <a href="/myapp/add_hod/"
-           class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition">
-            <i class="fas fa-plus"></i> Add New HOD
-        </a>
-    </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sl no</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Contact Details</th>
+                        <th>Gender</th>
+                        <th>Qualification</th>
+                        <th>Photo</th>
+                        <th style="text-align: center;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
 
 
 
-    <!-- Table -->
-    <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
-        <table class="w-full table-hover">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Photo</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Name</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Place</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Post</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Phone</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Email</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Gender</th>
-                    <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Qualification</th>
-                    <th class="py-4 px-6 text-center text-sm font-semibold text-gray-700">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-                {% for i in data %}
-                <tr class="transition">
-                    <td class="py-4 px-6">
-                        <img src="/media/{{ i.photo }}"
-                             alt="{{ i.name }}"
-                             class="photo w-16 h-16 border border-gray-200">
-                    </td>
-                    <td class="py-4 px-6 font-medium text-gray-800">{{ i.name }}</td>
-                    <td class="py-4 px-6 text-gray-600">{{ i.place }}</td>
-                    <td class="py-4 px-6 text-gray-600">{{ i.post }}</td>
-                    <td class="py-4 px-6 text-gray-600">{{ i.phone }}</td>
-                    <td class="py-4 px-6 text-gray-600">
-                        <a href="mailto:{{ i.email }}" class="hover:text-blue-600">{{ i.email }}</a>
-                    </td>
-                    <td class="py-4 px-6">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                            {% if i.gender == 'Male' %}bg-blue-100 text-blue-700{% else %}bg-pink-100 text-pink-700{% endif %}">
-                            {{ i.gender }}
-                        </span>
-                    </td>
-                    <td class="py-4 px-6 text-gray-600">{{ i.qualification }}</td>
-                    <td class="py-4 px-6 text-center">
-                        <div class="flex gap-3 justify-center">
-                            <a href="/myapp/edit_hod/{{ i.id }}"
-                               class="text-blue-600 hover:text-blue-700 transition">
-                                <i class="fas fa-edit text-lg"></i>
-                            </a>
-                            <a href="/myapp/view_allocation/{{ i.id }}"
-                               class="text-emerald-600 hover:text-emerald-700 transition">
-                                <i class="fas fa-user-plus text-lg"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        {% if not data %}
-        <div class="text-center py-12">
-            <i class="fas fa-users text-6xl text-gray-300 mb-4"></i>
-            <p class="text-gray-500">No HODs found</p>
+                    <tr>
+                     <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ i.name }}</strong></td>
+                        <td>Place:{{ i.place }}<br>Post:{{ i.post }}<br>Pin{{ i.pin }}</td>
+                        <td>Phone:{{ i.phone }}<br>Email:{{ i.email }}</td>
+                        <td>{{ i.gender }}</td>
+                        <td>{{ i.qualification }}</td>
+                        <td class="photo-cell">
+                            <img src="/media/{{ i.photo }}" width="70" height="70" alt="Photo">
+                        </td>
+                        <td>
+                            <a href="/myapp/edit_hod/{{ i.id }}" class="action-btn edit-btn">Edit</a>
+                            <a href="/myapp/view_allocation/{{ i.id }}" class="action-btn allocate-btn">Allocate</a>
+                            {% if i.status == "hod" %}
+                            <a href="/myapp/block_unblock_hod/{{ i.id }}/block" class="action-btn block-btn">Block</a>
+                            {% else %}
+                            <a href="/myapp/block_unblock_hod/{{ i.id }}/hod" class="action-btn block-btn">Unblock</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="10" class="no-data">No HODs found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
-        {% endif %}
     </div>
-
-</div>
-{% endblock %}
 </body>
 </html>
+{% endblock %}

@@ -1,52 +1,306 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<table border="1">
-    <tr>
-        <th>name</th>
-        <th>place</th>
-        <th>post</th>
-        <th>pin</th>
-        <th>phone</th>
-        <th>email</th>
-        <th>gender</th>
-        <th>qualification</th>
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#{% extends "Hod/hod_home.html" %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<table border="1">#}
+{#    <tr>#}
+{#        <th>name</th>#}
+{#        <th>place</th>#}
+{#        <th>post</th>#}
+{#        <th>pin</th>#}
+{#        <th>phone</th>#}
+{#        <th>email</th>#}
+{#        <th>gender</th>#}
+{#        <th>qualification</th>#}
+{#        <th>action</th>#}
+{##}
+{##}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#        <td>{{ i.name}}</td>#}
+{#        <td>{{ i.place}}</td>#}
+{#        <td>{{ i.post}}</td>#}
+{#        <td>{{ i.pin}}</td>#}
+{#        <td>{{ i.phone}}</td>#}
+{#        <td>{{ i.email}}</td>#}
+{#        <td>{{ i.gender}}</td>#}
+{#        <td>{{ i.qualification}}</td>#}
+{##}
+{#        <td>#}
+{#<a href="/Hod/edit_profile_hod/{{ i.id }}">edit</a>#}
+{#        </td>#}
+{##}
+{##}
+{#    </tr>#}
+{##}
+{##}
+{#</table>#}
+{##}
+{##}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
 
 
-    </tr>
-     {% for i in data %}
-    <tr>
-        <td>{{ i.name}}</td>
-        <td>{{ i.place}}</td>
-        <td>{{ i.post}}</td>
-        <td>{{ i.pin}}</td>
-        <td>{{ i.phone}}</td>
-        <td>{{ i.email}}</td>
-        <td>{{ i.gender}}</td>
-        <td>{{ i.qualification}}</td>
+{#{% extends "Hod/hod_home.html" %}#}
+{##}
+{#{% block body %}#}
+{#<div class="content-container">#}
+{#    <div class="profile-view-card">#}
+{##}
+{#        <div class="profile-header">#}
+{#            <div class="avatar" style="margin: 0 auto 15px; width: 80px; height: 80px; font-size: 2.5rem; background: #f8f9fa;">👤</div>#}
+{#            <h2 style="margin: 0;">User Profile</h2>#}
+{#            <p style="color: #95a5a6;">Personal Information</p>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-user"></i> Name</span>#}
+{#            <span class="info-value">{{ data.name }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-map-marker-alt"></i> Place</span>#}
+{#            <span class="info-value">{{ data.place }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-phone"></i> Phone</span>#}
+{#            <span class="info-value">{{ data.phone }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row">#}
+{#            <span class="info-label"><i class="fas fa-envelope"></i> Email</span>#}
+{#            <span class="info-value">{{ data.email }}</span>#}
+{#        </div>#}
+{##}
+{#        <div class="info-row" style="border-bottom: none;">#}
+{#            <span class="info-label"><i class="fas fa-info-circle"></i> Status</span>#}
+{#            <span class="info-value" style="color: #2ecc71;">Active</span>#}
+{#        </div>#}
+{##}
+{#        <a href="/myapp/edit_profile_hod/" class="edit-profile-btn">#}
+{#            <i class="fas fa-user-edit"></i> Edit Profile#}
+{#        </a>#}
+{##}
+{#    </div>#}
+{#</div>#}
+{#{% endblock %}#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
+{##}
 
-        <td>
-<a href="/Hod/edit_profile_hod/{{ i.id }}">edit</a>
-        </td>
+
+{% extends "Hod/hod_home.html" %}
+
+{% block body %}
+
+<style>
+    .profile-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .profile-header {
+        background: linear-gradient(135deg, #1e40af, #3b82f6);
+        color: white;
+        padding: 50px 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        border: 5px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-header h2 {
+        margin: 0 0 8px 0;
+        font-size: 28px;
+    }
+
+    .profile-header p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: 18px;
+    }
+
+    .profile-body {
+        padding: 40px;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .info-card {
+        background: #f8fafc;
+        padding: 22px 25px;
+        border-radius: 12px;
+        border-left: 6px solid #3b82f6;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .info-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .info-value {
+        font-size: 18px;
+        color: #1e2937;
+        font-weight: 500;
+    }
+
+    .edit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #2563eb;
+        color: white;
+        padding: 14px 32px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 40px;
+        transition: all 0.3s;
+    }
+
+    .edit-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .icon {
+        font-size: 1.1rem;
+    }
+</style>
+
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <img class="avatar" src="{{ data.photo.url }}" height="100" width="100"></d>
+        <h2>{{ data.name }}</h2>
+        <p>Head of Department</p>
+    </div>
+
+    <!-- Profile Body -->
+    <div class="profile-body">
+        <div class="info-grid">
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">👤</span>
+                    Full Name
+                </div>
+                <div class="info-value">{{ data.name }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">📍</span>
+                    Place
+                </div>
+                <div class="info-value">{{ data.place }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">📮</span>
+                    Post
+                </div>
+                <div class="info-value">{{ data.post|default:"—" }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">🔢</span>
+                    Pin Code
+                </div>
+                <div class="info-value">{{ data.pin|default:"—" }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">📞</span>
+                    Phone Number
+                </div>
+                <div class="info-value">{{ data.phone }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">✉️</span>
+                    Email Address
+                </div>
+                <div class="info-value">{{ data.email }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">⚧️</span>
+                    Gender
+                </div>
+                <div class="info-value">{{ data.gender|default:"—" }}</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-label">
+                    <span class="icon">🎓</span>
+                    Qualification
+                </div>
+                <div class="info-value">{{ data.qualification|default:"—" }}</div>
+            </div>
+
+        </div>
 
 
-    </tr>
-        {% endfor %}
+        <div style="text-align: center;">
+            <a href="/myapp/edit_profile_hod/" class="edit-btn">
+                ✏️ Edit Profile
+            </a>
+        </div>
+    </div>
+</div>
 
-
-</table>
-
-
-
-</body>
-</html>
-
-
-
-
-
-
+{% endblock %}

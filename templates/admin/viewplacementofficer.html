@@ -241,8 +241,9 @@
                         <th>Place</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Status</th>
+
                         <th>Action</th>
+{#                        <th>curriculum update</th>#}
                     </tr>
                 </thead>
                 <tbody>
@@ -253,17 +254,26 @@
                             <td>{{ i.place }}</td>
                             <td>{{ i.phone }}</td>
                             <td>{{ i.email }}</td>
+
+{#                                <span class="status status-pending">#}
+{#                                    {{ i.status }}#}
+{#                                </span>#}
+
                             <td>
-                                <span class="status status-pending">
-                                    {{ i.status }}
-                                </span>
-                            </td>
-                            <td>
+                                {% if i.status == 'pending' %}
                                 <a href="/myapp/accept_placementofficer/{{ i.id }}"
                                    class="action-btn accept-btn">Accept</a>
                                 <a href="/myapp/reject_placementofficer/{{ i.id }}"
                                    class="action-btn reject-btn">Reject</a>
+                                {% elif i.status == "Accepted" %}
+                                    <a href="/myapp/viewcurriculumupdate/{{ i.id }}" class="action-btn accept-btn">view updates</a>
+                                    {{ i.status }}
+                                {% else %}
+                                {{ i.status }}
+                                {% endif %}
                             </td>
+                        <td>
+                        </td>
                         </tr>
                         {% endfor %}
                     {% else %}
